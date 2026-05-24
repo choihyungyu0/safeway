@@ -3,68 +3,87 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { HomeHeader } from '@/features/home/components/HomeHeader'
-import { AuthPage } from '@/pages/AuthPage'
+import { LoginPage } from '@/pages/LoginPage'
+import { SignUpPage } from '@/pages/SignUpPage'
 
 vi.stubGlobal('alert', vi.fn())
 
-const renderAuthPage = () =>
+const renderLoginPage = () =>
   render(
-    <MemoryRouter initialEntries={['/signup']}>
-      <AuthPage />
+    <MemoryRouter initialEntries={['/login']}>
+      <LoginPage />
     </MemoryRouter>,
   )
 
-describe('AuthPage', () => {
-  it('renders the signup title', () => {
-    renderAuthPage()
+describe('LoginPage', () => {
+  it('renders the login title', () => {
+    renderLoginPage()
 
-    expect(screen.getByRole('heading', { name: '회원가입' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '로그인', level: 1 })).toBeInTheDocument()
   })
 
-  it('renders all signup fields', () => {
-    renderAuthPage()
+  it('renders login fields', () => {
+    renderLoginPage()
 
-    expect(screen.getByLabelText('이름')).toBeInTheDocument()
-    expect(screen.getByLabelText('이메일 또는 아이디')).toBeInTheDocument()
-    expect(screen.getByLabelText('휴대폰 번호')).toBeInTheDocument()
+    expect(screen.getByLabelText('아이디 또는 이메일')).toBeInTheDocument()
     expect(screen.getByLabelText('비밀번호')).toBeInTheDocument()
-    expect(screen.getByLabelText('비밀번호 확인')).toBeInTheDocument()
   })
 
   it('renders the submit button', () => {
-    renderAuthPage()
+    renderLoginPage()
 
-    expect(screen.getByRole('button', { name: '가입하기' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '로그인' })).toBeInTheDocument()
   })
 
-  it('validates required terms', async () => {
+  it('validates missing ID or email', async () => {
     const user = userEvent.setup()
-    renderAuthPage()
+    renderLoginPage()
 
-    await user.type(screen.getByLabelText('이름'), '홍길동')
-    await user.type(screen.getByLabelText('이메일 또는 아이디'), 'safe@example.com')
-    await user.type(screen.getByLabelText('휴대폰 번호'), '01012345678')
-    await user.type(screen.getByLabelText('비밀번호'), 'Safeway!1')
-    await user.type(screen.getByLabelText('비밀번호 확인'), 'Safeway!1')
-    await user.click(screen.getByRole('button', { name: '가입하기' }))
+    await user.type(screen.getByLabelText('비밀번호'), 'demo-password')
+    await user.click(screen.getByRole('button', { name: '로그인' }))
 
-    expect(screen.getByText('필수 약관에 동의해주세요.')).toBeInTheDocument()
+    expect(screen.getByText('아이디 또는 이메일을 입력해주세요.')).toBeInTheDocument()
   })
 
-  it('validates password mismatch', async () => {
+  it('validates missing password', async () => {
     const user = userEvent.setup()
-    renderAuthPage()
+    renderLoginPage()
 
-    await user.type(screen.getByLabelText('이름'), '홍길동')
-    await user.type(screen.getByLabelText('이메일 또는 아이디'), 'safe@example.com')
-    await user.type(screen.getByLabelText('휴대폰 번호'), '01012345678')
-    await user.type(screen.getByLabelText('비밀번호'), 'Safeway!1')
-    await user.type(screen.getByLabelText('비밀번호 확인'), 'Safeway!2')
-    await user.click(screen.getByLabelText('[필수] 서비스 이용약관 동의'))
-    await user.click(screen.getByLabelText('[필수] 개인정보 수집 및 이용 동의'))
-    await user.click(screen.getByRole('button', { name: '가입하기' }))
+    await user.type(screen.getByLabelText('아이디 또는 이메일'), 'safe@example.com')
+    await user.click(screen.getByRole('button', { name: '로그인' }))
 
-    expect(screen.getByText('비밀번호가 일치하지 않습니다.')).toBeInTheDocument()
+    expect(screen.getByText('비밀번호를 입력해주세요.')).toBeInTheDocument()
+  })
+
+  it('toggles password visibility', async () => {
+    const user = userEvent.setup()
+    renderLoginPage()
+    const passwordInput = screen.getByLabelText('비밀번호')
+
+    expect(passwordInput).toHaveAttribute('type', 'password')
+
+    await user.click(screen.getByRole('button', { name: '비밀번호 보기' }))
+
+    expect(passwordInput).toHaveAttribute('type', 'text')
+  })
+
+  it('points the card signup link to /signup', () => {
+    renderLoginPage()
+
+    expect(screen.getByRole('link', { name: '회원가입' })).toHaveAttribute('href', '/signup')
+  })
+})
+
+describe('SignUpPage', () => {
+  it('renders the signup screen separately from login', () => {
+    render(
+      <MemoryRouter initialEntries={['/signup']}>
+        <SignUpPage />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByRole('heading', { name: '회원가입' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: '로그인', level: 1 })).not.toBeInTheDocument()
   })
 })
 
@@ -79,5 +98,4 @@ describe('HomeHeader auth links', () => {
     expect(screen.getByRole('link', { name: /로그인/ })).toHaveAttribute('href', '/login')
     expect(screen.getByRole('link', { name: '회원가입' })).toHaveAttribute('href', '/signup')
   })
-}
-)
+})
