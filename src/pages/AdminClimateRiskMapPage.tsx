@@ -13,7 +13,7 @@ import {
   Wind,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { AdminLayout } from '@/features/admin/components/AdminLayout'
+import { SejongAdminShell as AdminLayout } from '@/shared/ui/SejongAdminShell'
 import {
   defaultClimateRiskFilter,
   displayRangeOptions,

@@ -1,0 +1,929 @@
+.page {
+  min-width: 0;
+  padding: 30px 28px 34px;
+  background: #f5f8fc;
+}
+
+.pageTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.pageTop h1 {
+  margin: 0 0 8px;
+  color: #071b3f;
+  font-size: 38px;
+  line-height: 1.12;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.pageTop p {
+  margin: 0;
+  color: #475569;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.dateControl {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dateControl span {
+  color: #071b3f;
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.dateButton,
+.resetButton {
+  min-height: 44px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #cbd8e8;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #172b57;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.dateButton svg,
+.resetButton svg {
+  color: #64748b;
+}
+
+.resetButton {
+  color: #075bd1;
+}
+
+.resetButton svg {
+  color: #075bd1;
+}
+
+.statusMessage {
+  width: fit-content;
+  min-height: 34px;
+  margin: -4px 0 14px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  color: #075bd1;
+  background: #eaf3ff;
+  border: 1px solid #b7d4ff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.filterPanel {
+  min-height: 88px;
+  margin-bottom: 18px;
+  padding: 17px 18px;
+  display: grid;
+  grid-template-columns: 1.05fr 1.18fr 1.05fr 1.25fr;
+  gap: 24px;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d9e3f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+.filterBox {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+  color: #172b57;
+}
+
+.filterBox > svg {
+  color: #00a6a6;
+}
+
+.filterBox:first-child > svg {
+  color: #ff8500;
+}
+
+.filterLabel {
+  color: #172b57;
+  font-size: 15px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.selectShell {
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #cbd8e8;
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+.selectShell select {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #172b57;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.selectShell svg {
+  flex: 0 0 auto;
+  color: #64748b;
+  pointer-events: none;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(500px, 0.76fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.mapSection {
+  min-width: 0;
+}
+
+.card,
+.mapCard {
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #d9e3f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+.mapCard {
+  overflow: hidden;
+}
+
+.mapView {
+  height: 690px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eef5ed;
+}
+
+.mapBase {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 31% 14%, rgba(111, 184, 225, 0.63) 0 12%, transparent 13%),
+    radial-gradient(circle at 54% 40%, rgba(111, 184, 225, 0.55) 0 15%, transparent 16%),
+    radial-gradient(circle at 68% 25%, rgba(111, 184, 225, 0.46) 0 11%, transparent 12%),
+    radial-gradient(circle at 80% 72%, rgba(111, 184, 225, 0.5) 0 13%, transparent 14%),
+    radial-gradient(circle at 37% 70%, rgba(148, 205, 119, 0.34) 0 16%, transparent 17%),
+    repeating-linear-gradient(
+      27deg,
+      transparent 0 42px,
+      rgba(210, 218, 224, 0.88) 42px 46px,
+      transparent 46px 88px
+    ),
+    repeating-linear-gradient(
+      -23deg,
+      transparent 0 52px,
+      rgba(215, 222, 228, 0.85) 52px 56px,
+      transparent 56px 105px
+    ),
+    linear-gradient(135deg, #eef4ed, #f8faf7);
+}
+
+.mapBase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      105deg,
+      transparent 0 25%,
+      rgba(118, 190, 222, 0.72) 26% 33%,
+      transparent 34%
+    ),
+    linear-gradient(
+      95deg,
+      transparent 0 51%,
+      rgba(118, 190, 222, 0.52) 52% 58%,
+      transparent 59%
+    ),
+    linear-gradient(
+      35deg,
+      transparent 0 42%,
+      rgba(255, 255, 255, 0.9) 43% 44%,
+      transparent 45%
+    ),
+    linear-gradient(
+      -30deg,
+      transparent 0 44%,
+      rgba(255, 255, 255, 0.9) 45% 46%,
+      transparent 47%
+    );
+}
+
+.legendBox {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 30;
+  width: 154px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.legendItem svg {
+  width: 20px;
+  flex: 0 0 auto;
+}
+
+.legendItem p {
+  margin: 0;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.green {
+  color: #15965f;
+}
+
+.blue {
+  color: #005bd8;
+}
+
+.red {
+  color: #ef4444;
+}
+
+.circle {
+  color: #6aa4e8;
+}
+
+.legendLine {
+  width: 20px;
+  height: 0;
+  border-top: 3px dashed #ff8500;
+}
+
+.district {
+  position: absolute;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  color: #334155;
+  font-size: 15px;
+  font-weight: 900;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+
+.blindCircle {
+  position: absolute;
+  z-index: 8;
+  border-radius: 50%;
+  filter: blur(5px);
+  background: radial-gradient(
+    circle,
+    rgba(239, 68, 68, 0.55) 0 20%,
+    rgba(249, 115, 22, 0.42) 35%,
+    rgba(249, 115, 22, 0.18) 58%,
+    transparent 72%
+  );
+}
+
+.blindEojin {
+  left: 50%;
+  top: 16%;
+  width: 150px;
+  height: 150px;
+}
+
+.blindNaseong {
+  left: 22%;
+  bottom: 26%;
+  width: 175px;
+  height: 175px;
+}
+
+.blindBoram {
+  right: 18%;
+  bottom: 23%;
+  width: 145px;
+  height: 145px;
+}
+
+.radiusCircle {
+  position: absolute;
+  z-index: 7;
+  border: 2px solid rgba(90, 157, 230, 0.6);
+  border-radius: 50%;
+}
+
+.radiusEojin {
+  left: 45%;
+  top: 10%;
+  width: 235px;
+  height: 235px;
+}
+
+.radiusNaseong {
+  left: 16%;
+  bottom: 20%;
+  width: 270px;
+  height: 270px;
+}
+
+.radiusBoram {
+  right: 12%;
+  bottom: 17%;
+  width: 235px;
+  height: 235px;
+}
+
+.walkLine {
+  position: absolute;
+  z-index: 12;
+  height: 2px;
+  border-top: 3px dashed #ff8500;
+  transform-origin: left center;
+}
+
+.corridorEojinNaseong {
+  left: 58%;
+  top: 27%;
+  width: 250px;
+  transform: rotate(112deg);
+}
+
+.corridorNaseongRiver {
+  left: 31%;
+  top: 64%;
+  width: 190px;
+  transform: rotate(36deg);
+}
+
+.corridorRiverBoram {
+  left: 45%;
+  top: 68%;
+  width: 245px;
+  transform: rotate(-30deg);
+}
+
+.corridorLakeRiver {
+  left: 48%;
+  top: 43%;
+  width: 180px;
+  transform: rotate(58deg);
+}
+
+.spotLabel {
+  position: absolute;
+  z-index: 25;
+  min-width: 148px;
+  min-height: 42px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -100%);
+  border-radius: 7px;
+  background: linear-gradient(135deg, #ef582d, #f04b25);
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(239, 88, 45, 0.28);
+}
+
+.spotLabel strong {
+  font-size: 14px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.marker {
+  position: absolute;
+  z-index: 20;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.18);
+}
+
+.shelterMarker {
+  background: #15965f;
+  color: #ffffff;
+}
+
+.candidateMarker {
+  background: #ffffff;
+  color: #005bd8;
+  border-color: #6aa4ff;
+}
+
+.mapControl {
+  position: absolute;
+  right: 16px;
+  top: 18px;
+  z-index: 40;
+  display: grid;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
+}
+
+.mapControl button {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #071b3f;
+  cursor: pointer;
+}
+
+.mapControl button:last-child {
+  border-bottom: 0;
+}
+
+.scale {
+  position: absolute;
+  left: 18px;
+  bottom: 15px;
+  z-index: 30;
+  color: #111827;
+}
+
+.scale span {
+  display: block;
+  width: 210px;
+  height: 10px;
+  border-left: 2px solid #111827;
+  border-right: 2px solid #111827;
+  border-bottom: 2px solid #111827;
+}
+
+.scale p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mapNote {
+  margin: 14px 2px 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.rightPanel {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto auto 60px;
+  gap: 16px;
+}
+
+.improvementCard {
+  padding: 18px 18px 14px;
+}
+
+.sectionHeader h2,
+.candidateCard h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #071b3f;
+  font-size: 21px;
+  font-weight: 950;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.sectionHeader h2 svg,
+.candidateCard h2 svg {
+  color: #94a3b8;
+}
+
+.improvementList {
+  margin-top: 15px;
+  display: grid;
+}
+
+.improvementItem {
+  min-height: 73px;
+  padding: 13px 0;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 13px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.improvementItem:last-child {
+  border-bottom: 0;
+}
+
+.rankBadge {
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 950;
+  background: #64748b;
+}
+
+.rank1 {
+  background: #e83d21;
+}
+
+.rank2 {
+  background: #f18700;
+}
+
+.rank3 {
+  background: #f0b400;
+}
+
+.rank4,
+.rank5 {
+  background: #7b8798;
+}
+
+.improvementContent {
+  min-width: 0;
+}
+
+.improvementTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.improvementTitleRow h3 {
+  margin: 0;
+  color: #071b3f;
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.tagRow {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.tagRow span {
+  min-height: 24px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  background: #fff1e6;
+  color: #ef582d;
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.areaMeta {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+}
+
+.areaMeta p {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #52637e;
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.areaMeta svg {
+  color: #64748b;
+}
+
+.areaMeta strong {
+  color: #075bd1;
+  font-weight: 950;
+}
+
+.candidateCard {
+  padding: 18px;
+}
+
+.candidateCard h2 {
+  margin-bottom: 13px;
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.candidateCard table {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.candidateCard thead {
+  background: #f3f7fc;
+  color: #52637e;
+}
+
+.candidateCard th,
+.candidateCard td {
+  height: 37px;
+  padding: 0 9px;
+  text-align: center;
+  border: 1px solid #d9e3f0;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.candidateCard th:last-child {
+  display: table-cell;
+}
+
+.candidateCard th svg {
+  margin-left: 3px;
+  vertical-align: -2px;
+  color: #94a3b8;
+}
+
+.candidateCard tbody td {
+  color: #334155;
+  background: #ffffff;
+}
+
+.candidateCard tbody td:first-child {
+  color: #075bd1;
+  text-align: left;
+  font-weight: 900;
+}
+
+.candidateIcon {
+  margin-right: 6px;
+  display: inline-flex;
+  vertical-align: -3px;
+}
+
+.moreButton {
+  min-height: 34px;
+  margin-top: 8px;
+  margin-left: auto;
+  padding: 0 2px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #075bd1;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.moreButton:hover {
+  background: #f0f7ff;
+}
+
+.actionRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.outlineButton,
+.primaryButton {
+  min-height: 60px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.outlineButton {
+  border: 1px solid #75aaff;
+  background: #ffffff;
+  color: #075bd1;
+}
+
+.outlineButton:hover {
+  background: #f0f7ff;
+}
+
+.primaryButton {
+  border: 0;
+  background: #075bd1;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(7, 91, 209, 0.24);
+}
+
+.primaryButton:hover {
+  background: #004fb8;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1500px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rightPanel {
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 1200px) {
+  .pageTop {
+    flex-direction: column;
+  }
+
+  .filterPanel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 18px 14px 28px;
+  }
+
+  .pageTop h1 {
+    font-size: 30px;
+  }
+
+  .dateControl {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dateButton,
+  .resetButton {
+    justify-content: center;
+    white-space: normal;
+  }
+
+  .filterPanel {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 16px;
+  }
+
+  .filterBox {
+    grid-template-columns: auto 1fr;
+  }
+
+  .selectShell {
+    grid-column: 1 / -1;
+  }
+
+  .mapView {
+    height: 500px;
+  }
+
+  .legendBox {
+    width: 145px;
+    padding: 13px;
+  }
+
+  .district {
+    font-size: 12px;
+  }
+
+  .spotLabel {
+    min-width: 120px;
+    min-height: 36px;
+    padding: 0 10px;
+  }
+
+  .spotLabel strong {
+    font-size: 11px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .blindEojin {
+    left: 42%;
+    top: 16%;
+  }
+
+  .blindNaseong {
+    left: 17%;
+    bottom: 25%;
+    width: 145px;
+    height: 145px;
+  }
+
+  .blindBoram {
+    right: 8%;
+    bottom: 22%;
+    width: 125px;
+    height: 125px;
+  }
+
+  .radiusEojin {
+    left: 33%;
+    width: 190px;
+    height: 190px;
+  }
+
+  .radiusNaseong {
+    left: 8%;
+    width: 215px;
+    height: 215px;
+  }
+
+  .radiusBoram {
+    right: 2%;
+    width: 190px;
+    height: 190px;
+  }
+
+  .walkLine {
+    width: 140px;
+  }
+
+  .improvementTitleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .areaMeta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .actionRow {
+    grid-template-columns: 1fr;
+  }
+
+  .scale span {
+    width: 150px;
+  }
+}

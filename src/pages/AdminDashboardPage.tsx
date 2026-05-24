@@ -1,4 +1,4 @@
-import { AdminLayout } from '@/features/admin/components/AdminLayout'
+import { SejongAdminShell as AdminLayout } from '@/shared/ui/SejongAdminShell'
 import { AdminStatCard } from '@/features/admin/components/AdminStatCard'
 import { ClimateRiskMapPanel } from '@/features/admin/components/ClimateRiskMapPanel'
 import { RecentAlertsPanel } from '@/features/admin/components/RecentAlertsPanel'

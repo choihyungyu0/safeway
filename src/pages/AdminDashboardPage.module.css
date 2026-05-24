@@ -11,7 +11,7 @@
   min-height: 72px;
   padding: 0 28px;
   display: grid;
-  grid-template-columns: auto minmax(220px, 1fr) auto;
+  grid-template-columns: auto minmax(180px, 1fr) auto;
   align-items: center;
   gap: 24px;
   background: #ffffff;
@@ -45,12 +45,14 @@
   font-weight: 850;
   line-height: 1.35;
   margin: 0;
+  min-width: 0;
 }
 
 .headerActions {
   display: flex;
   align-items: center;
   gap: 16px;
+  justify-self: end;
 }
 
 .iconButton,
@@ -265,7 +267,7 @@
 
 .sideMenu {
   display: grid;
-  gap: 14px;
+  gap: 12px;
   overflow-y: auto;
   padding-right: 2px;
 }
@@ -285,14 +287,14 @@
 
 .menuItem,
 .activeMenuItem {
-  min-height: 56px;
-  padding: 0 18px;
+  min-height: 42px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   color: #172b57;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 900;
   text-decoration: none;
 }
@@ -306,6 +308,28 @@
   color: #ffffff;
   background: linear-gradient(135deg, #075bd1, #005bea);
   box-shadow: 0 10px 22px rgba(7, 91, 209, 0.22);
+}
+
+.activeMenuItem svg {
+  color: #ffffff;
+}
+
+.managementSidebar .activeMenuItem {
+  color: #005bd8;
+  background: #eaf3ff;
+  box-shadow: none;
+}
+
+.managementSidebar .activeMenuItem svg {
+  color: #005bd8;
+}
+
+.compactSidebar .sideMenu {
+  gap: 0;
+}
+
+.compactSidebar .menuGroup {
+  gap: 12px;
 }
 
 .sidebarBottom {
@@ -1233,6 +1257,10 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .compactSidebar .menuGroup {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .menuItem,
   .activeMenuItem {
     justify-content: center;
@@ -1256,6 +1284,7 @@
   }
 
   .sideMenu,
+  .compactSidebar .menuGroup,
   .statGrid,
   .topRightGrid {
     grid-template-columns: 1fr;

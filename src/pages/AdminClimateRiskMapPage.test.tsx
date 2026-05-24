@@ -96,12 +96,11 @@ describe('AdminClimateRiskMapPage', () => {
     expect(screen.getByText('위험 권역 데이터 다운로드를 준비 중입니다.')).toBeInTheDocument()
   })
 
-  it('navigates to login from logout', async () => {
-    const user = userEvent.setup()
+  it('renders the shared admin header', () => {
     renderClimateRiskPage()
 
-    await user.click(screen.getByRole('button', { name: '로그아웃' }))
-
-    expect(screen.getByText('login route')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /알림/ })).toBeInTheDocument()
+    expect(screen.getByText('김세종 관리자')).toBeInTheDocument()
+    expect(screen.getByText('안전정책과')).toBeInTheDocument()
   })
 })

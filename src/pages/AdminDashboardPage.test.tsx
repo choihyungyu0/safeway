@@ -17,7 +17,10 @@ describe('AdminDashboardPage', () => {
     expect(
       screen.getByRole('heading', { name: '세종 세이프웨이 관리자' }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '알림' })).toBeInTheDocument()
     expect(screen.getByText('김세종 관리자')).toBeInTheDocument()
+    expect(screen.getByText('안전정책과')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '로그아웃' })).toBeInTheDocument()
   })
 
   it('renders every sidebar menu item with dashboard active', () => {
@@ -27,6 +30,7 @@ describe('AdminDashboardPage', () => {
       '대시보드',
       '기후위험 지도',
       '쉼터 사각지대',
+      '임시쉼터 후보',
       '추천 로그',
       '피드백 분석',
       '공공데이터 관리',
