@@ -172,13 +172,15 @@ export function RouteSearchCard() {
         </fieldset>
       </div>
 
-      <ClimateStatusRow />
+      <div className={styles.searchBottomRow}>
+        <ClimateStatusRow />
 
-      <div className={styles.ctaRow}>
-        <button type="submit" className={styles.primaryCta}>
-          AI 추천 경로 받기
-        </button>
-        <p>기후위험을 고려한 최적 경로 추천</p>
+        <div className={styles.ctaRow}>
+          <button type="submit" className={styles.primaryCta} aria-label="AI 추천 경로 받기">
+            <strong>AI 추천 경로 받기</strong>
+            <span>기후위험을 고려한 최적 경로 추천</span>
+          </button>
+        </div>
       </div>
     </form>
   )

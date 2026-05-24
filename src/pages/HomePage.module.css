@@ -99,12 +99,13 @@
 
 .homePage {
   min-height: 100vh;
+  overflow-x: hidden;
   background: #f5f9ff;
 }
 
 .hero {
   position: relative;
-  min-height: 430px;
+  min-height: 340px;
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(245, 249, 255, 0.88)),
@@ -117,15 +118,15 @@
   display: grid;
   align-content: center;
   justify-items: center;
-  min-height: 430px;
-  padding: 52px 24px 124px;
+  min-height: 340px;
+  padding: 28px 24px 76px;
   text-align: center;
 }
 
 .trustLine {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 30px;
   padding: 0 14px;
   color: #0057c2;
   background: rgba(255, 255, 255, 0.78);
@@ -136,16 +137,16 @@
 }
 
 .hero h1 {
-  margin-top: 18px;
+  margin-top: 12px;
   color: #073b78;
-  font-size: 56px;
+  font-size: 60px;
   line-height: 1.06;
   letter-spacing: 0;
   text-shadow: 0 4px 18px rgba(255, 255, 255, 0.75);
 }
 
 .heroSubtitle {
-  margin-top: 16px;
+  margin-top: 10px;
   color: #173b62;
   font-size: 22px;
   font-weight: 800;
@@ -153,8 +154,16 @@
   text-shadow: 0 3px 16px rgba(255, 255, 255, 0.78);
 }
 
+.heroSubtitle span + span::before {
+  content: ' ';
+}
+
 .sidePhrase {
-  margin-top: 18px;
+  position: absolute;
+  top: 82px;
+  right: max(96px, calc((100vw - 1500px) / 2 + 86px));
+  max-width: 340px;
+  margin-top: 0;
   color: #079a9a;
   font-family: 'Segoe Script', 'Malgun Gothic', cursive;
   font-size: 20px;
@@ -163,9 +172,9 @@
 
 .homeContent {
   position: relative;
-  width: min(1180px, calc(100% - 40px));
-  margin: -92px auto 0;
-  padding-bottom: 48px;
+  width: min(1500px, calc(100% - 192px));
+  margin: -72px auto 0;
+  padding-bottom: 22px;
 }
 
 .searchCard,
@@ -179,8 +188,8 @@
 
 .searchCard {
   display: grid;
-  gap: 22px;
-  padding: 26px;
+  gap: 14px;
+  padding: 24px 26px;
 }
 
 .searchGrid {
@@ -198,7 +207,7 @@
 
 .field {
   display: grid;
-  gap: 8px;
+  gap: 7px;
   color: #42546b;
   font-size: 14px;
   font-weight: 900;
@@ -278,10 +287,21 @@
   box-shadow: 0 10px 20px rgba(0, 87, 194, 0.2);
 }
 
+.searchBottomRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 308px;
+  gap: 28px;
+  align-items: stretch;
+}
+
 .climateStatusRow {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  min-height: 86px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
 }
 
 .climateCard {
@@ -289,10 +309,14 @@
   grid-template-columns: auto 1fr;
   gap: 12px;
   align-items: center;
-  min-height: 88px;
-  padding: 14px;
-  border: 1px solid #d9e3f0;
-  border-radius: 8px;
+  min-height: 84px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 0;
+}
+
+.climateCard + .climateCard {
+  border-left: 1px solid #d9e3f0;
 }
 
 .climateIcon {
@@ -323,7 +347,7 @@
 
 .heat {
   color: #b76400;
-  background: #fff7ec;
+  background: #ffffff;
 }
 
 .heat .climateIcon {
@@ -332,7 +356,7 @@
 
 .good {
   color: #15965f;
-  background: #ecfbf4;
+  background: #ffffff;
 }
 
 .good .climateIcon {
@@ -341,7 +365,7 @@
 
 .fog {
   color: #366d98;
-  background: #eff7ff;
+  background: #ffffff;
 }
 
 .fog .climateIcon {
@@ -349,40 +373,44 @@
 }
 
 .ctaRow {
-  display: grid;
-  grid-template-columns: minmax(220px, 320px) 1fr;
-  gap: 18px;
-  align-items: center;
+  display: flex;
 }
 
 .primaryCta {
-  min-height: 56px;
-  padding: 0 28px;
+  display: grid;
+  width: 100%;
+  min-height: 86px;
+  padding: 0 24px;
+  place-content: center;
+  place-items: center;
   color: #ffffff;
   background: #0057c2;
   border: 0;
   border-radius: 8px;
   box-shadow: 0 16px 30px rgba(0, 87, 194, 0.25);
   cursor: pointer;
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 900;
 }
 
-.ctaRow p {
-  color: #6a7a8f;
+.primaryCta span {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13px;
   font-weight: 800;
 }
 
 .cardGrid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 0.9fr;
-  gap: 18px;
-  margin-top: 22px;
+  grid-template-columns: 1.05fr 1.15fr 0.7fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 14px;
 }
 
 .infoCard {
   min-width: 0;
-  padding: 22px;
+  padding: 16px 18px;
 }
 
 .cardTitleRow {
@@ -390,7 +418,7 @@
   gap: 14px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .cardTitleRow h2 {
@@ -412,19 +440,19 @@
 
 .favoriteGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
 .favoriteButton {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   align-content: center;
-  justify-items: start;
-  min-height: 112px;
-  padding: 14px;
+  justify-items: center;
+  min-height: 108px;
+  padding: 12px 8px;
   color: #13243a;
-  text-align: left;
+  text-align: center;
   background: #f7fbff;
   border: 1px solid #d9e3f0;
   border-radius: 8px;
@@ -433,8 +461,8 @@
 
 .favoriteButton span {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   place-items: center;
   color: #0057c2;
   background: #ffffff;
@@ -444,51 +472,59 @@
 
 .favoriteButton strong {
   font-size: 15px;
+  white-space: nowrap;
 }
 
 .favoriteButton small {
   color: #6a7a8f;
   font-weight: 800;
+  line-height: 1.35;
 }
 
 .quickActionGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
 }
 
 .quickActionLink {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   justify-items: center;
-  min-height: 142px;
-  padding: 18px 12px;
+  min-height: 108px;
+  padding: 12px 8px;
   color: #13243a;
   text-align: center;
-  background: #f7fbff;
-  border: 1px solid #d9e3f0;
-  border-radius: 8px;
+  background: #ffffff;
+  border-right: 1px solid #d9e3f0;
+  border-radius: 0;
+}
+
+.quickActionLink:last-child {
+  border-right: 0;
 }
 
 .quickActionLink img {
-  width: 54px;
-  height: 54px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
 }
 
 .quickActionLink strong {
   font-size: 15px;
+  white-space: nowrap;
 }
 
 .quickActionLink span {
   color: #6a7a8f;
   font-size: 13px;
   font-weight: 800;
+  line-height: 1.35;
 }
 
 .conditionList {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   margin: 0;
 }
 
@@ -497,8 +533,8 @@
   grid-template-columns: 1fr auto;
   gap: 12px;
   align-items: center;
-  min-height: 58px;
-  padding: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
   background: #f7fbff;
   border: 1px solid #d9e3f0;
   border-radius: 8px;
@@ -542,8 +578,8 @@
   grid-template-columns: auto 1fr auto;
   gap: 16px;
   align-items: center;
-  margin-top: 22px;
-  padding: 20px 22px;
+  margin-top: 14px;
+  padding: 16px 22px;
   background: #eaf4ff;
   border-color: #cfe2f7;
   box-shadow: 0 16px 34px rgba(7, 59, 120, 0.09);
@@ -593,9 +629,22 @@
     padding-bottom: 3px;
   }
 
+  .homeContent {
+    width: min(100% - 36px, 1180px);
+  }
+
   .searchGrid,
   .searchGridSecondary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .searchBottomRow {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .primaryCta {
+    min-height: 64px;
   }
 
   .cardGrid {
@@ -609,7 +658,19 @@
 
 @media (max-width: 720px) {
   .header {
+    grid-template-columns: 1fr;
     min-height: auto;
+    align-items: start;
+  }
+
+  .headerNav,
+  .authActions {
+    width: 100%;
+  }
+
+  .authActions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .logoLink strong {
@@ -630,23 +691,43 @@
 
   .hero,
   .heroOverlay {
-    min-height: 380px;
+    min-height: 350px;
   }
 
   .heroOverlay {
-    padding: 42px 18px 112px;
+    padding: 34px 18px 92px;
   }
 
   .hero h1 {
-    font-size: 40px;
+    max-width: 100%;
+    font-size: 36px;
+    overflow-wrap: keep-all;
   }
 
   .heroSubtitle {
-    font-size: 18px;
+    max-width: 320px;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .heroSubtitle span {
+    display: block;
+  }
+
+  .heroSubtitle span + span::before {
+    content: '';
   }
 
   .sidePhrase {
+    position: static;
     font-size: 17px;
+    margin-top: 14px;
+  }
+
+  .trustLine {
+    max-width: 100%;
+    font-size: 13px;
   }
 
   .homeContent {
@@ -662,6 +743,7 @@
 
   .searchGrid,
   .searchGridSecondary,
+  .searchBottomRow,
   .climateStatusRow,
   .cardGrid,
   .favoriteGrid,
@@ -669,6 +751,19 @@
   .ctaRow,
   .serviceBanner {
     grid-template-columns: 1fr;
+  }
+
+  .climateStatusRow {
+    min-height: auto;
+  }
+
+  .climateCard {
+    min-height: 74px;
+  }
+
+  .climateCard + .climateCard {
+    border-top: 1px solid #d9e3f0;
+    border-left: 0;
   }
 
   .cardGrid > :last-child {
