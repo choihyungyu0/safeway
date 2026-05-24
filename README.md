@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Sejong Safeway
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sejong Safeway is a React + TypeScript MVP for an AI-based climate-safe route and
+shelter recommendation service for Sejong citizens.
 
-Currently, two official plugins are available:
+The prototype uses mock public data to demonstrate safer route recommendations
+under heat, fine dust, fog, low visibility, and night-safety conditions. It is not
+a production backend integration yet.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Demo Flow
 
-## React Compiler
+1. Home route search
+2. User type selection
+3. AI recommendation comparison
+4. Map-based route view with safety layers
+5. Shelter detail
+6. Citizen feedback
+7. Admin dashboard
+8. Shelter gap analysis
+9. Public-data status
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React + TypeScript + Vite
+- React Router
+- TanStack Query
+- Zustand
+- Zod
+- Axios boundary for future API integration
+- lucide-react
+- react-kakao-maps-sdk placeholder support
+- Vitest + Testing Library
+- ESLint + Prettier
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Commands
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
+npm run typecheck
+npm run lint
+npm run test
+npm run build
+npm run preview
+npm run format
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Notes
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- UI copy is Korean for Sejong citizens.
+- Mock fixtures live in `src/mocks/fixtures`.
+- API-like mock adapters live in `src/shared/api`.
+- Recommendation scoring is deterministic and isolated in
+  `src/features/recommendation/scoring.ts` so it can later be replaced by a
+  FastAPI service.
+- No secrets or API keys are required. If `VITE_KAKAO_MAP_APP_KEY` is absent, the
+  map page shows a safe fallback visual.

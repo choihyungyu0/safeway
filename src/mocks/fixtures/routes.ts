@@ -1,0 +1,133 @@
+import type { SafeRouteRecommendation } from '@/entities/route/types'
+
+export type RouteRecommendationTemplate = Omit<
+  SafeRouteRecommendation,
+  'climateSafetyScore' | 'userType'
+>
+
+export const routeRecommendationTemplates: RouteRecommendationTemplate[] = [
+  {
+    id: 'route-safeway',
+    routeLogId: 'log-safeway-001',
+    type: 'SAFEWAY',
+    title: '세이프웨이 추천 경로',
+    summary: '호수공원 그늘길과 공공 쉼터를 연결하는 균형형 경로',
+    totalDurationMinutes: 31,
+    walkingMinutes: 24,
+    distanceMeters: 2180,
+    outdoorExposureReductionPercent: 34,
+    shelterCount: 3,
+    scoreBreakdown: {
+      climateSafety: 88,
+      outdoorExposureSafety: 84,
+      shelterAccess: 91,
+      greenAccess: 86,
+      transitAccess: 73,
+      nightSafety: 79,
+    },
+    reason:
+      '폭염 위험이 높은 시간대라 세종호수공원 그늘길과 보람동 쉼터를 지나도록 조정했습니다.',
+    cautions: ['금강보행교 진입 전 180m 구간은 그늘이 적습니다.'],
+    path: [
+      { lat: 36.5044, lng: 127.2654 },
+      { lat: 36.4998, lng: 127.2685 },
+      { lat: 36.4961, lng: 127.2702 },
+      { lat: 36.4896, lng: 127.278 },
+      { lat: 36.4801, lng: 127.2891 },
+    ],
+    nearShelterIds: [
+      'shelter-government-library',
+      'shelter-lake-park-center',
+      'shelter-boram-community',
+    ],
+  },
+  {
+    id: 'route-transit',
+    routeLogId: 'log-transit-001',
+    type: 'TRANSIT_ALTERNATIVE',
+    title: '대중교통 대체경로',
+    summary: 'BRT 환승으로 야외 노출을 줄이는 경로',
+    totalDurationMinutes: 28,
+    walkingMinutes: 11,
+    distanceMeters: 1510,
+    outdoorExposureReductionPercent: 47,
+    shelterCount: 2,
+    scoreBreakdown: {
+      climateSafety: 82,
+      outdoorExposureSafety: 91,
+      shelterAccess: 76,
+      greenAccess: 61,
+      transitAccess: 94,
+      nightSafety: 82,
+    },
+    reason:
+      '나성동 BRT 환승쉼터를 활용해 실외 보행 시간을 줄이고 냉방 가능한 대기 공간을 확보합니다.',
+    cautions: ['퇴근 시간대 BRT 혼잡 가능성이 있습니다.'],
+    path: [
+      { lat: 36.5044, lng: 127.2654 },
+      { lat: 36.4968, lng: 127.2615 },
+      { lat: 36.4868, lng: 127.2571 },
+      { lat: 36.4801, lng: 127.2891 },
+    ],
+    nearShelterIds: ['shelter-government-library', 'shelter-naseong-brt'],
+  },
+  {
+    id: 'route-night-safe',
+    routeLogId: 'log-night-001',
+    type: 'NIGHT_SAFE',
+    title: '야간 안전경로',
+    summary: 'CCTV와 가로등 밀도가 높은 큰길 중심 경로',
+    totalDurationMinutes: 35,
+    walkingMinutes: 29,
+    distanceMeters: 2410,
+    outdoorExposureReductionPercent: 21,
+    shelterCount: 2,
+    scoreBreakdown: {
+      climateSafety: 78,
+      outdoorExposureSafety: 72,
+      shelterAccess: 82,
+      greenAccess: 68,
+      transitAccess: 74,
+      nightSafety: 94,
+    },
+    reason:
+      '저시정 또는 야간 이동을 대비해 CCTV, 가로등, 보행량이 확보된 대로변을 우선했습니다.',
+    cautions: ['호수공원 내부 산책로보다 4분 정도 더 걸립니다.'],
+    path: [
+      { lat: 36.5044, lng: 127.2654 },
+      { lat: 36.4979, lng: 127.269 },
+      { lat: 36.491, lng: 127.2787 },
+      { lat: 36.4801, lng: 127.2891 },
+    ],
+    nearShelterIds: ['shelter-government-library', 'shelter-boram-community'],
+  },
+  {
+    id: 'route-shortest',
+    routeLogId: 'log-shortest-001',
+    type: 'SHORTEST',
+    title: '최단경로 비교',
+    summary: '시간은 가장 짧지만 실외 노출이 큰 비교 경로',
+    totalDurationMinutes: 23,
+    walkingMinutes: 23,
+    distanceMeters: 1960,
+    outdoorExposureReductionPercent: 8,
+    shelterCount: 1,
+    scoreBreakdown: {
+      climateSafety: 58,
+      outdoorExposureSafety: 52,
+      shelterAccess: 49,
+      greenAccess: 44,
+      transitAccess: 62,
+      nightSafety: 57,
+    },
+    reason:
+      '가장 빠른 동선이지만 직사광선 보도와 쉼터 공백 구간이 길어 기후위험 점수가 낮습니다.',
+    cautions: ['폭염·미세먼지 민감 이용자에게는 권장하지 않습니다.'],
+    path: [
+      { lat: 36.5044, lng: 127.2654 },
+      { lat: 36.4955, lng: 127.276 },
+      { lat: 36.4801, lng: 127.2891 },
+    ],
+    nearShelterIds: ['shelter-boram-community'],
+  },
+]
