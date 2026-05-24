@@ -98,6 +98,7 @@
 }
 
 .headerNavLink {
+  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 38px;
@@ -112,6 +113,17 @@
 .headerNavLink:hover,
 .headerNavLink[aria-current='page'] {
   color: #0057c2;
+}
+
+.headerNavLink[aria-current='page']::after {
+  position: absolute;
+  right: 0;
+  bottom: -19px;
+  left: 0;
+  height: 3px;
+  content: '';
+  background: #0057c2;
+  border-radius: 999px 999px 0 0;
 }
 
 .authActions {
@@ -682,6 +694,10 @@
     justify-content: flex-start;
     overflow-x: auto;
     padding-bottom: 3px;
+  }
+
+  .headerNavLink[aria-current='page']::after {
+    bottom: -5px;
   }
 
   .homeContent {

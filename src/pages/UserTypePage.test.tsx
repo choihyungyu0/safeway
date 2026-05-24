@@ -25,7 +25,7 @@ describe('UserTypePage', () => {
     useRouteSearchStore.setState({
       searchParams: defaultSearchParams,
       userType: 'GENERAL',
-      selectedRecommendationId: 'route-safeway',
+      selectedRecommendationId: 'safeway-route',
     })
   })
 
@@ -38,7 +38,7 @@ describe('UserTypePage', () => {
   it('renders all six user type labels', () => {
     renderUserTypePage()
 
-    expect(screen.getByText('일반')).toBeInTheDocument()
+    expect(screen.getByText('일반 성인')).toBeInTheDocument()
     expect(screen.getByText('고령자')).toBeInTheDocument()
     expect(screen.getByText('아동/청소년')).toBeInTheDocument()
     expect(screen.getByText('임산부')).toBeInTheDocument()
@@ -49,7 +49,7 @@ describe('UserTypePage', () => {
   it('selects general by default', () => {
     renderUserTypePage()
 
-    expect(screen.getByRole('button', { name: /일반/ })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: /일반 성인/ })).toHaveAttribute(
       'aria-pressed',
       'true',
     )
@@ -65,7 +65,7 @@ describe('UserTypePage', () => {
       'aria-pressed',
       'true',
     )
-    expect(screen.getByRole('button', { name: /일반/ })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: /일반 성인/ })).toHaveAttribute(
       'aria-pressed',
       'false',
     )
@@ -95,7 +95,7 @@ describe('UserTypePage', () => {
   it('renders local icon images with meaningful alt text', () => {
     renderUserTypePage()
 
-    expect(screen.getByAltText('일반 사용자 아이콘')).toHaveAttribute(
+    expect(screen.getByAltText('일반 성인 사용자 아이콘')).toHaveAttribute(
       'src',
       '/assets/user-type/icon-general.png',
     )

@@ -60,7 +60,7 @@ export function UserTypePage() {
     },
     {
       id: 'destination',
-      label: '도착지',
+      label: '목적지',
       value: searchParams.destination || summaryFallbacks.destination,
       icon: MapPin,
     },
@@ -91,7 +91,7 @@ export function UserTypePage() {
       <section className={styles.panel} aria-labelledby="user-type-heading">
         <div className={styles.panelHeader}>
           <h1 id="user-type-heading">사용자 유형 선택</h1>
-          <p>사용자 유형에 따라 더 정확하고 안전한 경로를 추천해 드립니다.</p>
+          <p>사용자 유형에 따라 더 정확하고 안전한 경로를 추천해드립니다.</p>
         </div>
 
         <section className={styles.summaryBar} aria-label="경로 검색 요약">
@@ -123,7 +123,7 @@ export function UserTypePage() {
           </div>
           <div>
             <h2 id="privacy-title">안심하고 이용하세요</h2>
-            <p>입력하신 개인 정보는 안전한 경로 추천을 위한 목적으로만 사용됩니다.</p>
+            <p>입력하신 정보는 안전한 경로 추천 목적에만 사용합니다.</p>
           </div>
           <LockKeyhole className={styles.lockIcon} size={38} aria-hidden="true" />
         </section>

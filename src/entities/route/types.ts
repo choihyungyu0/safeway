@@ -41,10 +41,13 @@ export type SafeRouteRecommendation = {
   routeLogId: string
   type: RecommendationType
   title: string
+  subtitle: string
   summary: string
+  durationMin: number
   totalDurationMinutes: number
   walkingMinutes: number
   distanceMeters: number
+  exposureReductionPct: number
   outdoorExposureReductionPercent: number
   shelterCount: number
   climateSafetyScore: number
@@ -54,4 +57,7 @@ export type SafeRouteRecommendation = {
   path: LatLng[]
   nearShelterIds: string[]
   userType: UserType
+  iconSrc: string
+  accentColor: string
+  isRecommended?: boolean
 }

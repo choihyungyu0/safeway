@@ -26,7 +26,10 @@ export function RecommendationCard({
           <h2>{recommendation.title}</h2>
           <p>{recommendation.summary}</p>
         </div>
-        <div className="score-ring" aria-label={`기후 안전 점수 ${recommendation.climateSafetyScore}점`}>
+        <div
+          className="score-ring"
+          aria-label={`기후안전 점수 ${recommendation.climateSafetyScore}점`}
+        >
           <ShieldCheck size={18} />
           <strong>{recommendation.climateSafetyScore}</strong>
         </div>
@@ -34,16 +37,16 @@ export function RecommendationCard({
 
       <dl className="recommendation-metrics">
         <div>
-          <dt>총 소요</dt>
+          <dt>총 소요시간</dt>
           <dd>{formatMinutes(recommendation.totalDurationMinutes)}</dd>
         </div>
         <div>
-          <dt>야외 노출 감소</dt>
+          <dt>외부 노출 감소</dt>
           <dd>{recommendation.outdoorExposureReductionPercent}%</dd>
         </div>
         <div>
           <dt>주변 쉼터</dt>
-          <dd>{recommendation.shelterCount}곳</dd>
+          <dd>{recommendation.shelterCount}개소</dd>
         </div>
         <div>
           <dt>거리</dt>

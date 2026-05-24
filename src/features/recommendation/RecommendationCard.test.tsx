@@ -21,9 +21,9 @@ describe('RecommendationCard', () => {
       </MemoryRouter>,
     )
 
-    expect(screen.getByText('31분')).toBeInTheDocument()
+    expect(screen.getByText('32분')).toBeInTheDocument()
     expect(screen.getByText(`${recommendation.climateSafetyScore}`)).toBeInTheDocument()
-    expect(screen.getByText('3곳')).toBeInTheDocument()
+    expect(screen.getByText('3개소')).toBeInTheDocument()
     expect(screen.getByText(recommendation.reason)).toBeInTheDocument()
   })
 })
