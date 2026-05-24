@@ -172,6 +172,36 @@
   background: linear-gradient(135deg, #004db8, #0054d5);
 }
 
+.adminDemoArea {
+  display: grid;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.adminDemoButton {
+  min-height: 54px;
+  color: #075bd1;
+  background: #f0f7ff;
+  border: 1px solid #b7d4ff;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.adminDemoButton:hover {
+  color: #004db8;
+  background: #e7f1ff;
+  border-color: #75adff;
+}
+
+.adminDemoArea p {
+  color: #69768e;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 750;
+}
+
 .statusMessage {
   margin-top: 13px;
   color: #10733f;

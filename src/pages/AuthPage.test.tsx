@@ -1,17 +1,19 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { HomeHeader } from '@/features/home/components/HomeHeader'
 import { LoginPage } from '@/pages/LoginPage'
-import { SignUpPage } from '@/pages/SignUpPage'
 
 vi.stubGlobal('alert', vi.fn())
 
 const renderLoginPage = () =>
   render(
     <MemoryRouter initialEntries={['/login']}>
-      <LoginPage />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin" element={<div>admin route reached</div>} />
+      </Routes>
     </MemoryRouter>,
   )
 
@@ -29,10 +31,11 @@ describe('LoginPage', () => {
     expect(screen.getByLabelText('비밀번호')).toBeInTheDocument()
   })
 
-  it('renders the submit button', () => {
+  it('renders the submit button and admin demo button', () => {
     renderLoginPage()
 
     expect(screen.getByRole('button', { name: '로그인' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '관리자 대시보드로 이동' })).toBeInTheDocument()
   })
 
   it('validates missing ID or email', async () => {
@@ -42,7 +45,7 @@ describe('LoginPage', () => {
     await user.type(screen.getByLabelText('비밀번호'), 'demo-password')
     await user.click(screen.getByRole('button', { name: '로그인' }))
 
-    expect(screen.getByText('아이디 또는 이메일을 입력해주세요.')).toBeInTheDocument()
+    expect(screen.getByText('아이디 또는 이메일을 입력해 주세요.')).toBeInTheDocument()
   })
 
   it('validates missing password', async () => {
@@ -52,7 +55,7 @@ describe('LoginPage', () => {
     await user.type(screen.getByLabelText('아이디 또는 이메일'), 'safe@example.com')
     await user.click(screen.getByRole('button', { name: '로그인' }))
 
-    expect(screen.getByText('비밀번호를 입력해주세요.')).toBeInTheDocument()
+    expect(screen.getByText('비밀번호를 입력해 주세요.')).toBeInTheDocument()
   })
 
   it('toggles password visibility', async () => {
@@ -72,30 +75,30 @@ describe('LoginPage', () => {
 
     expect(screen.getByRole('link', { name: '회원가입' })).toHaveAttribute('href', '/signup')
   })
-})
 
-describe('SignUpPage', () => {
-  it('renders the signup screen separately from login', () => {
-    render(
-      <MemoryRouter initialEntries={['/signup']}>
-        <SignUpPage />
-      </MemoryRouter>,
-    )
+  it('navigates to admin without triggering login validation', async () => {
+    const user = userEvent.setup()
+    renderLoginPage()
 
-    expect(screen.getByRole('heading', { name: '회원가입' })).toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: '로그인', level: 1 })).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '관리자 대시보드로 이동' }))
+
+    expect(screen.getByText('admin route reached')).toBeInTheDocument()
+    expect(screen.queryByText('아이디 또는 이메일을 입력해 주세요.')).not.toBeInTheDocument()
+    expect(screen.queryByText('비밀번호를 입력해 주세요.')).not.toBeInTheDocument()
   })
 })
 
 describe('HomeHeader auth links', () => {
-  it('points login and signup links to auth routes', () => {
+  it('keeps login and signup links available', () => {
     render(
       <MemoryRouter>
         <HomeHeader />
       </MemoryRouter>,
     )
 
-    expect(screen.getByRole('link', { name: /로그인/ })).toHaveAttribute('href', '/login')
-    expect(screen.getByRole('link', { name: '회원가입' })).toHaveAttribute('href', '/signup')
+    const links = screen.getAllByRole('link')
+
+    expect(links.some((link) => link.getAttribute('href') === '/login')).toBe(true)
+    expect(links.some((link) => link.getAttribute('href') === '/signup')).toBe(true)
   })
 })

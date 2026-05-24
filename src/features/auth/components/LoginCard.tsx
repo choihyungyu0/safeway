@@ -100,6 +100,17 @@ export function LoginCard() {
         <button type="submit" className={styles.mainLoginButton}>
           로그인
         </button>
+
+        <div className={styles.adminDemoArea}>
+          <button
+            type="button"
+            className={styles.adminDemoButton}
+            onClick={() => navigate('/admin')}
+          >
+            관리자 대시보드로 이동
+          </button>
+          <p>데모용 관리자 화면으로 이동합니다.</p>
+        </div>
       </form>
 
       {statusMessage ? (
@@ -108,7 +119,7 @@ export function LoginCard() {
         </p>
       ) : null}
 
-      <nav className={styles.findMenu} aria-label="로그인 도움말">
+      <nav className={styles.findMenu} aria-label="로그인 지원 메뉴">
         <Link to="#">아이디 찾기</Link>
         <span aria-hidden="true" />
         <Link to="#">비밀번호 찾기</Link>

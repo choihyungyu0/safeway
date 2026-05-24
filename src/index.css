@@ -79,11 +79,16 @@ h3 {
   font-size: 1rem;
 }
 
-main {
+.app-main {
   min-height: calc(100vh - 74px);
 }
 
 .app-shell {
+  min-height: 100vh;
+}
+
+.app-shell--admin,
+.app-main--admin {
   min-height: 100vh;
 }
 
