@@ -9,6 +9,8 @@ export type ShelterFacility = {
   aed: boolean
 }
 
+export type ShelterCrowdingLevel = '여유로움' | '보통' | '혼잡'
+
 export type Shelter = {
   id: string
   name: string
@@ -18,6 +20,9 @@ export type Shelter = {
   operationTime: string
   capacity: number
   distanceFromRouteMeters: number
+  walkingTimeMin: number
+  crowdingLevel: ShelterCrowdingLevel
+  imageSrc: string
   location: LatLng
   facilities: ShelterFacility
 }
