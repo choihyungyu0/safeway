@@ -9,6 +9,7 @@ const renderHome = () =>
     <MemoryRouter initialEntries={['/']}>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/user-type" element={<div>user type route</div>} />
         <Route path="/recommendations" element={<div>recommendations route</div>} />
       </Routes>
     </MemoryRouter>,
@@ -45,12 +46,12 @@ describe('HomePage', () => {
     expect(screen.getByAltText('기상·위험 정보 아이콘')).toBeInTheDocument()
   })
 
-  it('navigates to recommendations when clicking the CTA', async () => {
+  it('navigates to user type selection when clicking the CTA', async () => {
     const user = userEvent.setup()
     renderHome()
 
     await user.click(screen.getByRole('button', { name: 'AI 추천 경로 받기' }))
 
-    expect(screen.getByText('recommendations route')).toBeInTheDocument()
+    expect(screen.getByText('user type route')).toBeInTheDocument()
   })
 })

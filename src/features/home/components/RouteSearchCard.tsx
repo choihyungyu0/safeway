@@ -37,7 +37,7 @@ const preferenceOptions: Array<{ preference: RoutePreference; label: string }> =
 export function RouteSearchCard() {
   const navigate = useNavigate()
   const { values, updateValue } = useHomeSearchStore()
-  const { setSearchParams, setUserType } = useRouteSearchStore()
+  const { setSearchParams } = useRouteSearchStore()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -58,8 +58,7 @@ export function RouteSearchCard() {
     }
 
     setSearchParams(parsed.data)
-    setUserType(values.userType)
-    navigate('/recommendations')
+    navigate('/user-type')
   }
 
   const updateUserType = (label: string) => {
