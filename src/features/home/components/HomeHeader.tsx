@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import { LogIn, ShieldCheck } from 'lucide-react'
+import { UserRound } from 'lucide-react'
 import styles from '@/pages/HomePage.module.css'
 
 const navItems = [
@@ -7,7 +7,7 @@ const navItems = [
   { to: '/recommendations', label: '추천 결과' },
   { to: '/map', label: '지도 보기' },
   { to: '/shelters/shelter-001', label: '쉼터' },
-  { to: '#', label: '마이페이지' },
+  { to: '#', label: '마이페이지', external: true },
 ]
 
 export function HomeHeader() {
@@ -15,25 +15,41 @@ export function HomeHeader() {
     <header className={styles.header}>
       <Link to="/" className={styles.logoLink} aria-label="세종 세이프웨이 홈">
         <span className={styles.logoMark} aria-hidden="true">
-          <ShieldCheck size={22} />
+          <span className={styles.logoCircle} />
+          <span className={`${styles.logoLeaf} ${styles.leafOne}`} />
+          <span className={`${styles.logoLeaf} ${styles.leafTwo}`} />
+          <span className={`${styles.logoLeaf} ${styles.leafThree}`} />
         </span>
-        <strong>세종 세이프웨이</strong>
+        <strong>
+          세종 <span>세이프웨이</span>
+        </strong>
       </Link>
 
       <nav className={styles.headerNav} aria-label="주요 메뉴">
-        {navItems.map((item) => (
-          <NavLink key={item.label} to={item.to} className={styles.headerNavLink}>
-            {item.label}
-          </NavLink>
-        ))}
+        {navItems.map((item) =>
+          item.external ? (
+            <a key={item.label} href={item.to} className={styles.headerNavLink}>
+              {item.label}
+            </a>
+          ) : (
+            <NavLink key={item.label} to={item.to} className={styles.headerNavLink}>
+              {item.label}
+            </NavLink>
+          ),
+        )}
       </nav>
 
       <div className={styles.authActions}>
-        <Link to="#" className={styles.loginLink}>
-          <LogIn size={18} />
+        <NavLink
+          to="/login"
+          className={({ isActive }) =>
+            isActive ? `${styles.loginLink} ${styles.loginLinkActive}` : styles.loginLink
+          }
+        >
+          <UserRound size={23} aria-hidden="true" />
           로그인
-        </Link>
-        <Link to="#" className={styles.signupButton}>
+        </NavLink>
+        <Link to="/signup" className={styles.signupButton}>
           회원가입
         </Link>
       </div>

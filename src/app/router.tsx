@@ -5,9 +5,11 @@ import { AdminDataStatusPage } from '@/pages/AdminDataStatusPage'
 import { AdminShelterGapPage } from '@/pages/AdminShelterGapPage'
 import { FeedbackPage } from '@/pages/FeedbackPage'
 import { HomePage } from '@/pages/HomePage'
+import { LoginPage } from '@/pages/LoginPage'
 import { MapPage } from '@/pages/MapPage'
 import { RecommendationPage } from '@/pages/RecommendationPage'
 import { ShelterDetailPage } from '@/pages/ShelterDetailPage'
+import { SignUpPage } from '@/pages/SignUpPage'
 import { UserTypePage } from '@/pages/UserTypePage'
 
 export const router = createBrowserRouter([
@@ -16,6 +18,8 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'signup', element: <SignUpPage /> },
       { path: 'user-type', element: <UserTypePage /> },
       { path: 'recommendations', element: <RecommendationPage /> },
       { path: 'map', element: <MapPage /> },

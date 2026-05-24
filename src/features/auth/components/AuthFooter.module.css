@@ -1,0 +1,97 @@
+.footer {
+  background: #ffffff;
+  border-top: 1px solid #d9e3f0;
+}
+
+.footerInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  width: min(1180px, calc(100% - 48px));
+  min-height: 150px;
+  margin: 0 auto;
+  padding: 26px 0;
+}
+
+.footerMain {
+  display: grid;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cityBrand {
+  color: #071b3f;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.footerLinks a {
+  color: #354761;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.footerAside {
+  display: grid;
+  gap: 16px;
+  justify-items: end;
+}
+
+.cityHomepageButton {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  color: #005bd8;
+  background: #f5f9ff;
+  border: 1px solid #b9d3ef;
+  border-radius: 12px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.socialList {
+  display: flex;
+  gap: 8px;
+}
+
+.socialList a {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: #005bd8;
+  background: #edf5ff;
+  border: 1px solid #d9e3f0;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .footerInner {
+    grid-template-columns: 1fr;
+  }
+
+  .footerAside {
+    justify-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .footerInner {
+    width: min(100% - 28px, 1180px);
+  }
+}
