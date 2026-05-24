@@ -1,14 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import {
-  BarChart3,
-  ChevronLeft,
   Database,
   FileText,
   Home,
-  ListChecks,
   Map,
   MapPinned,
-  MessageSquareText,
+  MessagesSquare,
+  Route,
   Settings,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -23,15 +21,15 @@ type AdminMenuItem = {
 
 const adminMenuItems: AdminMenuItem[] = [
   { icon: Home, label: '대시보드', to: '/admin' },
-  {
-    icon: MapPinned,
-    label: '기후위험 지도',
-    to: '/admin/climate-risk-map',
-    aliases: ['/admin/climate-risk'],
-  },
+  { icon: MapPinned, label: '기후위험 지도', to: '/admin/climate-risk-map', aliases: ['/admin/climate-risk'] },
   { icon: Map, label: '쉼터 사각지대', to: '/admin/shelter-gaps' },
-  { icon: ListChecks, label: '추천 로그', to: '/admin/recommendation-logs' },
-  { icon: MessageSquareText, label: '피드백 분석', to: '/admin/feedback' },
+  { icon: Route, label: '추천 로그', to: '/admin/recommendation-logs' },
+  {
+    icon: MessagesSquare,
+    label: '피드백 분석',
+    to: '/admin/feedback',
+    aliases: ['/admin/feedback-analysis'],
+  },
   { icon: Database, label: '공공데이터 관리', to: '/admin/data-status' },
   { icon: FileText, label: '리포트', to: '/admin/reports' },
   { icon: Settings, label: '설정', to: '/admin/settings' },
@@ -59,7 +57,7 @@ export function AdminSidebar() {
               className={isActive ? styles.activeMenuItem : styles.menuItem}
               aria-current={isActive ? 'page' : undefined}
             >
-              <Icon size={21} aria-hidden="true" />
+              <Icon size={20} strokeWidth={2.1} aria-hidden="true" />
               <span>{item.label}</span>
             </Link>
           )
@@ -68,16 +66,10 @@ export function AdminSidebar() {
 
       <div className={styles.sidebarBottom}>
         <div className={styles.cityCard}>
-          <BarChart3 size={50} strokeWidth={1.8} aria-hidden="true" />
+          <div className={styles.cityLogoMark} aria-hidden="true" />
           <strong>세종특별자치시</strong>
-          <p>AI 기후안전 도시, 세종</p>
+          <p>AI 기반안전 도시, 세종</p>
         </div>
-
-        <button type="button" className={styles.collapseButton}>
-          <ChevronLeft size={18} aria-hidden="true" />
-          <ChevronLeft size={18} aria-hidden="true" />
-          메뉴 접기
-        </button>
       </div>
     </aside>
   )

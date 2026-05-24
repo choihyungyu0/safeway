@@ -9,11 +9,11 @@
   top: 0;
   z-index: 30;
   min-height: 72px;
-  padding: 0 34px;
+  padding: 0 28px;
   display: grid;
-  grid-template-columns: auto minmax(240px, 1fr) auto;
+  grid-template-columns: auto minmax(220px, 1fr) auto;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f0;
 }
@@ -28,7 +28,7 @@
 .headerBrandGroup h1 {
   margin: 0;
   color: #063f93;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 950;
   line-height: 1;
   letter-spacing: 0;
@@ -44,18 +44,20 @@
   font-size: 16px;
   font-weight: 850;
   line-height: 1.35;
+  margin: 0;
 }
 
 .headerActions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
 .iconButton,
 .chevronButton,
 .textLinkButton,
 .alarmButton,
+.adminAccountButton,
 .logoutButton {
   display: inline-grid;
   place-items: center;
@@ -75,12 +77,14 @@
 .chevronButton:hover,
 .textLinkButton:hover,
 .alarmButton:hover,
+.adminAccountButton:hover,
 .logoutButton:hover {
   color: #005bd8;
   background: #f0f7ff;
 }
 
 .alarmButton,
+.adminAccountButton,
 .logoutButton {
   min-height: 38px;
   padding: 0 8px;
@@ -91,6 +95,10 @@
   font-size: 14px;
   font-weight: 850;
   white-space: nowrap;
+}
+
+.adminAccountButton {
+  gap: 7px;
 }
 
 .alarmButton strong {
@@ -239,30 +247,46 @@
 
 .bodyLayout {
   display: grid;
-  grid-template-columns: 236px minmax(0, 1fr);
+  grid-template-columns: 250px minmax(0, 1fr);
 }
 
 .sidebar {
   position: sticky;
   top: 72px;
   height: calc(100vh - 72px);
-  padding: 24px 15px;
+  padding: 22px 12px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: #ffffff;
   border-right: 1px solid #e2e8f0;
+  overflow: hidden;
 }
 
 .sideMenu {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.menuGroup {
+  display: grid;
+  gap: 7px;
+}
+
+.groupTitle {
+  margin: 0;
+  padding: 0 9px;
+  color: #52637e;
+  font-size: 13px;
+  font-weight: 850;
 }
 
 .menuItem,
 .activeMenuItem {
-  min-height: 54px;
-  padding: 0 19px;
+  min-height: 56px;
+  padding: 0 18px;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -281,12 +305,13 @@
 .activeMenuItem {
   color: #ffffff;
   background: linear-gradient(135deg, #075bd1, #005bea);
-  box-shadow: 0 10px 22px rgba(7, 91, 209, 0.23);
+  box-shadow: 0 10px 22px rgba(7, 91, 209, 0.22);
 }
 
 .sidebarBottom {
   display: grid;
   gap: 18px;
+  padding-top: 16px;
 }
 
 .cityCard {

@@ -11,13 +11,13 @@ const renderAdminDashboard = () =>
   )
 
 describe('AdminDashboardPage', () => {
-  it('renders the admin header and subtitle', () => {
+  it('renders the admin header', () => {
     renderAdminDashboard()
 
     expect(
       screen.getByRole('heading', { name: '세종 세이프웨이 관리자' }),
     ).toBeInTheDocument()
-    expect(screen.getByText('세종특별자치시 공공데이터 기반 운영현황')).toBeInTheDocument()
+    expect(screen.getByText('김세종 관리자')).toBeInTheDocument()
   })
 
   it('renders every sidebar menu item with dashboard active', () => {

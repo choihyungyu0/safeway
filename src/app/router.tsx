@@ -1,7 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { App } from '@/app/App'
+import { AdminClimateRiskMapPage } from '@/pages/AdminClimateRiskMapPage'
 import { AdminDashboardPage } from '@/pages/AdminDashboardPage'
 import { AdminDataStatusPage } from '@/pages/AdminDataStatusPage'
+import { AdminFeedbackPage } from '@/pages/AdminFeedbackPage'
 import { AdminShelterGapPage } from '@/pages/AdminShelterGapPage'
 import { FeedbackPage } from '@/pages/FeedbackPage'
 import { HomePage } from '@/pages/HomePage'
@@ -26,7 +28,11 @@ export const router = createBrowserRouter([
       { path: 'shelters/:shelterId', element: <ShelterDetailPage /> },
       { path: 'feedback/:routeLogId', element: <FeedbackPage /> },
       { path: 'admin', element: <AdminDashboardPage /> },
+      { path: 'admin/climate-risk-map', element: <AdminClimateRiskMapPage /> },
+      { path: 'admin/climate-risk', element: <AdminClimateRiskMapPage /> },
       { path: 'admin/shelter-gaps', element: <AdminShelterGapPage /> },
+      { path: 'admin/feedback', element: <AdminFeedbackPage /> },
+      { path: 'admin/feedback-analysis', element: <AdminFeedbackPage /> },
       { path: 'admin/data-status', element: <AdminDataStatusPage /> },
     ],
   },
