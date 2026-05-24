@@ -1,0 +1,685 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+  min-height: 72px;
+  padding: 0 32px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(217, 227, 240, 0.95);
+  box-shadow: 0 8px 24px rgba(7, 59, 120, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.logoLink,
+.headerNavLink,
+.loginLink,
+.signupButton,
+.quickActionLink,
+.bannerButton {
+  text-decoration: none;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #073b78;
+  font-size: 18px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.logoMark {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  color: #ffffff;
+  background: #0057c2;
+  border-radius: 8px;
+  box-shadow: 0 10px 22px rgba(0, 87, 194, 0.22);
+}
+
+.headerNav {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  min-width: 0;
+}
+
+.headerNavLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  color: #42546b;
+  border-radius: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.headerNavLink:hover {
+  color: #0057c2;
+  background: #f0f6ff;
+}
+
+.authActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.loginLink,
+.signupButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.loginLink {
+  color: #42546b;
+}
+
+.signupButton {
+  color: #ffffff;
+  background: #0057c2;
+  box-shadow: 0 12px 24px rgba(0, 87, 194, 0.22);
+}
+
+.homePage {
+  min-height: 100vh;
+  background: #f5f9ff;
+}
+
+.hero {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(245, 249, 255, 0.88)),
+    linear-gradient(90deg, rgba(0, 87, 194, 0.26), rgba(7, 59, 120, 0.04)),
+    url('/assets/home/hero-sejong.png') center / cover no-repeat,
+    linear-gradient(135deg, #dff0ff, #ffffff 48%, #d8f5f0);
+}
+
+.heroOverlay {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: 430px;
+  padding: 52px 24px 124px;
+  text-align: center;
+}
+
+.trustLine {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  color: #0057c2;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(217, 227, 240, 0.9);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.hero h1 {
+  margin-top: 18px;
+  color: #073b78;
+  font-size: 56px;
+  line-height: 1.06;
+  letter-spacing: 0;
+  text-shadow: 0 4px 18px rgba(255, 255, 255, 0.75);
+}
+
+.heroSubtitle {
+  margin-top: 16px;
+  color: #173b62;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.45;
+  text-shadow: 0 3px 16px rgba(255, 255, 255, 0.78);
+}
+
+.sidePhrase {
+  margin-top: 18px;
+  color: #079a9a;
+  font-family: 'Segoe Script', 'Malgun Gothic', cursive;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.homeContent {
+  position: relative;
+  width: min(1180px, calc(100% - 40px));
+  margin: -92px auto 0;
+  padding-bottom: 48px;
+}
+
+.searchCard,
+.infoCard,
+.serviceBanner {
+  background: #ffffff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+  box-shadow: 0 22px 52px rgba(7, 59, 120, 0.12);
+}
+
+.searchCard {
+  display: grid;
+  gap: 22px;
+  padding: 26px;
+}
+
+.searchGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.searchGridSecondary {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(420px, 1.2fr);
+  gap: 14px;
+  align-items: end;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  color: #42546b;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.fieldControl {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 14px;
+  color: #6a7a8f;
+  background: #f7fbff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+}
+
+.fieldControl input,
+.fieldControl select {
+  min-width: 0;
+  width: 100%;
+  min-height: 40px;
+  padding: 0;
+  color: #13243a;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-weight: 900;
+}
+
+.fieldControl select {
+  appearance: none;
+}
+
+.transportField {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.transportField legend {
+  margin-bottom: 8px;
+  color: #42546b;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.segmentedControl {
+  display: flex;
+  gap: 8px;
+  min-height: 54px;
+  padding: 7px;
+  overflow-x: auto;
+  background: #eef5fb;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+}
+
+.segmentedControl button {
+  flex: 1 0 max-content;
+  min-width: 86px;
+  min-height: 38px;
+  padding: 0 14px;
+  color: #42546b;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.segmentedControl .segmentSelected {
+  color: #ffffff;
+  background: #0057c2;
+  box-shadow: 0 10px 20px rgba(0, 87, 194, 0.2);
+}
+
+.climateStatusRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.climateCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  min-height: 88px;
+  padding: 14px;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+}
+
+.climateIcon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+}
+
+.climateCard strong {
+  display: block;
+  color: #13243a;
+  font-size: 15px;
+}
+
+.climateCard p {
+  margin-top: 3px;
+  font-weight: 900;
+}
+
+.climateCard small {
+  display: block;
+  margin-top: 2px;
+  color: #6a7a8f;
+  font-weight: 800;
+}
+
+.heat {
+  color: #b76400;
+  background: #fff7ec;
+}
+
+.heat .climateIcon {
+  background: #ffe3bd;
+}
+
+.good {
+  color: #15965f;
+  background: #ecfbf4;
+}
+
+.good .climateIcon {
+  background: #d6f6e8;
+}
+
+.fog {
+  color: #366d98;
+  background: #eff7ff;
+}
+
+.fog .climateIcon {
+  background: #dcecff;
+}
+
+.ctaRow {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.primaryCta {
+  min-height: 56px;
+  padding: 0 28px;
+  color: #ffffff;
+  background: #0057c2;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 16px 30px rgba(0, 87, 194, 0.25);
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.ctaRow p {
+  color: #6a7a8f;
+  font-weight: 800;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.9fr;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.infoCard {
+  min-width: 0;
+  padding: 22px;
+}
+
+.cardTitleRow {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cardTitleRow h2 {
+  color: #073b78;
+  font-size: 20px;
+  letter-spacing: 0;
+}
+
+.cardTitleRow button {
+  min-height: 34px;
+  padding: 0 12px;
+  color: #0057c2;
+  background: #f0f6ff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.favoriteGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.favoriteButton {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  justify-items: start;
+  min-height: 112px;
+  padding: 14px;
+  color: #13243a;
+  text-align: left;
+  background: #f7fbff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.favoriteButton span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: #0057c2;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(7, 59, 120, 0.08);
+}
+
+.favoriteButton strong {
+  font-size: 15px;
+}
+
+.favoriteButton small {
+  color: #6a7a8f;
+  font-weight: 800;
+}
+
+.quickActionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.quickActionLink {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  min-height: 142px;
+  padding: 18px 12px;
+  color: #13243a;
+  text-align: center;
+  background: #f7fbff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+}
+
+.quickActionLink img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.quickActionLink strong {
+  font-size: 15px;
+}
+
+.quickActionLink span {
+  color: #6a7a8f;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.conditionList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.conditionRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px;
+  background: #f7fbff;
+  border: 1px solid #d9e3f0;
+  border-radius: 8px;
+}
+
+.conditionRow dt {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #42546b;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.conditionRow dd {
+  margin: 0;
+  color: #13243a;
+  font-weight: 900;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.warning {
+  background: #ff9500;
+}
+
+.success {
+  background: #15965f;
+}
+
+.calm {
+  background: #3d88c8;
+}
+
+.serviceBanner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  margin-top: 22px;
+  padding: 20px 22px;
+  background: #eaf4ff;
+  border-color: #cfe2f7;
+  box-shadow: 0 16px 34px rgba(7, 59, 120, 0.09);
+}
+
+.bannerIcon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: #ffffff;
+  background: #0057c2;
+  border-radius: 8px;
+}
+
+.serviceBanner p {
+  color: #173b62;
+  font-weight: 800;
+  line-height: 1.65;
+}
+
+.bannerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  color: #0057c2;
+  background: #ffffff;
+  border: 1px solid #b9d3ef;
+  border-radius: 8px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+@media (max-width: 1060px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 12px 18px;
+  }
+
+  .headerNav {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 3px;
+  }
+
+  .searchGrid,
+  .searchGridSecondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cardGrid > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    min-height: auto;
+  }
+
+  .logoLink strong {
+    font-size: 16px;
+  }
+
+  .authActions {
+    gap: 6px;
+  }
+
+  .loginLink {
+    padding: 0 8px;
+  }
+
+  .signupButton {
+    padding: 0 10px;
+  }
+
+  .hero,
+  .heroOverlay {
+    min-height: 380px;
+  }
+
+  .heroOverlay {
+    padding: 42px 18px 112px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .heroSubtitle {
+    font-size: 18px;
+  }
+
+  .sidePhrase {
+    font-size: 17px;
+  }
+
+  .homeContent {
+    width: min(100% - 24px, 1180px);
+    margin-top: -74px;
+  }
+
+  .searchCard,
+  .infoCard,
+  .serviceBanner {
+    padding: 16px;
+  }
+
+  .searchGrid,
+  .searchGridSecondary,
+  .climateStatusRow,
+  .cardGrid,
+  .favoriteGrid,
+  .quickActionGrid,
+  .ctaRow,
+  .serviceBanner {
+    grid-template-columns: 1fr;
+  }
+
+  .cardGrid > :last-child {
+    grid-column: auto;
+  }
+
+  .primaryCta {
+    width: 100%;
+  }
+
+  .serviceBanner {
+    justify-items: start;
+  }
+}

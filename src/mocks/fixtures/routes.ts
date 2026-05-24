@@ -38,7 +38,7 @@ export const routeRecommendationTemplates: RouteRecommendationTemplate[] = [
     nearShelterIds: [
       'shelter-government-library',
       'shelter-lake-park-center',
-      'shelter-boram-community',
+      'shelter-001',
     ],
   },
   {
@@ -99,7 +99,7 @@ export const routeRecommendationTemplates: RouteRecommendationTemplate[] = [
       { lat: 36.491, lng: 127.2787 },
       { lat: 36.4801, lng: 127.2891 },
     ],
-    nearShelterIds: ['shelter-government-library', 'shelter-boram-community'],
+    nearShelterIds: ['shelter-government-library', 'shelter-001'],
   },
   {
     id: 'route-shortest',
@@ -128,6 +128,6 @@ export const routeRecommendationTemplates: RouteRecommendationTemplate[] = [
       { lat: 36.4955, lng: 127.276 },
       { lat: 36.4801, lng: 127.2891 },
     ],
-    nearShelterIds: ['shelter-boram-community'],
+    nearShelterIds: ['shelter-001'],
   },
 ]

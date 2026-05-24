@@ -2,7 +2,7 @@ import type { Shelter } from '@/entities/shelter/types'
 
 export const mockShelters: Shelter[] = [
   {
-    id: 'shelter-boram-community',
+    id: 'shelter-001',
     name: '보람동 복합커뮤니티센터 무더위쉼터',
     type: 'COOLING_CENTER',
     status: 'OPEN',
