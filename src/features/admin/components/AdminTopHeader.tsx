@@ -5,9 +5,14 @@ import styles from '@/pages/AdminDashboardPage.module.css'
 type AdminTopHeaderProps = {
   subtitle?: string
   variant?: 'compact' | 'management'
+  showLogout?: boolean
 }
 
-export function AdminTopHeader({ subtitle, variant = 'compact' }: AdminTopHeaderProps) {
+export function AdminTopHeader({
+  subtitle,
+  variant = 'compact',
+  showLogout = true,
+}: AdminTopHeaderProps) {
   const navigate = useNavigate()
 
   return (
@@ -66,12 +71,16 @@ export function AdminTopHeader({ subtitle, variant = 'compact' }: AdminTopHeader
             </button>
           </div>
 
-          <div className={styles.headerDivider} aria-hidden="true" />
+          {showLogout ? (
+            <>
+              <div className={styles.headerDivider} aria-hidden="true" />
 
-          <button type="button" className={styles.logoutButton} onClick={() => navigate('/login')}>
-            <LogOut size={18} strokeWidth={2.1} aria-hidden="true" />
-            로그아웃
-          </button>
+              <button type="button" className={styles.logoutButton} onClick={() => navigate('/login')}>
+                <LogOut size={18} strokeWidth={2.1} aria-hidden="true" />
+                로그아웃
+              </button>
+            </>
+          ) : null}
         </div>
       )}
     </header>

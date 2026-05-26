@@ -30,7 +30,7 @@ type AdminMenuItem = {
 }
 
 type AdminSidebarProps = {
-  variant?: 'compact' | 'management'
+  variant?: 'compact' | 'management' | 'settings'
 }
 
 type AdminMenuGroup = {
@@ -74,6 +74,8 @@ const adminMenuItems: AdminMenuItem[] = [
   { icon: FileText, label: '리포트', to: '/admin/reports' },
   { icon: Settings, label: '설정', to: '/admin/settings' },
 ]
+
+const settingsMenuItems = adminMenuItems.filter((item) => item.to !== '/admin/temporary-shelters')
 
 const managementMenuGroups: AdminMenuGroup[] = [
   {
@@ -139,7 +141,9 @@ const managementMenuGroups: AdminMenuGroup[] = [
 export function AdminSidebar({ variant = 'compact' }: AdminSidebarProps) {
   const location = useLocation()
   const menuGroups =
-    variant === 'management' ? managementMenuGroups : [{ items: adminMenuItems }]
+    variant === 'management'
+      ? managementMenuGroups
+      : [{ items: variant === 'settings' ? settingsMenuItems : adminMenuItems }]
   const sidebarClassName = `${styles.sidebar} ${
     variant === 'management' ? styles.managementSidebar : styles.compactSidebar
   }`

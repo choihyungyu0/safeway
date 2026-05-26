@@ -6,6 +6,7 @@ import { AdminFeedbackPage } from '@/pages/AdminFeedbackPage'
 import { AdminPublicDataPage } from '@/pages/AdminPublicDataPage'
 import { AdminRecommendationLogPage } from '@/pages/AdminRecommendationLogPage'
 import { AdminReportPage } from '@/pages/AdminReportPage'
+import { AdminSettingsPage } from '@/pages/AdminSettingsPage'
 import { AdminShelterGapPage } from '@/pages/AdminShelterGapPage'
 import { AdminTemporaryShelterPage } from '@/pages/AdminTemporaryShelterPage'
 import { FeedbackPage } from '@/pages/FeedbackPage'
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: 'admin/data-collection', element: <AdminPublicDataPage /> },
       { path: 'admin/data-quality', element: <AdminPublicDataPage /> },
       { path: 'admin/reports', element: <AdminReportPage /> },
+      { path: 'admin/settings', element: <AdminSettingsPage /> },
     ],
   },
 ])

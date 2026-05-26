@@ -5,7 +5,8 @@ type AdminShellLayoutProps = {
   children: ReactNode
   headerSubtitle?: string
   headerVariant?: 'compact' | 'management'
-  sidebarVariant?: 'compact' | 'management'
+  sidebarVariant?: 'compact' | 'management' | 'settings'
+  showLogout?: boolean
 }
 
 export function AdminShellLayout({
@@ -13,12 +14,14 @@ export function AdminShellLayout({
   headerSubtitle,
   headerVariant,
   sidebarVariant,
+  showLogout,
 }: AdminShellLayoutProps) {
   return (
     <SejongAdminShell
       headerSubtitle={headerSubtitle}
       headerVariant={headerVariant}
       sidebarVariant={sidebarVariant}
+      showLogout={showLogout}
     >
       {children}
     </SejongAdminShell>
