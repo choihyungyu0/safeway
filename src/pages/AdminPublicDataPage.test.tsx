@@ -49,6 +49,7 @@ describe('AdminPublicDataPage', () => {
       '미세먼지',
       '안개',
       '쉼터 정보',
+      'SafeWay 처리 분석 데이터',
       'CCTV 정보',
       '버스정류장',
       '가로등 정보',
@@ -57,6 +58,7 @@ describe('AdminPublicDataPage', () => {
       expect(screen.getByText(datasetName)).toBeInTheDocument()
     })
     expect(screen.getAllByText('정상').length).toBeGreaterThan(0)
+    expect(screen.getByText('쉼터 500개 · 추천 54건 · 시나리오 3개')).toBeInTheDocument()
     expect(screen.getAllByText('지연 수집').length).toBeGreaterThan(0)
     expect(screen.getAllByText('점검 필요').length).toBeGreaterThan(0)
   })

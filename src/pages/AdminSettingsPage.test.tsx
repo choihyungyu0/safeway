@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { AdminSettingsPage } from '@/pages/AdminSettingsPage'
@@ -41,5 +42,14 @@ describe('AdminSettingsPage', () => {
     expect(screen.getByRole('link', { name: '설정' })).toHaveAttribute('aria-current', 'page')
     expect(screen.queryByRole('link', { name: '임시쉼터 후보' })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: '로그아웃' })).not.toBeInTheDocument()
+  })
+
+  it('saves settings with fixture fallback when the backend is unavailable', async () => {
+    const user = userEvent.setup()
+    renderAdminSettings()
+
+    await user.click(screen.getByRole('button', { name: '설정 저장' }))
+
+    expect(await screen.findByRole('status')).toHaveTextContent('설정이 저장되었습니다.')
   })
 })

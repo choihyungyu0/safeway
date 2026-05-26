@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { AdminShellLayout as AdminLayout } from '@/features/admin/components/AdminShellLayout'
+import { saveAdminSettings } from '@/features/admin/adminSettings.api'
 import { safewayUserTypeWeights } from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/AdminSettingsPage.module.css'
 
@@ -167,8 +168,17 @@ export function AdminSettingsPage() {
     setNotifications((current) => ({ ...current, [id]: !current[id] }))
   }
 
-  const saveSettings = () => {
-    setSaveMessage('설정이 저장되었습니다.')
+  const saveSettings = async () => {
+    try {
+      await saveAdminSettings({
+        scoringWeights: weights,
+        notificationSettings: notifications,
+        userTypeWeights: safewayUserTypeWeights,
+      })
+      setSaveMessage('설정이 저장되었습니다.')
+    } catch {
+      setSaveMessage('설정 저장에 실패했습니다.')
+    }
   }
 
   return (

@@ -11,7 +11,7 @@ import {
 } from '@/features/shelter/shelter.store'
 import { ShelterDetailPage } from '@/pages/ShelterDetailPage'
 
-const renderShelterDetailPage = () => {
+const renderShelterDetailPage = (initialPath = '/shelters/shelter-001') => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -22,7 +22,7 @@ const renderShelterDetailPage = () => {
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/shelters/shelter-001']}>
+      <MemoryRouter initialEntries={[initialPath]}>
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="shelters/:shelterId" element={<ShelterDetailPage />} />
@@ -79,6 +79,14 @@ describe('ShelterDetailPage', () => {
       'src',
       '/assets/shelters/shelter-naseong-community-center.png',
     )
+  })
+
+  it('renders generated SafeWay shelter data when the backend is unavailable', async () => {
+    renderShelterDetailPage('/shelters/safeway-shelter-001')
+
+    expect(await screen.findByRole('heading', { name: '도담 방축천변 교량하부' })).toBeInTheDocument()
+    expect(screen.getByText('세종특별자치시 양지길 16')).toBeInTheDocument()
+    expect(screen.getByText('23명')).toBeInTheDocument()
   })
 
   it('renders the status panel values', async () => {

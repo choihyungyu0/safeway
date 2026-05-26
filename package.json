@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "backend:dev": "python -m uvicorn app.main:app --reload --app-dir backend --port 8000",
+    "backend:test": "python -m compileall backend/app",
     "check": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "dev:full": "docker compose up frontend backend",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
     "import:data": "node scripts/import-safeway-data.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
