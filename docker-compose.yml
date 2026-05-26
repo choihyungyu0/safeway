@@ -15,12 +15,16 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: backend/Dockerfile
     environment:
       APP_ENV: local
       CORS_ORIGINS: http://localhost:5174,http://127.0.0.1:5174
       DATABASE_URL: postgresql+psycopg://safeway:safeway@postgres:5432/safeway
+      USE_DATABASE: "true"
+      DB_ECHO: "false"
       REDIS_URL: redis://redis:6379/0
+      SAFEWAY_REPO_ROOT: /app
     ports:
       - "8000:8000"
     depends_on:

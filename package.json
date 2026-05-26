@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "backend:dev": "python -m uvicorn app.main:app --reload --app-dir backend --port 8000",
+    "backend:migrate": "python -m alembic -c backend/alembic.ini upgrade head",
+    "backend:seed": "cd backend && python -m app.db.seed",
     "backend:test": "python -m compileall backend/app",
     "check": "npm run typecheck && npm run lint && npm run test && npm run build",
     "dev:full": "docker compose up frontend backend",

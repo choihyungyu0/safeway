@@ -3,6 +3,32 @@
 This draft targets PostgreSQL with PostGIS. The current application still uses
 deterministic fixtures and does not require a database at runtime.
 
+## Implemented Migration
+
+The first Alembic migration lives at:
+
+`backend/alembic/versions/202605260001_initial_database.py`
+
+It creates the database-backed MVP tables that are currently wired to FastAPI:
+
+- `shelters`
+- `climate_scenarios`
+- `user_type_weights`
+- `route_recommendations`
+- `data_collection_runs`
+- `system_settings`
+
+The migration enables PostGIS only when the active Alembic dialect is
+PostgreSQL. Fixture fallback remains the runtime default when `DATABASE_URL` is
+unset or the database is unavailable.
+
+Run from the repository root:
+
+```bash
+npm run backend:migrate
+npm run backend:seed
+```
+
 ## Extensions
 
 ```sql
@@ -191,6 +217,12 @@ Initial local seed should load generated SafeWay fixtures:
 
 - `safewayShelters.json` -> `shelters`
 - `safewayClimateScenarios.json` -> `climate_scenarios`
-- `safewayRouteRecommendations.json` -> `route_requests`, `route_candidates`, `route_recommendations`
-- `safewayUserTypeWeights.json` -> `system_settings`
+- `safewayUserTypeWeights.json` -> `user_type_weights`
+- `safewayRouteRecommendations.json` -> `route_recommendations`
+- `safewayScenarioSummary.json` -> `system_settings.scenario_summary`
+- `safewayAnalysisSummary.json` -> `system_settings.analysis_summary`
 - `safewayImportMetadata.json` -> `data_collection_runs`
+
+Future production migrations can expand the route tables into normalized
+`route_requests`, `route_candidates`, and `route_recommendations` records once
+a real routing provider is connected.

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.schemas.admin import AdminPayload, AdminSettings, DataStatus
-from app.services.data_status_service import (
+from app.services.admin_service import (
     get_admin_payload,
     get_dashboard,
     get_data_statuses,

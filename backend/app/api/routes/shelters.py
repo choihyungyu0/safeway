@@ -15,11 +15,10 @@ def read_shelters() -> list[Shelter]:
 def read_nearby_shelters(
     lat: float | None = None,
     lng: float | None = None,
+    radius_m: int = Query(default=500, ge=1, le=20_000),
     limit: int = Query(default=10, ge=1, le=50),
 ) -> list[Shelter]:
-    # lat/lng are accepted now so the frontend contract is ready for PostGIS proximity queries.
-    _ = (lat, lng)
-    return list_nearby_shelters(limit)
+    return list_nearby_shelters(lat=lat, lng=lng, radius_m=radius_m, limit=limit)
 
 
 @router.get("/{shelter_id}", response_model=Shelter)
