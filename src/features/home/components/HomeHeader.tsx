@@ -6,7 +6,7 @@ const navItems = [
   { to: '/', label: '경로 검색' },
   { to: '/recommendations', label: '추천 결과' },
   { to: '/map', label: '지도 보기' },
-  { to: '/shelters/shelter-001', label: '쉼터' },
+  { to: '/shelters', label: '쉼터' },
   { to: '#', label: '마이페이지', external: true },
 ]
 

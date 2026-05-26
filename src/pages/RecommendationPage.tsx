@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import type { RecommendationType, SafeRouteRecommendation } from '@/entities/route/types'
 import { useRouteSearchStore } from '@/features/route-search/routeSearchStore'
 import { scoreCriteria } from '@/features/recommendation/recommendation.constants'
+import { bestSafewayRouteRecommendation } from '@/mocks/fixtures/generated/safewayData'
 import { mockRecommendationResults } from '@/mocks/fixtures/recommendations'
 import { routePreferenceLabels, transportModeLabels, userTypeLabels } from '@/shared/constants/labels'
 import styles from '@/pages/RecommendationPage.module.css'
@@ -137,7 +138,10 @@ export function RecommendationPage() {
           </span>
           <p>
             최단경로보다 <strong>6분</strong> 더 걸리지만, 폭염 노출과
-            기후위험이 낮은 <strong>세이프웨이</strong> 경로입니다.
+            기후위험이 낮은 <strong>세이프웨이</strong> 경로입니다. SafeWay
+            분석 데이터 기준 <strong>{bestSafewayRouteRecommendation.routeName}</strong>
+            은 최종 기후안전 <strong>{bestSafewayRouteRecommendation.finalSafetyScore}점</strong>
+            입니다.
           </p>
         </section>
 

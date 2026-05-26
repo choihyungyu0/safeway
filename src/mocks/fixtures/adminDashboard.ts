@@ -15,6 +15,7 @@ import type {
   RiskTypeRatio,
   TimeRiskPoint,
 } from '@/features/admin/admin.types'
+import { safewayAnalysisSummary } from '@/mocks/fixtures/generated/safewayData'
 
 export const adminSummaryMetrics: AdminSummaryMetric[] = [
   {
@@ -48,7 +49,7 @@ export const adminSummaryMetrics: AdminSummaryMetric[] = [
     id: 'active-shelters',
     title: '운영 중 쉼터',
     value: '128개',
-    comparison: '총 쉼터 143개',
+    comparison: `총 쉼터 ${safewayAnalysisSummary.totalShelterCount}개`,
     trend: 'neutral',
     accent: 'teal',
     icon: Building2,

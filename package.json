@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "import:data": "node scripts/import-safeway-data.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",

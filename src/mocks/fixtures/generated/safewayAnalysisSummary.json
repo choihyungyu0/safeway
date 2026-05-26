@@ -1,0 +1,32 @@
+{
+  "totalShelterCount": 500,
+  "nightOpenShelterCount": 374,
+  "holidayOpenShelterCount": 468,
+  "averageCapacity": 27.41,
+  "averageAirConditionerCount": 1.7,
+  "maxCapacity": 254,
+  "maxAirConditionerCount": 30,
+  "topFindings": [
+    "세종 세이프웨이 빅데이터 분석 MVP에서는 세종시 무더위쉼터 공공데이터를 기반으로 쉼터 접근성 점수를 산정하고, 기온·습도·미세먼지·초미세먼지·오존·시정 정보를 활용한 기후위험 점수 모델을 구성하였다.",
+    "기후 시나리오는 일반 여름날, 폭염·오존 위험일, 미세먼지·안개 위험일 3가지로 구성하였다.",
+    "각 시나리오별 기후위험 점수를 산정한 뒤, 사용자 유형별 가중치를 적용하여 경로별 최종 기후안전 점수를 계산하였다.",
+    "분석 결과, 전체 조합 중 가장 높은 점수를 받은 경로는 '조치원역 → 조치원읍 중심지'이며, 최종 기후안전 점수는 96.3점으로 나타났다.",
+    "폭염·오존 위험일에 고령자 기준으로 가장 적합한 경로는 '조치원역 → 조치원읍 중심지'이며, 최종 기후안전 점수는 79.6점으로 나타났다."
+  ],
+  "shortReportTextSnippets": [
+    "본 분석은 세종 세이프웨이 서비스의 AI 기반 기후안전 이동경로 추천 기능을 구현하기 위한 기초 분석이다. 세종시 무더위쉼터 공공데이터를 수집·정제하고, 쉼터 접근성, 야간개방 여부, 냉방시설, 수용인원 등을 반영하여 쉼터 추천 점수를 산정하였다. 또한 기온, 습도, 미세먼지, 초미세먼지, 오존, 시정 정보를 활용한 기후위험 점수 모델을 구성하고, 사용자 유형별 가중치를 적용하여 경로별 최종 기후안전 점수를 계산하였다.",
+    "- 세종특별자치시 무더위쉼터 공공데이터 - 기후 시나리오 데이터 - 일반 여름날 - 폭염·오존 위험일 - 미세먼지·안개 위험일 - 사용자 유형별 가중치 데이터 - 일반 - 고령자 - 아동/청소년 - 임산부 - 장애인 - 야외근로자",
+    "세종시 무더위쉼터 데이터 500개소를 분석하였다. 이 중 야간 개방이 가능한 쉼터는 374개소, 휴일 개방이 가능한 쉼터는 468개소로 나타났다. 쉼터 1개소당 평균 동시 이용 가능 인원은 27.41명이다.",
+    "쉼터 추천 점수는 수용인원, 면적, 에어컨 보유 수, 야간개방 여부, 휴일개방 여부를 반영하여 100점 만점으로 산정하였다. 이를 통해 단순히 위치만 표시하는 것이 아니라, 실제 이동 중 이용 가치가 높은 쉼터를 우선 추천할 수 있도록 하였다."
+  ],
+  "sourceFiles": [
+    "data/processed/heat_shelter_scored.csv",
+    "data/processed/climate_scenarios.csv",
+    "data/processed/user_type_weights.csv",
+    "outputs/reports/final_route_recommendation.csv",
+    "outputs/reports/scenario_safety_score_summary.csv",
+    "outputs/reports/heat_shelter_summary.csv",
+    "outputs/reports/final_bigdata_analysis_summary.txt",
+    "outputs/reports/bigdata_analysis_final_report.md"
+  ]
+}

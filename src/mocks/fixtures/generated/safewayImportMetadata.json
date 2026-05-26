@@ -1,0 +1,29 @@
+{
+  "sourceArchive": "external-data/SafeWay.zip",
+  "sourceRoot": ".tmp-safeway-data/SafeWay",
+  "sourceFiles": {
+    "shelters": "data/processed/heat_shelter_scored.csv",
+    "climateScenarios": "data/processed/climate_scenarios.csv",
+    "userTypeWeights": "data/processed/user_type_weights.csv",
+    "routeRecommendations": "outputs/reports/final_route_recommendation.csv",
+    "scenarioSummary": "outputs/reports/scenario_safety_score_summary.csv",
+    "shelterSummary": "outputs/reports/heat_shelter_summary.csv",
+    "analysisSummary": "outputs/reports/final_bigdata_analysis_summary.txt",
+    "analysisReport": "outputs/reports/bigdata_analysis_final_report.md"
+  },
+  "rowCounts": {
+    "shelters": 500,
+    "climateScenarios": 3,
+    "userTypeWeights": 6,
+    "routeRecommendations": 54,
+    "scenarioSummary": 3,
+    "shelterSummary": 7
+  },
+  "generatedCounts": {
+    "shelters": 500,
+    "climateScenarios": 3,
+    "userTypeWeights": 6,
+    "routeRecommendations": 54,
+    "scenarioSummary": 3
+  }
+}

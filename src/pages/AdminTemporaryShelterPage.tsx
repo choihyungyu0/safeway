@@ -43,6 +43,7 @@ import type {
   TemporaryShelterSummaryMetric,
 } from '@/features/admin/temporaryShelter.types'
 import { adminTemporaryShelterCandidates } from '@/mocks/fixtures/adminTemporaryShelters'
+import { safewayAnalysisSummary, topSafewayShelters } from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/AdminTemporaryShelterPage.module.css'
 
 type StatusMessage = {
@@ -53,6 +54,7 @@ type StatusMessage = {
 type FilterKey = keyof TemporaryShelterFilter
 
 const confirmedStorageKey = 'safeway-confirmed-temporary-shelters'
+const topGeneratedShelter = topSafewayShelters[0]
 
 export function AdminTemporaryShelterPage() {
   const navigate = useNavigate()
@@ -126,6 +128,12 @@ export function AdminTemporaryShelterPage() {
         <header className={styles.pageTitle}>
           <h1 id="temporary-shelter-title">임시쉼터 후보 관리</h1>
           <p>쉼터 사각지대 해소를 위한 후보 시설 검토 현황</p>
+          {topGeneratedShelter ? (
+            <p>
+              SafeWay 기존 쉼터 {safewayAnalysisSummary.totalShelterCount}개 기준 · 추천점수 상위{' '}
+              {topGeneratedShelter.name}
+            </p>
+          ) : null}
         </header>
 
         <TemporaryShelterFilterBar

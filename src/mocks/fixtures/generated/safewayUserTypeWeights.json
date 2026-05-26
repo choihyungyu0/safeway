@@ -1,0 +1,50 @@
+[
+  {
+    "userTypeLabel": "일반",
+    "userType": "GENERAL",
+    "climateSafetyWeight": 0.35,
+    "shelterAccessWeight": 0.3,
+    "nightSafetyWeight": 0.2,
+    "exposureTimeWeight": 0.15
+  },
+  {
+    "userTypeLabel": "고령자",
+    "userType": "SENIOR",
+    "climateSafetyWeight": 0.3,
+    "shelterAccessWeight": 0.35,
+    "nightSafetyWeight": 0.15,
+    "exposureTimeWeight": 0.2
+  },
+  {
+    "userTypeLabel": "아동/청소년",
+    "userType": "CHILD",
+    "climateSafetyWeight": 0.3,
+    "shelterAccessWeight": 0.35,
+    "nightSafetyWeight": 0.2,
+    "exposureTimeWeight": 0.15
+  },
+  {
+    "userTypeLabel": "임산부",
+    "userType": "PREGNANT",
+    "climateSafetyWeight": 0.3,
+    "shelterAccessWeight": 0.4,
+    "nightSafetyWeight": 0.1,
+    "exposureTimeWeight": 0.2
+  },
+  {
+    "userTypeLabel": "장애인",
+    "userType": "DISABLED",
+    "climateSafetyWeight": 0.25,
+    "shelterAccessWeight": 0.35,
+    "nightSafetyWeight": 0.15,
+    "exposureTimeWeight": 0.25
+  },
+  {
+    "userTypeLabel": "야외근로자",
+    "userType": "OUTDOOR_WORKER",
+    "climateSafetyWeight": 0.45,
+    "shelterAccessWeight": 0.25,
+    "nightSafetyWeight": 0.1,
+    "exposureTimeWeight": 0.2
+  }
+]

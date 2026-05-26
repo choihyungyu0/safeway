@@ -226,7 +226,7 @@ function ShelterBreadcrumb() {
         홈
       </Link>
       <ChevronRight size={17} aria-hidden="true" />
-      <Link to="/shelters/shelter-001">쉼터</Link>
+      <Link to="/shelters">쉼터</Link>
       <ChevronRight size={17} aria-hidden="true" />
       <span aria-current="page">쉼터 상세</span>
     </nav>

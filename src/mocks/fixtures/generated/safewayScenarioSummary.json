@@ -1,0 +1,23 @@
+[
+  {
+    "scenario": "미세먼지·안개 위험일",
+    "recommendationCount": 6,
+    "averageFinalSafetyScore": 76.37,
+    "maxScore": 81.3,
+    "minScore": 67.6
+  },
+  {
+    "scenario": "일반 여름날",
+    "recommendationCount": 6,
+    "averageFinalSafetyScore": 95.87,
+    "maxScore": 96.3,
+    "minScore": 94.6
+  },
+  {
+    "scenario": "폭염·오존 위험일",
+    "recommendationCount": 6,
+    "averageFinalSafetyScore": 77.98,
+    "maxScore": 82.6,
+    "minScore": 69.8
+  }
+]

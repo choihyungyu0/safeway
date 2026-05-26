@@ -1,0 +1,29 @@
+[
+  {
+    "name": "일반 여름날",
+    "temperature": 29,
+    "humidity": 60,
+    "pm10": 35,
+    "pm25": 18,
+    "ozone": 0.045,
+    "visibilityKm": 10
+  },
+  {
+    "name": "폭염·오존 위험일",
+    "temperature": 35,
+    "humidity": 70,
+    "pm10": 45,
+    "pm25": 22,
+    "ozone": 0.09,
+    "visibilityKm": 8
+  },
+  {
+    "name": "미세먼지·안개 위험일",
+    "temperature": 24,
+    "humidity": 85,
+    "pm10": 95,
+    "pm25": 48,
+    "ozone": 0.04,
+    "visibilityKm": 1.5
+  }
+]

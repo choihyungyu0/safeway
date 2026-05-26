@@ -11,6 +11,13 @@ node_modules
 dist
 dist-ssr
 *.local
+external-data/
+.tmp-safeway-data/
+tmp-*.html
+**/.ipynb_checkpoints/
+*.env
+.env
+.env.*
 
 # Editor directories and files
 .vscode/*

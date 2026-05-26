@@ -39,6 +39,10 @@ import {
   recommendationLogItems,
   recommendationRouteTypeRatios,
 } from '@/mocks/fixtures/adminRecommendationLogs'
+import {
+  bestSafewayRouteRecommendation,
+  safewayRouteRecommendations,
+} from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/AdminRecommendationLogPage.module.css'
 
 type StatusMessage = {
@@ -439,7 +443,14 @@ function RecommendationLogTable({
     <section className={`${styles.card} ${styles.tableCard}`} aria-labelledby="table-title">
       <div className={styles.tableHeader}>
         <h2 id="table-title">
-          추천 로그 목록 <span>총 {totalRecommendationLabel}</span>
+          추천 로그 목록{' '}
+          <span>총 {totalRecommendationLabel}</span>
+          <span>
+            SafeWay 실제 추천 {safewayRouteRecommendations.length}건 ·{' '}
+            {bestSafewayRouteRecommendation.scenario} ·{' '}
+            {bestSafewayRouteRecommendation.routeName}{' '}
+            {bestSafewayRouteRecommendation.finalSafetyScore}점
+          </span>
         </h2>
       </div>
 

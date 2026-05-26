@@ -73,6 +73,8 @@ describe('MapPage', () => {
     expect(screen.getAllByText('외부 노출 감소')).toHaveLength(2)
     expect(screen.getByText('야간 안전성')).toBeInTheDocument()
     expect(screen.getByText('기후·폭염 위험')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '실제 쉼터 상위 후보' })).toBeInTheDocument()
+    expect(screen.getByText('한솔동복합커뮤니티센터 정음관')).toBeInTheDocument()
   })
 
   it('shows mock navigation and route detail feedback', async () => {

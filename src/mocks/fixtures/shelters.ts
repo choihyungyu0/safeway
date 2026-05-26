@@ -1,6 +1,8 @@
 import type { Shelter } from '@/entities/shelter/types'
+import { safewayShelters } from '@/mocks/fixtures/generated/safewayData'
+import type { SafewayShelter } from '@/mocks/fixtures/generated/safewayData.types'
 
-export const mockShelters: Shelter[] = [
+const demoShelters: Shelter[] = [
   {
     id: 'shelter-001',
     name: '나성동 복합커뮤니티센터 쉼터',
@@ -90,3 +92,60 @@ export const mockShelters: Shelter[] = [
     },
   },
 ]
+
+const generatedShelters: Shelter[] = safewayShelters.map((shelter, index) =>
+  toAppShelter(shelter, index),
+)
+
+export const mockShelters: Shelter[] = [...demoShelters, ...generatedShelters]
+
+function toAppShelter(shelter: SafewayShelter, index: number): Shelter {
+  const distanceFromRouteMeters = 80 + ((index * 37) % 470)
+
+  return {
+    id: shelter.id,
+    name: shelter.name,
+    type: getShelterType(shelter),
+    status: shelter.isOpen ? 'OPEN' : 'CLOSED',
+    address: shelter.roadAddress || shelter.lotAddress,
+    operationTime: shelter.operationTime,
+    capacity: shelter.capacity,
+    distanceFromRouteMeters,
+    walkingTimeMin: Math.max(1, Math.ceil(distanceFromRouteMeters / 80)),
+    crowdingLevel: getCrowdingLevel(shelter.recommendationScore),
+    imageSrc: '/assets/shelters/shelter-naseong-community-center.png',
+    location: { lat: shelter.lat, lng: shelter.lng },
+    facilities: {
+      cooling: shelter.airConditionerCount > 0 || shelter.facilities.includes('냉방'),
+      seating: true,
+      water: false,
+      restroom: shelter.facilities.includes('화장실'),
+      wifi: false,
+      aed: false,
+    },
+  }
+}
+
+function getShelterType(shelter: SafewayShelter): Shelter['type'] {
+  if (shelter.type.includes('정류') || shelter.name.includes('BRT')) {
+    return 'TRANSIT_SHELTER'
+  }
+
+  if (shelter.name.includes('공원') || shelter.name.includes('교량')) {
+    return 'PARK_REST'
+  }
+
+  return shelter.airConditionerCount > 0 ? 'COOLING_CENTER' : 'PUBLIC_FACILITY'
+}
+
+function getCrowdingLevel(score: number): Shelter['crowdingLevel'] {
+  if (score >= 70) {
+    return '여유로움'
+  }
+
+  if (score >= 45) {
+    return '보통'
+  }
+
+  return '혼잡'
+}

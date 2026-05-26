@@ -7,6 +7,10 @@ import type {
   ReportSummaryKeyword,
   ShelterPriorityItem,
 } from '@/features/admin/report.types'
+import {
+  safewayAnalysisSummary,
+  safestSafewayScenario,
+} from '@/mocks/fixtures/generated/safewayData'
 
 export const reportMetrics: ReportMetric[] = [
   {
@@ -61,7 +65,7 @@ export const shelterPriorityItems: ShelterPriorityItem[] = [
 
 export const reportFeedbackKeywords: ReportSummaryKeyword[] = [
   { keyword: '그늘', count: 342 },
-  { keyword: '쉼터', count: 298 },
+  { keyword: '쉼터', count: safewayAnalysisSummary.totalShelterCount },
   { keyword: '가로등', count: 213 },
   { keyword: '보행안전', count: 198 },
 ]
@@ -84,6 +88,5 @@ export const reportChapters: ReportChapter[] = [
 export const policyProposal: PolicyProposal = {
   title: '보람동-어진동 연결 보행축에',
   emphasis: '그늘 및 쉼터 보강 필요',
-  description:
-    '보행량이 많고 일사 노출이 높은 구간으로, 그늘 및 쉼터 확충을 통해 시민 안전과 편의 향상이 필요합니다.',
+  description: `무더위쉼터 ${safewayAnalysisSummary.totalShelterCount}개소와 ${safestSafewayScenario.scenario} 평균 안전점수 ${safestSafewayScenario.averageFinalSafetyScore}점을 함께 반영해, 보행량이 많고 일사 노출이 높은 구간의 그늘 및 쉼터 보강이 필요합니다.`,
 }

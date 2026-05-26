@@ -19,6 +19,11 @@ import type {
   PublicDataSummaryMetric,
   PublicDataset,
 } from '@/features/admin/publicData.types'
+import {
+  safewayAnalysisSummary,
+  safewayImportMetadata,
+  safewayRouteRecommendations,
+} from '@/mocks/fixtures/generated/safewayData'
 
 export const publicDataSummaryMetrics: PublicDataSummaryMetric[] = [
   {
@@ -99,6 +104,17 @@ export const publicDatasets: PublicDataset[] = [
     note: '수집 주기 1시간',
     collectionCycle: '1시간',
     icon: Home,
+  },
+  {
+    id: 'safeway-processed-data',
+    name: 'SafeWay 처리 분석 데이터',
+    type: 'SHELTER',
+    provider: '세종 세이프웨이 로컬 분석',
+    lastCollectedAt: '2025.06.21 14:00',
+    status: 'NORMAL',
+    note: `쉼터 ${safewayAnalysisSummary.totalShelterCount}개 · 추천 ${safewayRouteRecommendations.length}건 · 시나리오 ${safewayImportMetadata.generatedCounts.climateScenarios}개`,
+    collectionCycle: '수시',
+    icon: Database,
   },
   {
     id: 'cctv',

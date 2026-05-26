@@ -381,6 +381,69 @@
   line-height: 1.45;
 }
 
+.nearbyShelters {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.nearbyShelters h2 {
+  margin: 0;
+  color: #071b4d;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.nearbyShelterList {
+  display: grid;
+  gap: 8px;
+}
+
+.nearbyShelterList a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 68px;
+  padding: 12px;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #dce7f4;
+  border-radius: 8px;
+}
+
+.nearbyShelterList span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.nearbyShelterList strong,
+.nearbyShelterList small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nearbyShelterList strong {
+  color: #071b4d;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.nearbyShelterList small {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.nearbyShelterList em {
+  color: #078c72;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 950;
+}
+
 .bottomSection {
   margin-top: 18px;
 }

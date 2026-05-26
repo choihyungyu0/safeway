@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { AdminShellLayout as AdminLayout } from '@/features/admin/components/AdminShellLayout'
+import { safewayUserTypeWeights } from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/AdminSettingsPage.module.css'
 
 type WeightId = 'heat' | 'dust' | 'fog' | 'shelter' | 'walking'
@@ -144,6 +145,10 @@ const initialNotifications: Record<NotificationId, boolean> = {
   shelter: true,
 }
 
+const generalSafewayUserWeight = safewayUserTypeWeights.find(
+  (weight) => weight.userType === 'GENERAL',
+)
+
 export function AdminSettingsPage() {
   const [weights, setWeights] = useState(initialWeights)
   const [notifications, setNotifications] = useState(initialNotifications)
@@ -176,6 +181,13 @@ export function AdminSettingsPage() {
         <header className={styles.pageHeader}>
           <h1 id="admin-settings-title">설정</h1>
           <p>추천 가중치와 관리자 운영 기준 설정</p>
+          {generalSafewayUserWeight ? (
+            <p>
+              SafeWay 사용자유형 가중치 {safewayUserTypeWeights.length}종 · 일반 기후안전{' '}
+              {Math.round(generalSafewayUserWeight.climateSafetyWeight * 100)}% · 쉼터접근{' '}
+              {Math.round(generalSafewayUserWeight.shelterAccessWeight * 100)}%
+            </p>
+          ) : null}
         </header>
 
         <section className={styles.weightCard} aria-labelledby="weight-settings-title">

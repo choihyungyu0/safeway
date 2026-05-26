@@ -3,6 +3,8 @@ import type {
   RecommendationLogItem,
   RecommendationRouteTypeRatio,
 } from '@/features/admin/recommendationLog.types'
+import { safewayRouteRecommendations } from '@/mocks/fixtures/generated/safewayData'
+import type { SafewayRouteRecommendation } from '@/mocks/fixtures/generated/safewayData.types'
 
 export const recommendationRouteTypeRatios: RecommendationRouteTypeRatio[] = [
   {
@@ -64,7 +66,7 @@ export const abnormalPatternAlerts: AbnormalPatternAlert[] = [
 const recommendationReason =
   '폭염 노출을 줄이고 쉼터 접근성이 높은 경로로 추천되었습니다.'
 
-export const recommendationLogItems: RecommendationLogItem[] = [
+const demoRecommendationLogItems: RecommendationLogItem[] = [
   {
     id: 'log-20250621-0945',
     recommendedAt: '2025.06.21 09:45',
@@ -206,3 +208,55 @@ export const recommendationLogItems: RecommendationLogItem[] = [
     reason: recommendationReason,
   },
 ]
+
+const generatedRecommendationLogItems: RecommendationLogItem[] = safewayRouteRecommendations.map(
+  (route, index) => toRecommendationLogItem(route, index),
+)
+
+export const recommendationLogItems: RecommendationLogItem[] = [
+  ...demoRecommendationLogItems,
+  ...generatedRecommendationLogItems,
+]
+
+function toRecommendationLogItem(
+  route: SafewayRouteRecommendation,
+  index: number,
+): RecommendationLogItem {
+  const [startPlace = route.routeName, destination = '세종시 목적지'] =
+    route.routeName.split(' → ')
+  const recommendedHour = 14 - (index % 8)
+  const recommendedMinute = (index * 7) % 60
+
+  return {
+    id: `generated-${route.id}`,
+    recommendedAt: `2025.06.${String(21 - Math.floor(index / 18)).padStart(2, '0')} ${String(
+      recommendedHour,
+    ).padStart(2, '0')}:${String(recommendedMinute).padStart(2, '0')}`,
+    userType: getUserTypeLabel(route.userTypeLabel),
+    startPlace,
+    destination,
+    transportMode: '도보',
+    routeType: getRouteType(route),
+    durationMin: Math.round(20 + route.distanceKm * 4 + (100 - route.finalSafetyScore) / 4),
+    climateSafetyScore: Math.round(route.finalSafetyScore),
+    exposureReductionPct: Math.max(30, Math.min(72, Math.round(route.exposureScore))),
+    selected: index % 5 !== 0,
+    reason: `${route.scenario} 시나리오에서 쉼터 ${route.shelterWithin500mCount}개 접근성과 야간안전 ${route.nightSafetyScore}점을 반영한 추천입니다.`,
+  }
+}
+
+function getUserTypeLabel(label: string) {
+  return label === '일반' ? '일반 성인' : label
+}
+
+function getRouteType(route: SafewayRouteRecommendation): RecommendationLogItem['routeType'] {
+  if (route.scenario.includes('안개')) {
+    return '야간 안전경로'
+  }
+
+  if (route.shelterWithin500mCount <= 2) {
+    return '대중교통 대체경로'
+  }
+
+  return '세이프웨이'
+}

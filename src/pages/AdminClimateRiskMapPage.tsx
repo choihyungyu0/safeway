@@ -41,6 +41,7 @@ import {
   riskRatioSegments,
   timeRiskPoints,
 } from '@/mocks/fixtures/adminClimateRiskMap'
+import { safewayClimateScenarios } from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/AdminClimateRiskMapPage.module.css'
 
 const riskTypeIcons: Record<AdminRiskType, LucideIcon> = {
@@ -73,6 +74,8 @@ const chartPlot = {
   maxCount: 1200,
 }
 
+const baselineSafewayScenario = safewayClimateScenarios[0]
+
 export function AdminClimateRiskMapPage() {
   const [filters, setFilters] = useState<AdminRiskFilter>(defaultClimateRiskFilter)
   const [downloadMessage, setDownloadMessage] = useState('')
@@ -98,6 +101,13 @@ export function AdminClimateRiskMapPage() {
         <header className={styles.pageTitle}>
           <h1 id="climate-risk-title">기후위험 지도</h1>
           <p>폭염·미세먼지·안개 위험 권역 모니터링</p>
+          {baselineSafewayScenario ? (
+            <p>
+              SafeWay 처리 시나리오 {baselineSafewayScenario.name}: {baselineSafewayScenario.temperature}
+              °C · PM10 {baselineSafewayScenario.pm10} · PM2.5 {baselineSafewayScenario.pm25} ·
+              시정 {baselineSafewayScenario.visibilityKm}km
+            </p>
+          ) : null}
         </header>
 
         <ClimateRiskFilterBar

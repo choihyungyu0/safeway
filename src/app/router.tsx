@@ -15,6 +15,7 @@ import { LoginPage } from '@/pages/LoginPage'
 import { MapPage } from '@/pages/MapPage'
 import { RecommendationPage } from '@/pages/RecommendationPage'
 import { ShelterDetailPage } from '@/pages/ShelterDetailPage'
+import { ShelterListPage } from '@/pages/ShelterListPage'
 import { SignUpPage } from '@/pages/SignUpPage'
 import { UserTypePage } from '@/pages/UserTypePage'
 
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: 'user-type', element: <UserTypePage /> },
       { path: 'recommendations', element: <RecommendationPage /> },
       { path: 'map', element: <MapPage /> },
+      { path: 'shelters', element: <ShelterListPage /> },
       { path: 'shelters/:shelterId', element: <ShelterDetailPage /> },
       { path: 'feedback/:routeLogId', element: <FeedbackPage /> },
       { path: 'admin', element: <AdminDashboardPage /> },

@@ -21,6 +21,7 @@ import {
   Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { SejongAdminShell as AdminLayout } from '@/shared/ui/SejongAdminShell'
 import {
   defaultShelterGapFilter,
@@ -47,6 +48,7 @@ import {
   temporaryShelterCandidates,
   vulnerableWalkingCorridors,
 } from '@/mocks/fixtures/adminShelterGaps'
+import { safewayAnalysisSummary, topSafewayShelters } from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/AdminShelterGapPage.module.css'
 
 type StatusMessage = {
@@ -55,8 +57,10 @@ type StatusMessage = {
 }
 
 const topPriorityAreas = shelterGapAreas.slice(0, 3)
+const topGeneratedShelter = topSafewayShelters[0]
 
 export function AdminShelterGapPage() {
+  const navigate = useNavigate()
   const [filters, setFilters] = useState<ShelterGapFilter>(defaultShelterGapFilter)
   const [statusMessage, setStatusMessage] = useState<StatusMessage | null>(null)
 
@@ -73,7 +77,7 @@ export function AdminShelterGapPage() {
   }
 
   const showCandidates = () => {
-    announce('임시쉼터 후보 목록을 표시합니다.')
+    navigate('/admin/temporary-shelters')
   }
 
   const createReport = () => {
@@ -90,16 +94,22 @@ export function AdminShelterGapPage() {
       // Storage can be unavailable in private browsing or restricted test environments.
     }
 
-    announce('쉼터 사각지대 분석 리포트를 생성했습니다.')
+    navigate('/admin/reports')
   }
 
   return (
-    <AdminLayout headerVariant="management" sidebarVariant="management">
+    <AdminLayout>
       <section className={styles.page} aria-labelledby="shelter-gap-title">
         <header className={styles.pageTop}>
           <div>
             <h1 id="shelter-gap-title">쉼터 사각지대 분석</h1>
             <p>폭염·미세먼지 취약 보행축과 쉼터 접근성 분석</p>
+            {topGeneratedShelter ? (
+              <p>
+                SafeWay 쉼터 {safewayAnalysisSummary.totalShelterCount}개 기준 · 추천점수 상위{' '}
+                {topGeneratedShelter.name}
+              </p>
+            ) : null}
           </div>
 
           <div className={styles.dateControl}>

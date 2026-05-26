@@ -11,8 +11,13 @@ import {
   ThermometerSun,
   TreePine,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import type { SafeRouteRecommendation } from '@/entities/route/types'
 import { DEFAULT_SELECTED_ROUTE_ID } from '@/features/map/map.constants'
+import {
+  bestSafewayRouteRecommendation,
+  topSafewayShelters,
+} from '@/mocks/fixtures/generated/safewayData'
 import styles from '@/pages/MapPage.module.css'
 
 type Tone = 'blue' | 'green' | 'teal' | 'purple' | 'orange'
@@ -109,8 +114,27 @@ export function RouteSummaryPanel({
 
       <div className={styles.panelTip}>
         <Sun size={24} aria-hidden="true" />
-        <p>그늘이 많은 경로로 선택되어 폭염 및 외부 노출 위험을 효과적으로 줄였습니다.</p>
+        <p>
+          SafeWay 실제 분석 기준 {bestSafewayRouteRecommendation.routeName} 경로는
+          500m 이내 쉼터 {bestSafewayRouteRecommendation.shelterWithin500mCount}개와
+          최종 기후안전 {bestSafewayRouteRecommendation.finalSafetyScore}점을 반영합니다.
+        </p>
       </div>
+
+      <section className={styles.nearbyShelters} aria-labelledby="nearby-shelters-title">
+        <h2 id="nearby-shelters-title">실제 쉼터 상위 후보</h2>
+        <div className={styles.nearbyShelterList}>
+          {topSafewayShelters.slice(0, 3).map((shelter) => (
+            <Link to={`/shelters/${shelter.id}`} key={shelter.id}>
+              <span>
+                <strong>{shelter.name}</strong>
+                <small>{shelter.roadAddress || shelter.lotAddress}</small>
+              </span>
+              <em>{shelter.recommendationScore}점</em>
+            </Link>
+          ))}
+        </div>
+      </section>
     </aside>
   )
 }
