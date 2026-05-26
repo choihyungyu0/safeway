@@ -9,7 +9,6 @@
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.03) 42%, rgba(245, 249, 255, 0.12) 100%),
-    url('/assets/auth/login-bg.png') center bottom / cover no-repeat,
     url('/assets/auth/sejong-auth-bg.png') center / cover no-repeat,
     #dcefff;
 }
@@ -337,7 +336,6 @@
     min-height: auto;
     background-position:
       center,
-      center bottom,
       center;
   }
 
