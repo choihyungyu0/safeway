@@ -61,181 +61,96 @@
   border-radius: 8px 0 0 8px;
 }
 
-.imageWrap {
+.locationMapWrap {
   position: relative;
   height: clamp(380px, 29vw, 430px);
   overflow: hidden;
-  background: #dff0ff;
+  background: #edf5f8;
 }
 
-.shelterImage {
+.shelterMap {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  min-height: 100%;
+  background: #edf5f8;
 }
 
-.hiddenImage {
-  display: none;
+.shelterMap :global(.leaflet-control-attribution) {
+  font-size: 10px;
 }
 
-.imageFallback {
+.shelterMapBadge,
+.shelterMapAddress {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 82% 13%, rgba(255, 255, 255, 0.94) 0 5%, transparent 6%),
-    radial-gradient(circle at 36% 12%, rgba(255, 255, 255, 0.46) 0 4%, transparent 5%),
-    linear-gradient(180deg, #8bc4f5 0%, #d9efff 48%, #dfead4 100%);
-}
-
-.imageFallbackVisible {
-  z-index: 1;
-}
-
-.fallbackBuilding {
-  position: absolute;
-  top: 74px;
-  left: 13%;
-  z-index: 3;
-  width: min(610px, 64%);
-  height: 244px;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.24), rgba(20, 85, 130, 0.18)),
-    repeating-linear-gradient(
-      90deg,
-      rgba(30, 96, 145, 0.88) 0 4px,
-      rgba(188, 224, 243, 0.86) 4px 42px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(28, 90, 140, 0.75) 0 4px,
-      rgba(221, 239, 249, 0.86) 4px 36px
-    );
-  border-radius: 6px 42px 0 0;
-  box-shadow: 26px 25px 42px rgba(15, 23, 42, 0.22);
-  transform: perspective(850px) rotateY(-10deg) skewY(-4deg);
-}
-
-.fallbackBuilding::before {
-  position: absolute;
-  top: -45px;
-  left: 25px;
-  width: 86%;
-  height: 82px;
-  content: '';
-  background: linear-gradient(180deg, #eef4fa, #d9e3ef);
-  border-radius: 10px 38px 0 0;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-  transform: skewX(-23deg);
-}
-
-.fallbackBuilding::after {
-  position: absolute;
-  bottom: -48px;
-  left: 30%;
-  width: 42%;
-  height: 90px;
-  content: '';
-  background: rgba(255, 255, 255, 0.88);
-  border-radius: 4px;
-  box-shadow:
-    -68px 0 0 rgba(255, 255, 255, 0.86),
-    68px 0 0 rgba(255, 255, 255, 0.86);
-}
-
-.fallbackBuilding span {
-  position: absolute;
-  top: -17px;
-  left: 30%;
-  z-index: 4;
-  color: #063f93;
-  font-size: 20px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  color: #075bd1;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #cfe0f5;
+  box-shadow: 0 10px 22px rgba(9, 30, 66, 0.16);
   font-weight: 950;
+}
+
+.shelterMapBadge {
+  right: 18px;
+  bottom: 18px;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
-.fallbackTowers {
-  position: absolute;
-  top: 122px;
-  right: 35px;
-  z-index: 2;
-  display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  height: 190px;
+.shelterMapAddress {
+  bottom: 18px;
+  left: 18px;
+  gap: 8px;
+  max-width: min(520px, calc(100% - 230px));
+  min-height: 40px;
+  padding: 0 13px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
-.fallbackTowers i {
+.shelterMapAddress span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shelterLocationMarker {
+  width: auto !important;
+  height: auto !important;
+  background: transparent;
+  border: 0;
+}
+
+.shelterLocationMarker span {
+  position: relative;
   display: block;
-  width: 38px;
-  height: 135px;
-  background: repeating-linear-gradient(0deg, #edf7ff 0 10px, #9ebbd4 10px 13px);
-  border-radius: 5px 5px 0 0;
-  box-shadow: inset 0 0 0 1px rgba(58, 93, 124, 0.13);
+  width: 36px;
+  height: 36px;
+  background: #075bd1;
+  border: 3px solid #ffffff;
+  border-radius: 999px 999px 999px 4px;
+  box-shadow: 0 9px 20px rgba(7, 91, 209, 0.32);
+  transform: rotate(-45deg);
 }
 
-.fallbackTowers i:nth-child(2n) {
-  height: 165px;
-}
-
-.fallbackTowers i:nth-child(3n) {
-  height: 110px;
-}
-
-.fallbackTowers i:nth-child(4n) {
-  height: 185px;
-}
-
-.fallbackTrees {
+.shelterLocationMarker span::after {
   position: absolute;
-  right: -3%;
-  bottom: 0;
-  left: -3%;
-  z-index: 4;
-  height: 126px;
-  background:
-    radial-gradient(ellipse at 4% 86%, #5f8838 0 16%, transparent 17%),
-    radial-gradient(ellipse at 13% 86%, #80a947 0 17%, transparent 18%),
-    radial-gradient(ellipse at 24% 86%, #668d3d 0 16%, transparent 17%),
-    radial-gradient(ellipse at 38% 86%, #7aa445 0 16%, transparent 17%),
-    radial-gradient(ellipse at 52% 86%, #5f8839 0 17%, transparent 18%),
-    radial-gradient(ellipse at 66% 86%, #82aa49 0 16%, transparent 17%),
-    radial-gradient(ellipse at 82% 86%, #628b3a 0 17%, transparent 18%),
-    radial-gradient(ellipse at 96% 86%, #7ca647 0 15%, transparent 16%),
-    linear-gradient(180deg, transparent 0 34px, rgba(248, 248, 244, 0.98) 35px);
-}
-
-.fallbackIcon {
-  position: absolute;
-  right: 26px;
-  bottom: 24px;
-  z-index: 5;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.carouselDots {
-  position: absolute;
-  bottom: 17px;
+  top: 50%;
   left: 50%;
-  z-index: 5;
-  display: flex;
-  gap: 9px;
-  transform: translateX(-50%);
-}
-
-.carouselDots span {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
+  content: '';
   background: #ffffff;
   border-radius: 999px;
-  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.22);
-}
-
-.carouselDots .activeDot {
-  background: #d6e2ef;
+  transform: translate(-50%, -50%);
 }
 
 .shelterInfo {
@@ -577,19 +492,8 @@
     width: calc(100% - 28px);
   }
 
-  .imageWrap {
+  .locationMapWrap {
     height: 340px;
-  }
-
-  .fallbackBuilding {
-    top: 82px;
-    left: 56px;
-    transform: perspective(850px) rotateY(-8deg) skewY(-4deg) scale(0.82);
-    transform-origin: left top;
-  }
-
-  .fallbackTowers {
-    opacity: 0.58;
   }
 
   .bottomRow {
@@ -630,14 +534,20 @@
     font-size: 15px;
   }
 
-  .imageWrap {
+  .locationMapWrap {
     height: 288px;
   }
 
-  .fallbackBuilding {
-    top: 84px;
-    left: 28px;
-    transform: perspective(850px) rotateY(-8deg) skewY(-4deg) scale(0.64);
+  .shelterMapBadge {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .shelterMapAddress {
+    right: 12px;
+    bottom: 54px;
+    left: 12px;
+    max-width: none;
   }
 
   .shelterInfo {

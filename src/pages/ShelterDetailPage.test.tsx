@@ -66,7 +66,7 @@ describe('ShelterDetailPage', () => {
     expect(within(breadcrumb).getByText('쉼터 상세')).toBeInTheDocument()
   })
 
-  it('renders the shelter identity, badges, address, and local image path', async () => {
+  it('renders the shelter identity, badges, address, and location map', async () => {
     renderShelterDetailPage()
 
     expect(
@@ -74,18 +74,18 @@ describe('ShelterDetailPage', () => {
     ).toBeInTheDocument()
     expect(screen.getByText('실내 쉼터')).toBeInTheDocument()
     expect(screen.getByText('운영중')).toBeInTheDocument()
-    expect(screen.getByText('세종특별자치시 나성로 33')).toBeInTheDocument()
-    expect(screen.getByAltText('나성동 복합커뮤니티센터 쉼터 외관')).toHaveAttribute(
-      'src',
-      '/assets/shelters/shelter-naseong-community-center.png',
-    )
+    const locationMap = screen.getByTestId('shelter-location-map')
+
+    expect(locationMap).toBeInTheDocument()
+    expect(within(locationMap).getByText('Leaflet / OpenStreetMap')).toBeInTheDocument()
+    expect(within(locationMap).getByText('세종특별자치시 나성로 33')).toBeInTheDocument()
   })
 
   it('renders generated SafeWay shelter data when the backend is unavailable', async () => {
     renderShelterDetailPage('/shelters/safeway-shelter-001')
 
     expect(await screen.findByRole('heading', { name: '도담 방축천변 교량하부' })).toBeInTheDocument()
-    expect(screen.getByText('세종특별자치시 양지길 16')).toBeInTheDocument()
+    expect(screen.getAllByText('세종특별자치시 양지길 16')).not.toHaveLength(0)
     expect(screen.getByText('23명')).toBeInTheDocument()
   })
 

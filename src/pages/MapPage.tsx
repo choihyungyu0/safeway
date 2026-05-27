@@ -1,12 +1,23 @@
 import { useMemo, useState } from 'react'
 import { useRouteSearchStore } from '@/features/route-search/routeSearchStore'
 import { MapBottomActions } from '@/features/map/components/MapBottomActions'
-import { MapMountArea } from '@/features/map/components/MapMountArea'
 import { MapSearchBar } from '@/features/map/components/MapSearchBar'
 import { RouteSummaryPanel } from '@/features/map/components/RouteSummaryPanel'
 import { DEFAULT_SELECTED_ROUTE_ID } from '@/features/map/map.constants'
+import { RouteMap } from '@/features/map/RouteMap'
+import type { MapLayerKey } from '@/mocks/fixtures/mapLayers'
+import { mapLayerOptions, mockSafetyLayerPoints } from '@/mocks/fixtures/mapLayers'
 import { mockRecommendationResults } from '@/mocks/fixtures/recommendations'
 import styles from '@/pages/MapPage.module.css'
+
+const initialActiveLayers: Record<MapLayerKey, boolean> = {
+  climateRisk: true,
+  shelters: true,
+  busStops: true,
+  cctv: true,
+  streetlights: true,
+  riskSegments: true,
+}
 
 export function MapPage() {
   const {
@@ -17,6 +28,8 @@ export function MapPage() {
     setUserType,
   } = useRouteSearchStore()
   const [searchStatus, setSearchStatus] = useState('')
+  const [activeLayers, setActiveLayers] =
+    useState<Record<MapLayerKey, boolean>>(initialActiveLayers)
 
   const selectedRecommendation = useMemo(
     () =>
@@ -25,6 +38,10 @@ export function MapPage() {
       mockRecommendationResults[0],
     [selectedRecommendationId],
   )
+
+  const toggleLayer = (layer: MapLayerKey) => {
+    setActiveLayers((current) => ({ ...current, [layer]: !current[layer] }))
+  }
 
   return (
     <section className={styles.mapPage} aria-label="지도 보기">
@@ -41,7 +58,30 @@ export function MapPage() {
         />
 
         <section className={styles.mapLayout} aria-label="경로 지도 및 안전 분석">
-          <MapMountArea />
+          <section className={styles.mapCard} aria-label="지도 표시 영역">
+            <div className={styles.mapLayerToolbar} aria-label="안전 레이어">
+              {mapLayerOptions.map((layer) => (
+                <button
+                  type="button"
+                  className={`${styles.layerButton} ${
+                    activeLayers[layer.key] ? styles.layerButtonActive : ''
+                  }`}
+                  aria-pressed={activeLayers[layer.key]}
+                  onClick={() => toggleLayer(layer.key)}
+                  key={layer.key}
+                >
+                  {layer.label}
+                </button>
+              ))}
+            </div>
+
+            <RouteMap
+              recommendation={selectedRecommendation}
+              activeLayers={activeLayers}
+              layerPoints={mockSafetyLayerPoints}
+            />
+          </section>
+
           <RouteSummaryPanel recommendation={selectedRecommendation} />
         </section>
 

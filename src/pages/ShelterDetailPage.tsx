@@ -1,5 +1,7 @@
-import { useState, type ComponentType } from 'react'
+import { useEffect, useRef, useState, type ComponentType } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import L, { type LatLngExpression, type Map as LeafletMap, type Marker } from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   Armchair,
@@ -9,7 +11,6 @@ import {
   Droplets,
   HeartPulse,
   Home,
-  ImageIcon,
   MapPin,
   PlusCircle,
   Route,
@@ -36,6 +37,7 @@ type ShelterStatusItem = {
 }
 
 const facilityOrder: FacilityKey[] = ['cooling', 'seating', 'water', 'restroom', 'wifi', 'aed']
+const tileLayerUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
 const facilityIcons: Record<FacilityKey, typeof Snowflake> = {
   cooling: Snowflake,
@@ -145,7 +147,7 @@ export function ShelterDetailPage() {
 
         <section className={styles.detailGrid} aria-label="쉼터 상세 정보">
           <article className={styles.shelterCard}>
-            <ShelterImage shelter={shelter} />
+            <ShelterLocationMap shelter={shelter} />
 
             <div className={styles.shelterInfo}>
               <h1>{shelter.name}</h1>
@@ -233,43 +235,86 @@ function ShelterBreadcrumb() {
   )
 }
 
-function ShelterImage({ shelter }: { shelter: Shelter }) {
-  const [imageFailed, setImageFailed] = useState(false)
-  const imageAlt = `${shelter.name} 외관`
+function ShelterLocationMap({ shelter }: { shelter: Shelter }) {
+  const mapContainerRef = useRef<HTMLDivElement | null>(null)
+  const mapRef = useRef<LeafletMap | null>(null)
+  const markerRef = useRef<Marker | null>(null)
+  const initialLocationRef = useRef(shelter.location)
+  const { lat, lng } = shelter.location
+
+  useEffect(() => {
+    if (!mapContainerRef.current || mapRef.current) {
+      return
+    }
+
+    const map = L.map(mapContainerRef.current, {
+      center: toLeafletLatLng(initialLocationRef.current),
+      zoom: 16,
+      scrollWheelZoom: true,
+    })
+
+    L.tileLayer(tileLayerUrl, {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 19,
+    }).addTo(map)
+
+    mapRef.current = map
+
+    return () => {
+      map.remove()
+      mapRef.current = null
+      markerRef.current = null
+    }
+  }, [])
+
+  useEffect(() => {
+    const map = mapRef.current
+
+    if (!map) {
+      return
+    }
+
+    const position = toLeafletLatLng({ lat, lng })
+    map.setView(position, 16)
+
+    markerRef.current?.remove()
+    markerRef.current = L.marker(position, {
+      icon: createShelterLocationIcon(),
+      title: shelter.name,
+      zIndexOffset: 500,
+    }).addTo(map)
+
+    const resizeTimer = window.setTimeout(() => map.invalidateSize(), 80)
+
+    return () => window.clearTimeout(resizeTimer)
+  }, [lat, lng, shelter.name])
 
   return (
-    <div className={styles.imageWrap}>
-      <div
-        className={`${styles.imageFallback} ${imageFailed ? styles.imageFallbackVisible : ''}`}
-        role={imageFailed ? 'img' : undefined}
-        aria-label={imageFailed ? imageAlt : undefined}
-      >
-        <div className={styles.fallbackBuilding} aria-hidden="true">
-          <span>{shelter.name.replace(' 쉼터', '')}</span>
-        </div>
-        <div className={styles.fallbackTowers} aria-hidden="true">
-          {Array.from({ length: 7 }).map((_, index) => (
-            <i key={index} />
-          ))}
-        </div>
-        <div className={styles.fallbackTrees} aria-hidden="true" />
-        <ImageIcon className={styles.fallbackIcon} size={58} aria-hidden="true" />
-      </div>
-
-      <img
-        className={imageFailed ? styles.hiddenImage : styles.shelterImage}
-        src={shelter.imageSrc}
-        alt={imageAlt}
-        onError={() => setImageFailed(true)}
-      />
-
-      <div className={styles.carouselDots} aria-hidden="true">
-        <span className={styles.activeDot} />
-        <span />
-        <span />
+    <div
+      className={styles.locationMapWrap}
+      aria-label={`${shelter.name} 위치 지도`}
+      data-testid="shelter-location-map"
+    >
+      <div ref={mapContainerRef} className={styles.shelterMap} />
+      <div className={styles.shelterMapBadge}>Leaflet / OpenStreetMap</div>
+      <div className={styles.shelterMapAddress}>
+        <MapPin size={18} aria-hidden="true" />
+        <span>{shelter.address}</span>
       </div>
     </div>
   )
+}
+
+function createShelterLocationIcon() {
+  return L.divIcon({
+    className: styles.shelterLocationMarker,
+    html: '<span aria-hidden="true"></span>',
+    iconAnchor: [18, 36],
+  })
+}
+
+function toLeafletLatLng(location: Shelter['location']): LatLngExpression {
+  return [location.lat, location.lng]
 }
 
 function ShelterStatusRow({ item }: { item: ShelterStatusItem }) {

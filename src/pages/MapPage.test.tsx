@@ -50,15 +50,25 @@ describe('MapPage', () => {
     expect(screen.getByRole('button', { name: '다시 검색' })).toBeInTheDocument()
   })
 
-  it('renders an empty map mount area without fake route labels', () => {
+  it('renders the route map and toggles safety layers', async () => {
+    const user = userEvent.setup()
     renderMapPage()
 
-    const mapMountArea = screen.getByTestId('map-mount-area')
+    const routeMap = screen.getByTestId('route-map')
+    const busLayerButton = screen.getByRole('button', { name: '버스정류장' })
 
-    expect(mapMountArea).toBeInTheDocument()
-    expect(mapMountArea).toHaveAccessibleName('지도 표시 영역')
-    expect(within(mapMountArea).queryByText('출발')).not.toBeInTheDocument()
-    expect(within(mapMountArea).queryByText('도착')).not.toBeInTheDocument()
+    expect(routeMap).toBeInTheDocument()
+    expect(routeMap).toHaveAccessibleName('세종 세이프웨이 Leaflet 지도')
+    expect(within(routeMap).getByText('Leaflet / OpenStreetMap')).toBeInTheDocument()
+    expect(await within(routeMap).findByText('출발')).toBeInTheDocument()
+    expect(await within(routeMap).findByText('도착')).toBeInTheDocument()
+    expect(await within(routeMap).findByText('나성동 BRT 정류장')).toBeInTheDocument()
+    expect(busLayerButton).toHaveAttribute('aria-pressed', 'true')
+
+    await user.click(busLayerButton)
+
+    expect(busLayerButton).toHaveAttribute('aria-pressed', 'false')
+    expect(within(routeMap).queryByText('나성동 BRT 정류장')).not.toBeInTheDocument()
   })
 
   it('renders the recommendation summary metrics and analysis rows', () => {
@@ -73,8 +83,7 @@ describe('MapPage', () => {
     expect(screen.getAllByText('외부 노출 감소')).toHaveLength(2)
     expect(screen.getByText('야간 안전성')).toBeInTheDocument()
     expect(screen.getByText('기후·폭염 위험')).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: '실제 쉼터 상위 후보' })).toBeInTheDocument()
-    expect(screen.getByText('한솔동복합커뮤니티센터 정음관')).toBeInTheDocument()
+    expect(screen.getByText(/500m 이내 쉼터 32개와 최종 기후안전/)).toBeInTheDocument()
   })
 
   it('shows mock navigation and route detail feedback', async () => {

@@ -80,7 +80,7 @@ h3 {
 }
 
 .app-main {
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 76px);
 }
 
 .app-shell {

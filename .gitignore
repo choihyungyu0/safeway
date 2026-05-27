@@ -16,6 +16,7 @@ __pycache__/
 backend/.venv/
 external-data/
 .tmp-safeway-data/
+artifacts/
 tmp-*.html
 **/.ipynb_checkpoints/
 *.env
