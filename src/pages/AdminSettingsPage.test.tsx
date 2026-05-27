@@ -36,11 +36,11 @@ describe('AdminSettingsPage', () => {
     expect(screen.getByRole('button', { name: '설정 저장' })).toBeInTheDocument()
   })
 
-  it('uses the screenshot-specific admin chrome for the settings screen', () => {
+  it('keeps the full admin menu visible for the settings screen', () => {
     renderAdminSettings()
 
     expect(screen.getByRole('link', { name: '설정' })).toHaveAttribute('aria-current', 'page')
-    expect(screen.queryByRole('link', { name: '임시쉼터 후보' })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '임시쉼터 후보' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: '로그아웃' })).not.toBeInTheDocument()
   })
 

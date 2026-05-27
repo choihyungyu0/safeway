@@ -75,8 +75,6 @@ const adminMenuItems: AdminMenuItem[] = [
   { icon: Settings, label: '설정', to: '/admin/settings' },
 ]
 
-const settingsMenuItems = adminMenuItems.filter((item) => item.to !== '/admin/temporary-shelters')
-
 const managementMenuGroups: AdminMenuGroup[] = [
   {
     items: [{ icon: Home, label: '대시보드', to: '/admin' }],
@@ -143,7 +141,7 @@ export function AdminSidebar({ variant = 'compact' }: AdminSidebarProps) {
   const menuGroups =
     variant === 'management'
       ? managementMenuGroups
-      : [{ items: variant === 'settings' ? settingsMenuItems : adminMenuItems }]
+      : [{ items: adminMenuItems }]
   const sidebarClassName = `${styles.sidebar} ${
     variant === 'management' ? styles.managementSidebar : styles.compactSidebar
   }`
