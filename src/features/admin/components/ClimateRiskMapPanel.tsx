@@ -1,5 +1,10 @@
 import { useState } from 'react'
-import { CloudFog, Maximize2, RefreshCw, Sun, Waves } from 'lucide-react'
+import { CloudFog, RefreshCw, Sun, Waves } from 'lucide-react'
+import {
+  AdminLeafletMap,
+  type AdminLeafletCircle,
+  type AdminLeafletPoint,
+} from '@/features/admin/components/AdminLeafletMap'
 import { climateRiskMarkers } from '@/mocks/fixtures/adminDashboard'
 import styles from '@/pages/AdminDashboardPage.module.css'
 
@@ -9,9 +14,59 @@ const climateTabs = [
   { label: '안개', icon: Waves },
 ] as const
 
+const markerPositions: Record<string, { x: number; y: number }> = {
+  markerEojin: { x: 43, y: 24 },
+  markerNaseong: { x: 47, y: 52 },
+  markerHansol: { x: 79, y: 52 },
+  markerBoram: { x: 22, y: 74 },
+}
+
+const climateHeatCircles: AdminLeafletCircle[] = [
+  {
+    id: 'dashboard-eojin-heat',
+    position: { x: 43, y: 25 },
+    radiusMeters: 870,
+    tone: 'danger',
+    label: '어진동',
+    fillOpacity: 0.22,
+  },
+  {
+    id: 'dashboard-naseong-heat',
+    position: { x: 48, y: 52 },
+    radiusMeters: 980,
+    tone: 'danger',
+    label: '나성동',
+    fillOpacity: 0.24,
+  },
+  {
+    id: 'dashboard-hansol-heat',
+    position: { x: 78, y: 55 },
+    radiusMeters: 920,
+    tone: 'danger',
+    label: '한솔동',
+    fillOpacity: 0.2,
+  },
+  {
+    id: 'dashboard-boram-heat',
+    position: { x: 21, y: 72 },
+    radiusMeters: 720,
+    tone: 'warning',
+    label: '보람동',
+    fillOpacity: 0.18,
+  },
+]
+
 export function ClimateRiskMapPanel() {
   const [activeTab, setActiveTab] = useState<(typeof climateTabs)[number]['label']>('폭염')
   const [message, setMessage] = useState('')
+  const riskPoints: AdminLeafletPoint[] = climateRiskMarkers.map((marker) => ({
+    id: marker.id,
+    label: marker.district,
+    detail: marker.level,
+    tone: marker.tone,
+    shape: 'label',
+    position: markerPositions[marker.className] ?? { x: 50, y: 50 },
+  }))
 
   const refreshMap = () => {
     setMessage('기후위험 지도가 새로고침되었습니다.')
@@ -53,39 +108,18 @@ export function ClimateRiskMapPanel() {
         </div>
       </div>
 
-      <div
+      <AdminLeafletMap
         className={styles.fakeMap}
-        role="img"
-        aria-label="어진동, 나성동, 한솔동, 보람동 기후위험 현황을 보여주는 모의 지도"
+        ariaLabel="어진동, 나성동, 한솔동, 보람동의 기후위험 현황을 보여주는 Leaflet 지도"
+        points={riskPoints}
+        circles={climateHeatCircles.map((circle) => ({
+          ...circle,
+          label: `${activeTab} ${circle.label}`,
+        }))}
+        center={{ x: 50, y: 52 }}
+        zoom={12}
+        maxFitZoom={12}
       >
-        <div className={styles.mapTexture} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatEojin}`} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatNaseong}`} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatHansol}`} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatBoram}`} aria-hidden="true" />
-
-        {climateRiskMarkers.map((marker) => (
-          <div
-            key={marker.id}
-            className={`${styles.mapLabel} ${styles[marker.className]} ${styles[marker.tone]}`}
-          >
-            <strong>{marker.district}</strong>
-            <span>{marker.level}</span>
-          </div>
-        ))}
-
-        <div className={styles.mapControls} aria-label="모의 지도 확대 축소">
-          <button type="button" aria-label="확대">
-            +
-          </button>
-          <button type="button" aria-label="축소">
-            -
-          </button>
-          <button type="button" aria-label="전체 화면">
-            <Maximize2 size={18} aria-hidden="true" />
-          </button>
-        </div>
-
         <div className={styles.mapBottom}>
           <p>데이터 기준: 2025.06.21 14:00</p>
           <button type="button" onClick={refreshMap}>
@@ -93,7 +127,7 @@ export function ClimateRiskMapPanel() {
             새로고침
           </button>
         </div>
-      </div>
+      </AdminLeafletMap>
 
       {message ? (
         <p className={styles.inlineToast} role="status">
@@ -106,7 +140,7 @@ export function ClimateRiskMapPanel() {
 
 export function InfoDot() {
   return (
-    <span className={styles.infoDot} aria-label="도움말">
+    <span className={styles.infoDot} aria-label="안내">
       ?
     </span>
   )

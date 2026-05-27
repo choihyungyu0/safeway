@@ -5,15 +5,17 @@ import {
   CloudFog,
   Download,
   Info,
-  Maximize,
-  Minus,
-  Plus,
   Sun,
   User,
   Wind,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { SejongAdminShell as AdminLayout } from '@/shared/ui/SejongAdminShell'
+import {
+  AdminLeafletMap,
+  type AdminLeafletCircle,
+  type AdminLeafletPoint,
+} from '@/features/admin/components/AdminLeafletMap'
 import {
   defaultClimateRiskFilter,
   displayRangeOptions,
@@ -75,6 +77,34 @@ const chartPlot = {
 }
 
 const baselineSafewayScenario = safewayClimateScenarios[0]
+
+const districtMapPositions: Record<string, { x: number; y: number }> = {
+  districtEojin: { x: 42, y: 23 },
+  districtNaseong: { x: 35, y: 63 },
+  districtBoram: { x: 76, y: 65 },
+  districtSodam: { x: 24, y: 83 },
+  districtDodam: { x: 15, y: 58 },
+  districtHansol: { x: 76, y: 24 },
+  districtDaepyeong: { x: 75, y: 93 },
+  districtLake: { x: 62, y: 45 },
+  districtComplex: { x: 43, y: 43 },
+}
+
+const riskLabelMapPositions: Record<string, { x: number; y: number }> = {
+  riskEojin: { x: 48, y: 21 },
+  riskNaseong: { x: 38, y: 56 },
+  riskBoram: { x: 73, y: 62 },
+}
+
+const heatZoneMapConfig: Record<
+  string,
+  { position: { x: number; y: number }; radiusMeters: number; tone: 'danger' | 'warning' }
+> = {
+  heatEojin: { position: { x: 42, y: 25 }, radiusMeters: 900, tone: 'danger' },
+  heatNaseong: { position: { x: 35, y: 62 }, radiusMeters: 1120, tone: 'danger' },
+  heatBoram: { position: { x: 76, y: 64 }, radiusMeters: 940, tone: 'warning' },
+  heatSodam: { position: { x: 24, y: 83 }, radiusMeters: 650, tone: 'warning' },
+}
 
 export function AdminClimateRiskMapPage() {
   const [filters, setFilters] = useState<AdminRiskFilter>(defaultClimateRiskFilter)
@@ -233,6 +263,34 @@ function ClimateRiskFilterBar({
 }
 
 function ClimateRiskMapPanel({ riskTypeLabel }: { riskTypeLabel: string }) {
+  const heatCircles: AdminLeafletCircle[] = mapHeatZones.map((zone) => {
+    const config = heatZoneMapConfig[zone.className] ?? heatZoneMapConfig.heatEojin
+
+    return {
+      id: zone.id,
+      position: config.position,
+      radiusMeters: config.radiusMeters,
+      tone: config.tone,
+      label: riskTypeLabel,
+      fillOpacity: config.tone === 'danger' ? 0.24 : 0.18,
+    }
+  })
+  const districtPoints: AdminLeafletPoint[] = mapDistrictLabels.map((district) => ({
+    id: district.id,
+    label: district.label,
+    position: districtMapPositions[district.className] ?? { x: 50, y: 50 },
+    tone: 'district',
+    shape: 'district',
+  }))
+  const riskPoints: AdminLeafletPoint[] = mapRiskLabels.map((riskLabel) => ({
+    id: riskLabel.id,
+    label: riskLabel.district,
+    detail: riskLabel.level,
+    position: riskLabelMapPositions[riskLabel.className] ?? { x: 50, y: 50 },
+    tone: riskLabel.tone,
+    shape: 'label',
+  }))
+
   return (
     <section className={`${styles.card} ${styles.mapCard}`} aria-labelledby="risk-map-title">
       <div className={styles.sectionTitle}>
@@ -240,57 +298,21 @@ function ClimateRiskMapPanel({ riskTypeLabel }: { riskTypeLabel: string }) {
         <InfoIcon label="위험 지도 설명" />
       </div>
 
-      <div
+      <AdminLeafletMap
         className={styles.mapView}
-        role="img"
-        aria-label={`${riskTypeLabel} 기준 위험 권역은 나성동, 어진동, 보람동, 소담동을 중심으로 표시됩니다.`}
+        ariaLabel={`${riskTypeLabel} 기준 위험 권역을 표시하는 Leaflet 지도`}
+        points={[...districtPoints, ...riskPoints]}
+        circles={heatCircles}
+        center={{ x: 50, y: 52 }}
+        zoom={12}
+        maxFitZoom={12}
       >
-        <div className={styles.mapBase} aria-hidden="true" />
-
         <RiskLegend />
-
-        {mapHeatZones.map((zone) => (
-          <div key={zone.id} className={`${styles.heat} ${styles[zone.className]}`} />
-        ))}
-
-        {mapDistrictLabels.map((district) => (
-          <span
-            key={district.id}
-            className={`${styles.mapText} ${styles[district.className]}`}
-          >
-            {district.label}
-          </span>
-        ))}
-
-        {mapRiskLabels.map((riskLabel) => (
-          <div
-            key={riskLabel.id}
-            className={`${styles.riskLabel} ${styles[riskLabel.className]} ${
-              riskLabel.tone === 'warning' ? styles.warningRiskLabel : ''
-            }`}
-          >
-            <strong>{riskLabel.district}</strong>
-            <span>{riskLabel.level}</span>
-          </div>
-        ))}
-
-        <div className={styles.mapControl} aria-label="지도 확대 축소">
-          <button type="button" aria-label="확대">
-            <Plus size={20} aria-hidden="true" />
-          </button>
-          <button type="button" aria-label="축소">
-            <Minus size={20} aria-hidden="true" />
-          </button>
-          <button type="button" aria-label="전체 화면">
-            <Maximize size={18} aria-hidden="true" />
-          </button>
-        </div>
-
         <div className={styles.scale} aria-hidden="true">
           <span />
           <p>0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;250&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;750m</p>
         </div>
-      </div>
+      </AdminLeafletMap>
     </section>
   )
 }

@@ -14,6 +14,10 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { AdminShellLayout as AdminLayout } from '@/features/admin/components/AdminShellLayout'
 import {
+  AdminLeafletMap,
+  type AdminLeafletCircle,
+} from '@/features/admin/components/AdminLeafletMap'
+import {
   defaultReportFilter,
   reportRegionOptions,
   reportRiskTypeOptions,
@@ -45,6 +49,33 @@ type StatusMessage = {
 }
 
 type FilterKey = keyof ReportFilter
+
+const reportHeatCircles: AdminLeafletCircle[] = [
+  {
+    id: 'report-heat-one',
+    position: { x: 32, y: 35 },
+    radiusMeters: 760,
+    tone: 'danger',
+    label: '매우 높음',
+    fillOpacity: 0.24,
+  },
+  {
+    id: 'report-heat-two',
+    position: { x: 45, y: 68 },
+    radiusMeters: 680,
+    tone: 'warning',
+    label: '높음',
+    fillOpacity: 0.2,
+  },
+  {
+    id: 'report-heat-three',
+    position: { x: 72, y: 70 },
+    radiusMeters: 620,
+    tone: 'warning',
+    label: '보통',
+    fillOpacity: 0.16,
+  },
+]
 
 export function AdminReportPage() {
   const navigate = useNavigate()
@@ -340,12 +371,17 @@ function ReportCoreSummary({
       <div className={styles.summaryGrid}>
         <SummaryPanel title="기후위험 집중 지역" onClick={onShowClimate} actionLabel="자세히 보기">
           <div className={styles.heatmapWrap}>
-            <div className={styles.miniMap} role="img" aria-label="기후위험 집중 지역 모의 열지도">
-              <div className={styles.mapRoads} aria-hidden="true" />
-              <span className={`${styles.heatBlob} ${styles.heatOne}`} aria-hidden="true" />
-              <span className={`${styles.heatBlob} ${styles.heatTwo}`} aria-hidden="true" />
-              <span className={`${styles.heatBlob} ${styles.heatThree}`} aria-hidden="true" />
-            </div>
+            <AdminLeafletMap
+              className={styles.miniMap}
+              ariaLabel="기후위험 집중 지역 Leaflet 열지도"
+              circles={reportHeatCircles}
+              center={{ x: 52, y: 55 }}
+              zoom={11}
+              fitToContent={false}
+              showBadge={false}
+              zoomControl={false}
+              attributionControl={false}
+            />
             <div className={styles.legendList} aria-label="위험도 범례">
               {['매우 높음', '높음', '보통', '낮음', '매우 낮음'].map((label, index) => (
                 <span key={label}>

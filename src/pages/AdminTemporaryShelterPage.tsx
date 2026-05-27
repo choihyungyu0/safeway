@@ -9,14 +9,11 @@ import {
   ChevronRight,
   ClipboardCheck,
   Clock,
-  Crosshair,
   Droplets,
   FileText,
   HeartPulse,
   ListChecks,
   MapPin,
-  Minus,
-  Plus,
   RefreshCw,
   Snowflake,
   Toilet,
@@ -25,6 +22,11 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { SejongAdminShell as AdminLayout } from '@/shared/ui/SejongAdminShell'
+import {
+  AdminLeafletMap,
+  type AdminLeafletCircle,
+  type AdminLeafletPoint,
+} from '@/features/admin/components/AdminLeafletMap'
 import {
   defaultTemporaryShelterFilter,
   temporaryShelterFacilityTypeOptions,
@@ -55,6 +57,41 @@ type FilterKey = keyof TemporaryShelterFilter
 
 const confirmedStorageKey = 'safeway-confirmed-temporary-shelters'
 const topGeneratedShelter = topSafewayShelters[0]
+
+const temporaryShelterHeatCircles: AdminLeafletCircle[] = [
+  {
+    id: 'temporary-naseong-risk',
+    position: { x: 18, y: 20 },
+    radiusMeters: 650,
+    tone: 'danger',
+    label: '쉼터 사각지대',
+    fillOpacity: 0.18,
+  },
+  {
+    id: 'temporary-eojin-risk',
+    position: { x: 56, y: 26 },
+    radiusMeters: 760,
+    tone: 'danger',
+    label: '쉼터 사각지대',
+    fillOpacity: 0.18,
+  },
+  {
+    id: 'temporary-hansol-risk',
+    position: { x: 73, y: 52 },
+    radiusMeters: 720,
+    tone: 'warning',
+    label: '주의 권역',
+    fillOpacity: 0.16,
+  },
+  {
+    id: 'temporary-boram-risk',
+    position: { x: 25, y: 80 },
+    radiusMeters: 690,
+    tone: 'warning',
+    label: '주의 권역',
+    fillOpacity: 0.16,
+  },
+]
 
 export function AdminTemporaryShelterPage() {
   const navigate = useNavigate()
@@ -304,6 +341,18 @@ function TemporaryShelterMapPanel({
   selectedCandidateId,
   onSelectCandidate,
 }: MapPanelProps) {
+  const candidatePoints: AdminLeafletPoint[] = candidates.map((candidate) => ({
+    id: candidate.id,
+    label: candidate.mapPosition.label ?? candidate.name,
+    position: candidate.mapPosition,
+    tone: 'candidate',
+    shape: 'pin',
+    rank: candidate.rank,
+    selected: candidate.id === selectedCandidateId,
+    ariaLabel: `${candidate.rank}순위 ${candidate.name} 후보 선택`,
+    onClick: () => onSelectCandidate(candidate.id),
+  }))
+
   return (
     <section className={`${styles.card} ${styles.mapCard}`} aria-labelledby="candidate-map-title">
       <div className={styles.cardHeader}>
@@ -321,51 +370,15 @@ function TemporaryShelterMapPanel({
         사각지대가 표시됩니다.
       </p>
 
-      <div className={styles.mapView} aria-describedby="temporary-shelter-map-summary">
-        <div className={styles.mapBase} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatNaseong}`} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatEojin}`} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatHansol}`} aria-hidden="true" />
-        <div className={`${styles.heat} ${styles.heatBoram}`} aria-hidden="true" />
-
-        {candidates.map((candidate) => {
-          const isSelected = candidate.id === selectedCandidateId
-
-          return (
-            <div
-              key={candidate.id}
-              className={`${styles.mapPinWrap} ${isSelected ? styles.selectedMapPin : ''}`}
-              style={{
-                left: `${candidate.mapPosition.x}%`,
-                top: `${candidate.mapPosition.y}%`,
-              }}
-            >
-              <button
-                type="button"
-                className={styles.mapPin}
-                aria-label={`${candidate.rank}순위 ${candidate.name} 후보 선택`}
-                aria-pressed={isSelected}
-                onClick={() => onSelectCandidate(candidate.id)}
-              >
-                <span>{candidate.rank}</span>
-              </button>
-              {candidate.mapPosition.label ? <strong>{candidate.mapPosition.label}</strong> : null}
-            </div>
-          )
-        })}
-
-        <div className={styles.mapControls} aria-label="지도 제어">
-          <button type="button" aria-label="확대">
-            <Plus size={21} strokeWidth={2.2} aria-hidden="true" />
-          </button>
-          <button type="button" aria-label="축소">
-            <Minus size={21} strokeWidth={2.2} aria-hidden="true" />
-          </button>
-          <button type="button" aria-label="현재 위치">
-            <Crosshair size={19} strokeWidth={2.2} aria-hidden="true" />
-          </button>
-        </div>
-      </div>
+      <AdminLeafletMap
+        className={styles.mapView}
+        ariaLabel="임시쉼터 후보 시설 위치와 쉼터 사각지대를 표시하는 Leaflet 지도"
+        points={candidatePoints}
+        circles={temporaryShelterHeatCircles}
+        center={{ x: 52, y: 52 }}
+        zoom={12}
+        maxFitZoom={12}
+      />
     </section>
   )
 }

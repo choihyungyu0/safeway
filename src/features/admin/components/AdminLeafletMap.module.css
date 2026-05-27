@@ -1,0 +1,247 @@
+.frame {
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  background: #edf5f8;
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: #edf5f8;
+}
+
+.map :global(.leaflet-control-attribution) {
+  font-size: 10px;
+}
+
+.map :global(.leaflet-control-zoom) {
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
+}
+
+.map :global(.leaflet-control-zoom a) {
+  color: #071b3f;
+  border-color: #e2e8f0;
+  font-weight: 900;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.overlay > * {
+  pointer-events: auto;
+}
+
+.badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 6;
+  min-height: 28px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  color: #005bd8;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #cfe0f5;
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(9, 30, 66, 0.14);
+  font-size: 11px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.marker {
+  width: auto !important;
+  height: auto !important;
+  background: transparent;
+  border: 0;
+}
+
+.label,
+.badgeMarker,
+.district {
+  display: inline-flex;
+  align-items: center;
+  color: #071b3f;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #d9e3f0;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
+  white-space: nowrap;
+}
+
+.label {
+  min-width: 100px;
+  padding: 10px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  border-radius: 8px;
+}
+
+.label strong {
+  color: #071b3f;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.label span {
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.badgeMarker {
+  min-height: 34px;
+  padding: 0 12px;
+  gap: 8px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.district {
+  padding: 3px 8px;
+  color: #334155;
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  font-size: 12px;
+  font-weight: 950;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.pin,
+.dot {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.pinButton,
+.pinDot,
+.dotMarker {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: 0 8px 15px rgba(15, 23, 42, 0.22);
+}
+
+.pinButton {
+  width: 33px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50% 50% 50% 0;
+  cursor: pointer;
+  transform: rotate(-45deg);
+}
+
+.pinButton span {
+  display: block;
+  font-size: 15px;
+  font-weight: 950;
+  transform: rotate(45deg);
+}
+
+.pinLabel {
+  color: #071b3f;
+  font-size: 13px;
+  font-weight: 950;
+  text-shadow: 0 1px 0 #ffffff;
+  white-space: nowrap;
+}
+
+.pinDot {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+}
+
+.dotMarker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.danger .pinButton,
+.danger .pinDot,
+.danger .dotMarker {
+  background: #ef4444;
+}
+
+.warning .pinButton,
+.warning .pinDot,
+.warning .dotMarker {
+  background: #f18700;
+}
+
+.info .pinButton,
+.info .pinDot,
+.info .dotMarker {
+  background: #075bd1;
+}
+
+.shelter .pinButton,
+.shelter .pinDot,
+.shelter .dotMarker {
+  background: #15965f;
+}
+
+.candidate .pinButton,
+.candidate .pinDot,
+.candidate .dotMarker {
+  color: #075bd1;
+  background: #ffffff;
+  border-color: #6aa4ff;
+}
+
+.priority .pinButton,
+.priority .pinDot,
+.priority .dotMarker {
+  background: linear-gradient(135deg, #ef582d, #f04b25);
+}
+
+.selected .pinButton {
+  background: #00a6a6;
+  box-shadow:
+    0 0 0 5px rgba(0, 166, 166, 0.18),
+    0 8px 15px rgba(0, 166, 166, 0.28);
+}
+
+.danger.label span,
+.danger.badgeMarker {
+  color: #ef4444;
+}
+
+.warning.label span,
+.warning.badgeMarker {
+  color: #f18700;
+}
+
+.info.label span,
+.info.badgeMarker {
+  color: #075bd1;
+}
+
+.shelter.badgeMarker {
+  color: #15965f;
+}
+
+.candidate.badgeMarker {
+  color: #075bd1;
+}
+
+.priority.badgeMarker {
+  color: #ef582d;
+}

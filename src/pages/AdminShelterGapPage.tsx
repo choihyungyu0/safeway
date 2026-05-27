@@ -6,13 +6,10 @@ import {
   ChevronRight,
   CircleDot,
   Clock,
-  Crosshair,
   FileText,
   Home,
   Info,
   MapPin,
-  Minus,
-  Plus,
   RefreshCw,
   ShieldAlert,
   Target,
@@ -23,6 +20,12 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { SejongAdminShell as AdminLayout } from '@/shared/ui/SejongAdminShell'
+import {
+  AdminLeafletMap,
+  type AdminLeafletCircle,
+  type AdminLeafletLine,
+  type AdminLeafletPoint,
+} from '@/features/admin/components/AdminLeafletMap'
 import {
   defaultShelterGapFilter,
   shelterGapAnalysisRadiusOptions,
@@ -58,6 +61,37 @@ type StatusMessage = {
 
 const topPriorityAreas = shelterGapAreas.slice(0, 3)
 const topGeneratedShelter = topSafewayShelters[0]
+
+const blindZoneMapConfig: Record<string, { position: { x: number; y: number }; radiusMeters: number }> = {
+  blindEojin: { position: { x: 50, y: 18 }, radiusMeters: 780 },
+  blindNaseong: { position: { x: 22, y: 66 }, radiusMeters: 900 },
+  blindBoram: { position: { x: 76, y: 67 }, radiusMeters: 740 },
+}
+
+const radiusZoneMapConfig: Record<string, { position: { x: number; y: number }; radiusMeters: number }> = {
+  radiusEojin: { position: { x: 50, y: 22 }, radiusMeters: 1250 },
+  radiusNaseong: { position: { x: 22, y: 66 }, radiusMeters: 1400 },
+  radiusBoram: { position: { x: 76, y: 67 }, radiusMeters: 1250 },
+}
+
+const corridorMapConfig: Record<string, Array<{ x: number; y: number }>> = {
+  corridorEojinNaseong: [
+    { x: 58, y: 27 },
+    { x: 31, y: 64 },
+  ],
+  corridorNaseongRiver: [
+    { x: 31, y: 64 },
+    { x: 45, y: 72 },
+  ],
+  corridorRiverBoram: [
+    { x: 45, y: 68 },
+    { x: 73, y: 62 },
+  ],
+  corridorLakeRiver: [
+    { x: 48, y: 43 },
+    { x: 62, y: 62 },
+  ],
+}
 
 export function AdminShelterGapPage() {
   const navigate = useNavigate()
@@ -274,96 +308,83 @@ function ShelterGapMapPanel({
       `나성동 남측 보행축, 어진동 호수공원 동측, 보람동 생활권이 ${riskLabel} 기준 ${userTypeLabel} 쉼터 접근 취약 권역으로 표시됩니다.`,
     [riskLabel, userTypeLabel],
   )
+  const districtPoints: AdminLeafletPoint[] = shelterGapDistrictLabels.map((district) => ({
+    id: district.id,
+    label: district.label,
+    position: district.position,
+    tone: 'district',
+    shape: 'district',
+  }))
+  const priorityPoints: AdminLeafletPoint[] = topPriorityAreas.map((area) => ({
+    id: area.id,
+    label: area.name,
+    position: { x: area.position.x, y: area.position.y - 8 },
+    tone: 'priority',
+    shape: 'badge',
+  }))
+  const markerPoints: AdminLeafletPoint[] = shelterGapMarkers.map((marker) => ({
+    id: marker.id,
+    label: marker.label ?? '',
+    position: marker.position,
+    tone: marker.type === 'SHELTER' ? 'shelter' : 'candidate',
+    shape: 'dot',
+  }))
+  const blindCircles: AdminLeafletCircle[] = shelterGapBlindZones.map((zone) => {
+    const config = blindZoneMapConfig[zone.className] ?? blindZoneMapConfig.blindEojin
+
+    return {
+      id: zone.id,
+      position: config.position,
+      radiusMeters: config.radiusMeters,
+      tone: 'danger',
+      label: '사각지대',
+      fillOpacity: 0.2,
+    }
+  })
+  const radiusCircles: AdminLeafletCircle[] = shelterGapRadiusZones.map((zone) => {
+    const config = radiusZoneMapConfig[zone.className] ?? radiusZoneMapConfig.radiusEojin
+
+    return {
+      id: zone.id,
+      position: config.position,
+      radiusMeters: config.radiusMeters,
+      tone: 'info',
+      label: `분석 반경 ${analysisRadius}`,
+      fillOpacity: 0.04,
+      dashed: true,
+    }
+  })
+  const corridorLines: AdminLeafletLine[] = vulnerableWalkingCorridors.map((corridor) => ({
+    id: corridor.id,
+    positions: corridorMapConfig[corridor.className] ?? corridorMapConfig.corridorLakeRiver,
+    tone: 'warning',
+    label: '취약 보행축',
+    dashed: true,
+  }))
 
   return (
     <section className={styles.mapCard} aria-labelledby="shelter-gap-map-title">
       <h2 id="shelter-gap-map-title" className={styles.srOnly}>
         쉼터 사각지대 지도
       </h2>
-      <div className={styles.mapView} role="img" aria-label={mapSummary}>
-        <div className={styles.mapBase} aria-hidden="true" />
-
+      <AdminLeafletMap
+        className={styles.mapView}
+        ariaLabel={mapSummary}
+        points={[...districtPoints, ...priorityPoints, ...markerPoints]}
+        circles={[...radiusCircles, ...blindCircles]}
+        lines={corridorLines}
+        center={{ x: 50, y: 54 }}
+        zoom={12}
+        maxFitZoom={12}
+      >
         <ShelterGapLegend analysisRadius={analysisRadius} />
-
-        {shelterGapDistrictLabels.map((district) => (
-          <span
-            key={district.id}
-            className={styles.district}
-            style={{ left: `${district.position.x}%`, top: `${district.position.y}%` }}
-          >
-            {district.label}
-          </span>
-        ))}
-
-        {shelterGapBlindZones.map((zone) => (
-          <div
-            key={zone.id}
-            className={`${styles.blindCircle} ${styles[zone.className]}`}
-            aria-hidden="true"
-          />
-        ))}
-
-        {shelterGapRadiusZones.map((zone) => (
-          <div
-            key={zone.id}
-            className={`${styles.radiusCircle} ${styles[zone.className]}`}
-            aria-hidden="true"
-          />
-        ))}
-
-        {vulnerableWalkingCorridors.map((corridor) => (
-          <div
-            key={corridor.id}
-            className={`${styles.walkLine} ${styles[corridor.className]}`}
-            aria-hidden="true"
-          />
-        ))}
-
-        {topPriorityAreas.map((area) => (
-          <div
-            key={area.id}
-            className={styles.spotLabel}
-            style={{ left: `${area.position.x}%`, top: `${area.position.y - 8}%` }}
-          >
-            <strong>{area.name}</strong>
-          </div>
-        ))}
-
-        {shelterGapMarkers.map((marker) => {
-          const isShelter = marker.type === 'SHELTER'
-          const MarkerIcon = isShelter ? Home : MapPin
-
-          return (
-            <div
-              key={marker.id}
-              className={`${styles.marker} ${isShelter ? styles.shelterMarker : styles.candidateMarker}`}
-              style={{ left: `${marker.position.x}%`, top: `${marker.position.y}%` }}
-              aria-hidden="true"
-            >
-              <MarkerIcon size={15} strokeWidth={2.6} />
-            </div>
-          )
-        })}
-
-        <div className={styles.mapControl} aria-label="지도 표시 제어">
-          <button type="button" aria-label="확대">
-            <Plus size={20} aria-hidden="true" />
-          </button>
-          <button type="button" aria-label="축소">
-            <Minus size={20} aria-hidden="true" />
-          </button>
-          <button type="button" aria-label="현재 위치">
-            <Crosshair size={18} aria-hidden="true" />
-          </button>
-        </div>
-
         <div className={styles.scale} aria-hidden="true">
           <span />
           <p>
             0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;250&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;750m
           </p>
         </div>
-      </div>
+      </AdminLeafletMap>
     </section>
   )
 }
