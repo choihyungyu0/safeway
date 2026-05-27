@@ -970,3 +970,296 @@
     border-bottom: 0;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .page {
+    height: calc(100vh - 64px);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pageTitle {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .pageTitle h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+  }
+
+  .pageTitle p {
+    font-size: 14px;
+  }
+
+  .filterPanel {
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .controlBox {
+    grid-column: span 2;
+  }
+
+  .wideControl {
+    grid-column: span 3;
+  }
+
+  .searchBox {
+    grid-column: span 5;
+  }
+
+  .searchButton {
+    grid-column: span 3;
+  }
+
+  .downloadButton {
+    grid-column: span 4;
+  }
+
+  .controlBox {
+    height: 40px;
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .controlLabel {
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  .controlDivider {
+    height: 16px;
+  }
+
+  .selectShell select,
+  .searchBox input {
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .searchButton,
+  .downloadButton {
+    height: 40px;
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .statusMessage {
+    min-height: 30px;
+    margin: 0;
+    padding: 7px 10px;
+    flex: 0 0 auto;
+  }
+
+  .overviewGrid {
+    height: 298px;
+    margin-bottom: 0;
+    grid-template-columns: minmax(360px, 0.92fr) minmax(420px, 1.1fr) minmax(290px, 0.7fr);
+    gap: 12px;
+    flex: 0 0 298px;
+  }
+
+  .statGrid {
+    height: 100%;
+    gap: 10px;
+  }
+
+  .statCard {
+    min-height: 0;
+    padding: 16px 18px;
+  }
+
+  .statCard p {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .statCard strong {
+    margin-bottom: 6px;
+    font-size: 27px;
+  }
+
+  .statCard small {
+    font-size: 12px;
+  }
+
+  .statIcon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .statIcon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ratioCard,
+  .alertPanel {
+    height: 100%;
+    min-height: 0;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .ratioCard h2,
+  .alertPanel h2 {
+    font-size: 18px;
+  }
+
+  .ratioContent {
+    height: calc(100% - 26px);
+    min-height: 0;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .donut {
+    width: 154px;
+    height: 154px;
+  }
+
+  .donut::after {
+    inset: 42px;
+  }
+
+  .donut strong {
+    font-size: 22px;
+  }
+
+  .ratioLegend {
+    gap: 12px;
+  }
+
+  .ratioLegend article {
+    grid-template-columns: 10px minmax(0, 1fr) 78px;
+    gap: 8px;
+  }
+
+  .ratioLegend strong {
+    font-size: 15px;
+  }
+
+  .alertPanel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .patternList {
+    min-height: 0;
+    margin-top: 12px;
+    gap: 8px;
+    overflow: auto;
+  }
+
+  .patternItem {
+    padding: 10px 12px 8px;
+    border-radius: 8px;
+  }
+
+  .patternTitle {
+    margin-bottom: 6px;
+  }
+
+  .patternTitle strong {
+    font-size: 13px;
+  }
+
+  .patternItem p {
+    margin-bottom: 7px;
+    line-height: 1.35;
+  }
+
+  .patternItem h3 {
+    margin-bottom: 3px;
+  }
+
+  .patternItem button,
+  .allAlertButton {
+    min-height: 26px;
+    font-size: 12px;
+  }
+
+  .allAlertButton {
+    margin-top: 8px;
+    flex: 0 0 auto;
+  }
+
+  .tableCard {
+    min-height: 0;
+    padding: 12px 14px;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .tableHeader {
+    margin-bottom: 8px;
+    flex: 0 0 auto;
+  }
+
+  .tableHeader h2 {
+    font-size: 18px;
+  }
+
+  .tableHeader span {
+    margin-left: 8px;
+    font-size: 12px;
+  }
+
+  .tableScroll {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+
+  .tableScroll table {
+    font-size: 12px;
+  }
+
+  .tableScroll th,
+  .tableScroll td {
+    height: 32px;
+    padding: 0 8px;
+  }
+
+  .pathBadge,
+  .selectBadge {
+    min-height: 22px;
+    font-size: 11px;
+  }
+
+  .tableButtons button {
+    min-height: 24px;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+
+  .tableFooter {
+    min-height: 42px;
+    gap: 14px;
+    flex: 0 0 auto;
+  }
+
+  .pagination {
+    gap: 6px;
+  }
+
+  .pagination button {
+    min-width: 26px;
+    height: 26px;
+  }
+
+  .pageSizeSelect,
+  .pageSizeSelect select {
+    height: 32px;
+  }
+}

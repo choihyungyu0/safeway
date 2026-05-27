@@ -880,3 +880,227 @@
     flex-wrap: wrap;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .page {
+    height: calc(100vh - 64px);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pageTitle {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .pageTitle h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+  }
+
+  .pageTitle p {
+    font-size: 13px;
+  }
+
+  .filterPanel {
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .filterBox,
+  .resetButton {
+    height: 38px;
+  }
+
+  .filterBox {
+    padding: 0 10px;
+    gap: 9px;
+  }
+
+  .filterLabel strong,
+  .selectShell select,
+  .resetButton {
+    font-size: 13px;
+  }
+
+  .statusMessage {
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .statGrid {
+    margin-bottom: 0;
+    gap: 12px;
+    flex: 0 0 96px;
+  }
+
+  .statCard {
+    min-height: 96px;
+    padding: 16px 18px;
+  }
+
+  .statCard p {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .statCard strong {
+    margin-bottom: 5px;
+    font-size: 26px;
+  }
+
+  .statCard small {
+    font-size: 12px;
+  }
+
+  .statIcon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .statIcon svg {
+    width: 29px;
+    height: 29px;
+  }
+
+  .analysisGrid {
+    height: 300px;
+    margin-bottom: 0;
+    grid-template-columns: minmax(460px, 1.25fr) minmax(300px, 0.8fr) minmax(330px, 1fr);
+    grid-template-rows: minmax(0, 1fr) 74px;
+    gap: 12px;
+    flex: 0 0 300px;
+  }
+
+  .trendCard,
+  .riskCard,
+  .routeCard,
+  .keywordCard {
+    min-height: 0;
+    padding: 14px 16px;
+    overflow: hidden;
+  }
+
+  .trendCard {
+    grid-row: 1 / span 2;
+  }
+
+  .keywordCard {
+    grid-column: 2 / 4;
+  }
+
+  .cardTitle {
+    margin-bottom: 8px;
+  }
+
+  .cardTitle h2 {
+    font-size: 18px;
+  }
+
+  .trendChart {
+    height: 218px;
+  }
+
+  .chartLegend {
+    margin: 5px 0;
+  }
+
+  .donutLayout {
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .riskDonut {
+    width: 126px;
+    height: 126px;
+  }
+
+  .riskDonut::after {
+    inset: 36px;
+  }
+
+  .riskLegend {
+    gap: 9px;
+  }
+
+  .totalBox {
+    height: 34px;
+    margin-top: 8px;
+  }
+
+  .routeBarChart {
+    height: 172px;
+    gap: 8px;
+  }
+
+  .routeBar {
+    width: 34px;
+    height: 134px;
+  }
+
+  .keywordList {
+    gap: 7px;
+  }
+
+  .keywordList span {
+    height: 24px;
+    min-width: 78px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .feedbackTableCard {
+    min-height: 0;
+    padding: 12px 14px;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .tableTitle {
+    margin-bottom: 8px;
+    flex: 0 0 auto;
+  }
+
+  .tableScroll {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+
+  .tableScroll table {
+    font-size: 12px;
+  }
+
+  .tableScroll th,
+  .tableScroll td {
+    height: 31px;
+    padding: 0 8px;
+  }
+
+  .tableFooter {
+    min-height: 40px;
+    gap: 14px;
+    flex: 0 0 auto;
+  }
+
+  .pagination {
+    gap: 6px;
+  }
+
+  .pagination button {
+    min-width: 26px;
+    height: 26px;
+  }
+
+  .pageSizeSelect {
+    height: 32px;
+  }
+}

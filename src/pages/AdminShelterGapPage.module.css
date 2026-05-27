@@ -927,3 +927,177 @@
     width: 150px;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .page {
+    height: calc(100vh - 64px);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pageTop {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .pageTop h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+  }
+
+  .pageTop p {
+    font-size: 13px;
+  }
+
+  .dateControl {
+    gap: 10px;
+  }
+
+  .dateButton,
+  .resetButton {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .statusMessage {
+    min-height: 30px;
+    margin: 0;
+    padding: 7px 10px;
+    flex: 0 0 auto;
+  }
+
+  .filterPanel {
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    gap: 16px;
+    flex: 0 0 auto;
+  }
+
+  .filterBox {
+    gap: 9px;
+  }
+
+  .filterBox > svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .filterLabel {
+    font-size: 13px;
+  }
+
+  .selectShell {
+    height: 38px;
+  }
+
+  .mainGrid {
+    min-height: 0;
+    margin-bottom: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(470px, 0.7fr);
+    gap: 14px;
+    flex: 1 1 auto;
+    align-items: stretch;
+  }
+
+  .mapSection {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mapCard {
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+
+  .mapView {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .mapNote {
+    margin: 8px 2px 0;
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+
+  .legendBox {
+    width: 142px;
+    padding: 12px;
+    gap: 9px;
+  }
+
+  .rightPanel {
+    min-height: 0;
+    height: 100%;
+    grid-template-rows: minmax(0, 1fr) auto 54px;
+    gap: 12px;
+  }
+
+  .improvementCard,
+  .candidateCard {
+    padding: 14px;
+    overflow: hidden;
+  }
+
+  .sectionHeader h2,
+  .candidateCard h2 {
+    font-size: 18px;
+  }
+
+  .improvementList {
+    min-height: 0;
+    margin-top: 10px;
+    overflow: auto;
+  }
+
+  .improvementItem {
+    min-height: 58px;
+    padding: 9px 0;
+    gap: 10px;
+  }
+
+  .improvementTitleRow h3 {
+    font-size: 14px;
+  }
+
+  .areaMeta {
+    margin-top: 6px;
+    gap: 7px;
+  }
+
+  .candidateCard h2 {
+    margin-bottom: 8px;
+  }
+
+  .candidateCard table {
+    font-size: 11px;
+  }
+
+  .candidateCard th,
+  .candidateCard td {
+    height: 30px;
+    padding: 0 7px;
+  }
+
+  .moreButton {
+    min-height: 28px;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .actionRow {
+    gap: 12px;
+  }
+
+  .outlineButton,
+  .primaryButton {
+    min-height: 54px;
+    font-size: 15px;
+  }
+}

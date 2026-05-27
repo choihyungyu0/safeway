@@ -1068,3 +1068,193 @@
     flex-wrap: wrap;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .page {
+    height: calc(100vh - 64px);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pageTitle {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .pageTitle h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+  }
+
+  .pageTitle p {
+    font-size: 13px;
+  }
+
+  .filterPanel {
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    grid-template-columns: minmax(300px, 1.45fr) repeat(3, minmax(170px, 1fr));
+    gap: 16px;
+    flex: 0 0 auto;
+  }
+
+  .filterLabel {
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .riskTabs {
+    gap: 8px;
+  }
+
+  .riskTabs button,
+  .selectBox {
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  .dashboardGrid {
+    min-height: 0;
+    margin-bottom: 0;
+    grid-template-columns: minmax(0, 1.16fr) minmax(520px, 0.96fr);
+    gap: 12px;
+    flex: 1 1 auto;
+  }
+
+  .mapCard {
+    min-height: 0;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sectionTitle {
+    margin-bottom: 10px;
+  }
+
+  .sectionTitle h2 {
+    font-size: 18px;
+  }
+
+  .mapView {
+    min-height: 0;
+    height: auto;
+    flex: 1 1 auto;
+  }
+
+  .sideStats {
+    min-height: 0;
+    height: 100%;
+    grid-template-rows: 96px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .summaryGrid {
+    gap: 12px;
+  }
+
+  .summaryCard {
+    min-height: 96px;
+    padding: 14px;
+  }
+
+  .summaryCard p {
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .summaryCard strong {
+    margin-bottom: 6px;
+    font-size: 25px;
+  }
+
+  .summaryCard small {
+    font-size: 12px;
+  }
+
+  .summaryIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .summaryIcon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .chartCard,
+  .donutCard {
+    min-height: 0;
+    padding: 14px;
+    overflow: hidden;
+  }
+
+  .chartLegend {
+    margin: 8px 0 4px;
+  }
+
+  .chartBox {
+    height: calc(100% - 54px);
+    min-height: 210px;
+  }
+
+  .donutLayout {
+    min-height: 0;
+    height: calc(100% - 92px);
+    grid-template-columns: 138px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .donutChart {
+    width: 132px;
+    height: 132px;
+  }
+
+  .donutChart::after {
+    inset: 38px;
+  }
+
+  .donutLegend {
+    gap: 11px;
+  }
+
+  .totalBox {
+    min-height: 42px;
+  }
+
+  .riskTableCard {
+    min-height: 0;
+    padding: 14px;
+    flex: 0 0 214px;
+    overflow: hidden;
+  }
+
+  .tableHeader {
+    margin-bottom: 8px;
+  }
+
+  .downloadButton {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .tableScroll {
+    max-height: 148px;
+    overflow: auto;
+  }
+
+  .tableScroll table {
+    font-size: 13px;
+  }
+
+  .tableScroll th,
+  .tableScroll td {
+    height: 29px;
+    padding: 0 10px;
+  }
+}

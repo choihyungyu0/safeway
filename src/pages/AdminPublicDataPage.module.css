@@ -781,3 +781,203 @@ input:focus-visible {
     text-align: left;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .page {
+    height: calc(100vh - 64px);
+    min-height: 0;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pageTop {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .pageTop h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+  }
+
+  .pageTop p {
+    font-size: 13px;
+  }
+
+  .topActions {
+    gap: 10px;
+  }
+
+  .outlineActionButton,
+  .primaryActionButton {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .statusMessage {
+    min-height: 30px;
+    margin: 0;
+    padding: 7px 10px;
+    flex: 0 0 auto;
+  }
+
+  .statGrid {
+    margin-bottom: 0;
+    gap: 12px;
+    flex: 0 0 96px;
+  }
+
+  .statCard {
+    min-height: 96px;
+    padding: 16px 18px;
+    gap: 16px;
+  }
+
+  .statIcon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .statIcon svg {
+    width: 29px;
+    height: 29px;
+  }
+
+  .statCard p {
+    margin-bottom: 7px;
+    font-size: 14px;
+  }
+
+  .statCard strong {
+    margin-bottom: 5px;
+    font-size: 26px;
+  }
+
+  .statCard small {
+    font-size: 12px;
+  }
+
+  .filterPanel {
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    gap: 14px;
+    flex: 0 0 auto;
+  }
+
+  .filterBox {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .filterBox > span:first-child {
+    font-size: 13px;
+  }
+
+  .selectShell,
+  .searchBox,
+  .pageSizeSelect {
+    height: 36px;
+  }
+
+  .mainGrid {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.32fr);
+    gap: 14px;
+    flex: 1 1 auto;
+    align-items: stretch;
+  }
+
+  .tableCard {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .tableScroll {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+
+  .tableScroll table {
+    font-size: 13px;
+  }
+
+  .tableScroll th,
+  .tableScroll td {
+    height: 42px;
+    padding: 0 12px;
+  }
+
+  .statusBadge {
+    min-height: 28px;
+    padding: 0 11px;
+    font-size: 12px;
+  }
+
+  .tableFooter {
+    min-height: 48px;
+    padding: 8px 14px;
+    gap: 14px;
+    flex: 0 0 auto;
+  }
+
+  .pagination {
+    gap: 7px;
+  }
+
+  .pagination button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rightPanel {
+    min-height: 0;
+    height: 100%;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .qualityCard,
+  .logCard {
+    padding: 14px;
+    overflow: hidden;
+  }
+
+  .qualityCard h2,
+  .logCard h2 {
+    font-size: 18px;
+  }
+
+  .qualityList {
+    margin-top: 14px;
+    gap: 14px;
+  }
+
+  .qualityDate,
+  .notice {
+    margin-top: 10px;
+  }
+
+  .logList {
+    margin-top: 10px;
+  }
+
+  .logItem {
+    min-height: 52px;
+    padding: 9px 0;
+    grid-template-columns: 32px minmax(0, 1fr) 44px;
+    gap: 10px;
+  }
+
+  .logIcon {
+    width: 28px;
+    height: 28px;
+  }
+}

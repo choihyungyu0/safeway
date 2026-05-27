@@ -916,3 +916,221 @@
     grid-template-columns: 24px minmax(0, 1fr) auto;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .page {
+    height: calc(100vh - 64px);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pageTitle {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .pageTitle h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+  }
+
+  .pageTitle p {
+    font-size: 13px;
+  }
+
+  .filterPanel {
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .filterBox,
+  .resetButton {
+    height: 38px;
+  }
+
+  .filterBox {
+    padding: 0 10px;
+    gap: 9px;
+  }
+
+  .filterLabel strong,
+  .selectShell select,
+  .resetButton {
+    font-size: 13px;
+  }
+
+  .statusMessage {
+    min-height: 30px;
+    margin: 0;
+    padding: 7px 10px;
+    flex: 0 0 auto;
+  }
+
+  .statGrid {
+    margin-bottom: 0;
+    gap: 12px;
+    flex: 0 0 86px;
+  }
+
+  .statCard {
+    min-height: 86px;
+    padding: 14px 16px;
+  }
+
+  .statCard p {
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .statCard strong {
+    font-size: 25px;
+  }
+
+  .statIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .statIcon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .mainGrid {
+    min-height: 0;
+    margin-bottom: 0;
+    gap: 12px;
+    flex: 1 1 auto;
+    align-items: stretch;
+  }
+
+  .mapCard,
+  .tableCard {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .cardHeader {
+    min-height: 44px;
+    padding: 0 14px;
+    flex: 0 0 auto;
+  }
+
+  .card h2 {
+    font-size: 18px;
+  }
+
+  .mapView {
+    height: auto;
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+
+  .tableCard {
+    padding: 14px;
+  }
+
+  .tableCard h2 {
+    margin-bottom: 8px;
+  }
+
+  .tableScroll {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+
+  .tableCard table {
+    font-size: 12px;
+  }
+
+  .tableCard th,
+  .tableCard td {
+    height: 32px;
+    padding: 0 7px;
+  }
+
+  .viewAllButton {
+    min-height: 32px;
+    margin-top: 8px;
+    flex: 0 0 auto;
+    font-size: 13px;
+  }
+
+  .detailCard {
+    padding: 14px;
+    flex: 0 0 auto;
+  }
+
+  .detailCard h2 {
+    margin-bottom: 8px;
+  }
+
+  .candidateInfo,
+  .facilityCheck,
+  .effectBox {
+    padding: 14px;
+  }
+
+  .candidateTitle {
+    margin-bottom: 10px;
+  }
+
+  .candidateTitle h3 {
+    font-size: 17px;
+  }
+
+  .infoList {
+    gap: 8px;
+  }
+
+  .infoList p {
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  .infoList strong,
+  .facilityCheck p,
+  .facilityCheck strong,
+  .effectMetric,
+  .memo {
+    font-size: 13px;
+  }
+
+  .facilityCheck {
+    gap: 7px;
+  }
+
+  .facilityCheck article {
+    min-height: 30px;
+    padding-bottom: 6px;
+  }
+
+  .memoTitle {
+    margin-top: 12px;
+  }
+
+  .memo {
+    margin-top: 6px;
+    line-height: 1.45;
+  }
+
+  .actionRow {
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .primaryButton,
+  .outlineButton {
+    min-height: 44px;
+    font-size: 15px;
+  }
+}

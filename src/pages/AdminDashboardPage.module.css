@@ -1426,3 +1426,278 @@
     flex-wrap: wrap;
   }
 }
+
+@media (min-width: 1501px) and (min-height: 850px) {
+  .adminPage {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .adminHeader {
+    height: 64px;
+    min-height: 64px;
+    padding: 0 28px;
+    gap: 20px;
+  }
+
+  .headerBrandGroup {
+    gap: 14px;
+  }
+
+  .headerBrandGroup h1 {
+    font-size: 24px;
+  }
+
+  .headerSubtitle {
+    font-size: 15px;
+  }
+
+  .headerActions {
+    gap: 12px;
+  }
+
+  .logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .bodyLayout {
+    height: calc(100vh - 64px);
+    overflow: hidden;
+  }
+
+  .sidebar {
+    top: 64px;
+    height: calc(100vh - 64px);
+    padding: 14px 12px;
+  }
+
+  .sideMenu {
+    gap: 8px;
+  }
+
+  .compactSidebar .menuGroup {
+    gap: 8px;
+  }
+
+  .menuItem,
+  .activeMenuItem {
+    min-height: 38px;
+    padding: 0 12px;
+  }
+
+  .sidebarBottom {
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .cityCard {
+    min-height: 154px;
+    padding: 15px 14px;
+  }
+
+  .cityLogoMark {
+    width: 72px;
+    height: 52px;
+    margin-bottom: 10px;
+  }
+
+  .cityCard strong {
+    margin-bottom: 6px;
+    font-size: 18px;
+  }
+
+  .cityCard p {
+    font-size: 13px;
+  }
+
+  .dashboardArea {
+    height: calc(100vh - 64px);
+    padding: 16px 18px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 14px;
+    overflow: hidden;
+  }
+
+  .dashboardArea > .statGrid {
+    margin-bottom: 0;
+    gap: 14px;
+  }
+
+  .dashboardArea > .statGrid .statCard {
+    min-height: 108px;
+    padding: 16px 18px;
+  }
+
+  .statTitle {
+    margin-bottom: 9px;
+    font-size: 15px;
+  }
+
+  .statValue {
+    margin-bottom: 7px;
+    font-size: 31px;
+  }
+
+  .statSub {
+    font-size: 13px;
+  }
+
+  .statIcon {
+    width: 58px;
+    height: 58px;
+  }
+
+  .statIcon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .mainGrid {
+    min-height: 0;
+    height: 100%;
+    grid-template-columns: minmax(470px, 0.95fr) minmax(690px, 1.42fr);
+    gap: 14px;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    min-height: 0;
+    gap: 14px;
+    overflow: hidden;
+  }
+
+  .leftColumn {
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .rightColumn {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .topRightGrid {
+    gap: 14px;
+  }
+
+  .mapCard {
+    min-height: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tabRow {
+    margin: 14px 0 12px;
+  }
+
+  .tabRow button {
+    min-height: 34px;
+    padding: 0 15px;
+    font-size: 13px;
+  }
+
+  .fakeMap {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 360px;
+  }
+
+  .chartCard,
+  .ratioCard {
+    min-height: 320px;
+    padding: 16px;
+  }
+
+  .card h2 {
+    font-size: 19px;
+  }
+
+  .chartLegend {
+    margin: 12px 0 4px;
+  }
+
+  .chartBox {
+    height: 232px;
+  }
+
+  .ratioContent {
+    min-height: 182px;
+    grid-template-columns: 134px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .donutChart {
+    width: 132px;
+    height: 132px;
+  }
+
+  .donutChart::after {
+    inset: 38px;
+  }
+
+  .ratioLegend {
+    gap: 15px;
+  }
+
+  .totalBox {
+    min-height: 46px;
+  }
+
+  .tableCard {
+    padding: 14px;
+  }
+
+  .tableCard h2 {
+    margin-bottom: 9px;
+    font-size: 18px;
+  }
+
+  .tableScroll table {
+    font-size: 13px;
+  }
+
+  .tableScroll th,
+  .tableScroll td {
+    height: 29px;
+    padding: 0 10px;
+  }
+
+  .alertCard {
+    min-height: 0;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .alertList {
+    margin-top: 12px;
+  }
+
+  .alertItem {
+    min-height: 58px;
+    padding: 10px 14px;
+    grid-template-columns: 36px minmax(0, 1fr) 122px;
+    gap: 12px;
+  }
+
+  .alertIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .alertItem strong {
+    margin-bottom: 3px;
+    font-size: 14px;
+  }
+
+  .alertItem p,
+  .alertItem time {
+    font-size: 12px;
+  }
+}
