@@ -199,52 +199,17 @@
 .logo {
   width: 46px;
   height: 46px;
-  position: relative;
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.logoCircle {
-  position: absolute;
-  inset: 5px;
-  border: 5px solid #0964ca;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  transform: rotate(-18deg);
-}
-
-.logoLeaf {
-  position: absolute;
+.logo img {
   display: block;
-  border-radius: 24px 24px 24px 2px;
-  transform-origin: bottom left;
-}
-
-.leafOne {
-  width: 22px;
-  height: 28px;
-  right: 2px;
-  top: 3px;
-  background: linear-gradient(145deg, #13a4a3, #0a6ec4);
-  transform: rotate(42deg);
-}
-
-.leafTwo {
-  width: 19px;
-  height: 24px;
-  right: 10px;
-  bottom: 4px;
-  background: linear-gradient(145deg, #25b86d, #079896);
-  transform: rotate(78deg);
-}
-
-.leafThree {
-  width: 17px;
-  height: 20px;
-  left: 3px;
-  bottom: 7px;
-  background: linear-gradient(145deg, #0a64c8, #1ca7a9);
-  transform: rotate(110deg);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .bodyLayout {

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'SejongGeulggot';
+  src: url('./assets/fonts/SejongGeulggot.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   --main-blue: #005bd8;
   --safe-teal: #00a6a6;
@@ -13,15 +21,23 @@
   --soft-surface: #f7fafc;
   --focus: #ffbf47;
   --shadow: 0 18px 44px rgba(23, 32, 51, 0.1);
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    sans-serif;
   color: var(--ink);
   background: #eef5fb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root,
+*,
+button,
+input,
+textarea,
+select {
+  font-family: 'SejongGeulggot', sans-serif;
 }
 
 * {
@@ -90,6 +106,100 @@ h3 {
 .app-shell--admin,
 .app-main--admin {
   min-height: 100vh;
+}
+
+@media (max-width: 720px) {
+  .app-shell:not(.app-shell--admin) .app-main {
+    min-height: calc(100vh - 78px);
+    padding-bottom: 104px;
+  }
+
+  .page {
+    width: min(100% - 32px, 1180px);
+    padding: 1rem 0 1.5rem;
+  }
+
+  .page-header {
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    color: #071b3f;
+    font-size: 2.35rem;
+    line-height: 1.16;
+  }
+
+  .page-header p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .feedback-form {
+    max-width: none;
+    padding: 1.25rem;
+    border-radius: 22px;
+    box-shadow: 0 16px 42px rgba(7, 27, 63, 0.12);
+  }
+
+  .feedback-form label {
+    gap: 0.65rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .feedback-form label:last-of-type {
+    border-bottom: 0;
+  }
+
+  .feedback-form label > span {
+    color: #071b3f;
+    font-size: 1.18rem;
+    font-weight: 950;
+  }
+
+  .feedback-form input[type='range'] {
+    accent-color: #005bd8;
+  }
+
+  .feedback-form input[type='number'],
+  .feedback-form select,
+  .feedback-form textarea {
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+
+  .feedback-form .button-wide {
+    min-height: 62px;
+    border-radius: 14px;
+    font-size: 1.35rem;
+  }
+
+  .feedback-success {
+    min-height: calc(100vh - 200px);
+    padding: 2rem 1rem;
+    background:
+      linear-gradient(180deg, rgba(247, 251, 255, 0.34), rgba(255, 255, 255, 0.96)),
+      url('/assets/home/hero-sejong.png') center top / 165% auto no-repeat;
+  }
+
+  .feedback-success h1 {
+    color: #071b3f;
+    font-size: 2.4rem;
+  }
+
+  .feedback-success p {
+    max-width: 22rem;
+    color: #334155;
+    line-height: 1.7;
+  }
+
+  .feedback-success .button {
+    width: 100%;
+    min-height: 60px;
+    border-radius: 14px;
+    font-size: 1.2rem;
+  }
 }
 
 .site-header {

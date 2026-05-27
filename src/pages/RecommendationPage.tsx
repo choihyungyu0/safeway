@@ -119,7 +119,10 @@ export function RecommendationPage() {
       <section className={styles.hero} aria-labelledby="recommendation-heading">
         <div className={styles.heroOverlay}>
           <h1 id="recommendation-heading">
-            <span>세종 세이프웨이</span> AI 추천 결과
+            <span className={styles.desktopHeading}>
+              <span>세종 세이프웨이</span> AI 추천 결과
+            </span>
+            <span className={styles.mobileHeading}>AI 추천 결과</span>
           </h1>
           <p>세종시민을 위한 AI 기후안전 경로·쉼터 안내</p>
           <div className={styles.trustLine}>

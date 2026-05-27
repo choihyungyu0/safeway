@@ -1,5 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import L, {
+  type LatLngExpression,
+  type LayerGroup,
+  type Map as LeafletMap,
+} from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import {
   CalendarCheck,
   Database,
@@ -33,6 +39,21 @@ export function ShelterListPage() {
   const [nightOpenOnly, setNightOpenOnly] = useState(false)
   const [holidayOpenOnly, setHolidayOpenOnly] = useState(false)
   const [coolingOnly, setCoolingOnly] = useState(false)
+  const [shouldShowMobileMap, setShouldShowMobileMap] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return
+    }
+
+    const mediaQuery = window.matchMedia('(max-width: 720px)')
+    const updateMobileMapState = () => setShouldShowMobileMap(mediaQuery.matches)
+
+    updateMobileMapState()
+    mediaQuery.addEventListener('change', updateMobileMapState)
+
+    return () => mediaQuery.removeEventListener('change', updateMobileMapState)
+  }, [])
 
   const filteredShelters = useMemo(() => {
     const normalizedKeyword = keyword.trim().toLowerCase()
@@ -164,6 +185,8 @@ export function ShelterListPage() {
           </div>
         </section>
 
+        {shouldShowMobileMap ? <MobileShelterMap shelters={visibleShelters.slice(0, 3)} /> : null}
+
         <section className={styles.resultHeader} aria-live="polite">
           <h2>쉼터 {filteredShelters.length.toLocaleString('ko-KR')}개 검색됨</h2>
           <p>상위 {visibleShelters.length}개를 표시합니다.</p>
@@ -179,6 +202,89 @@ export function ShelterListPage() {
   )
 }
 
+function MobileShelterMap({ shelters }: { shelters: SafewayShelter[] }) {
+  const mapContainerRef = useRef<HTMLDivElement | null>(null)
+  const mapRef = useRef<LeafletMap | null>(null)
+  const markerLayerRef = useRef<LayerGroup | null>(null)
+
+  useEffect(() => {
+    if (!mapContainerRef.current || mapRef.current) {
+      return
+    }
+
+    const map = L.map(mapContainerRef.current, {
+      center: [36.492, 127.268],
+      zoom: 13,
+      scrollWheelZoom: true,
+      keyboard: false,
+      zoomControl: false,
+      attributionControl: false,
+    })
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+    }).addTo(map)
+
+    mapRef.current = map
+    markerLayerRef.current = L.layerGroup().addTo(map)
+
+    const resizeTimer = window.setTimeout(() => map.invalidateSize(), 80)
+
+    return () => {
+      window.clearTimeout(resizeTimer)
+      map.remove()
+      mapRef.current = null
+      markerLayerRef.current = null
+    }
+  }, [])
+
+  useEffect(() => {
+    const map = mapRef.current
+    const markerLayer = markerLayerRef.current
+
+    if (!map || !markerLayer) {
+      return
+    }
+
+    markerLayer.clearLayers()
+
+    const positions = shelters
+      .filter((shelter) => Number.isFinite(shelter.lat) && Number.isFinite(shelter.lng))
+      .map((shelter) => {
+        const position = toLeafletLatLng(shelter)
+
+        L.marker(position, {
+          icon: L.divIcon({
+            className: styles.mobileShelterMarker,
+            html: '<span aria-hidden="true"><i>⌂</i></span>',
+            iconAnchor: [19, 42],
+          }),
+          title: shelter.name,
+        }).addTo(markerLayer)
+
+        return position
+      })
+
+    if (positions.length > 1) {
+      map.fitBounds(L.latLngBounds(positions), { padding: [34, 34], maxZoom: 14 })
+    } else if (positions.length === 1) {
+      map.setView(positions[0], 14)
+    }
+
+    const resizeTimer = window.setTimeout(() => map.invalidateSize(), 80)
+
+    return () => window.clearTimeout(resizeTimer)
+  }, [shelters])
+
+  return (
+    <section className={styles.mobileMapPanel} aria-label="주변 쉼터 지도">
+      <div ref={mapContainerRef} className={styles.mobileShelterMap} />
+      <span className={styles.mobileMapLabel}>나성동</span>
+      <span className={styles.mobileMapLabelRight}>세종시청</span>
+    </section>
+  )
+}
+
 function SummaryMetric({ label, value }: { label: string; value: string }) {
   return (
     <article className={styles.summaryMetric}>
@@ -186,6 +292,10 @@ function SummaryMetric({ label, value }: { label: string; value: string }) {
       <strong>{value}</strong>
     </article>
   )
+}
+
+function toLeafletLatLng(shelter: SafewayShelter): LatLngExpression {
+  return [shelter.lat, shelter.lng]
 }
 
 function FilterToggle({

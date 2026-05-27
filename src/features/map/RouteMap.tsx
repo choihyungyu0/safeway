@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import L, {
+  type FitBoundsOptions,
   type LatLngExpression,
   type LayerGroup,
   type Map as LeafletMap,
@@ -44,6 +45,7 @@ export function RouteMap({ recommendation, activeLayers, layerPoints }: RouteMap
       center: toLeafletLatLng(getPathCenter(recommendation.path)),
       zoom: 14,
       scrollWheelZoom: true,
+      keyboard: false,
     })
 
     L.tileLayer(tileLayerUrl, {
@@ -97,7 +99,7 @@ export function RouteMap({ recommendation, activeLayers, layerPoints }: RouteMap
       }).addTo(overlayLayer)
     })
 
-    map.fitBounds(routeLine.getBounds(), { padding: [42, 42], maxZoom: 15 })
+    map.fitBounds(routeLine.getBounds(), getFitBoundsOptions())
   }, [recommendation, visiblePoints])
 
   return (
@@ -154,4 +156,21 @@ function getPathCenter(path: LatLng[]): LatLng {
 
 function toLeafletLatLng(point: LatLng): LatLngExpression {
   return [point.lat, point.lng]
+}
+
+function getFitBoundsOptions(): FitBoundsOptions {
+  const isMobile =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(max-width: 640px)').matches
+
+  if (!isMobile) {
+    return { padding: [42, 42], maxZoom: 15 }
+  }
+
+  return {
+    paddingTopLeft: [36, 106],
+    paddingBottomRight: [36, 274],
+    maxZoom: 15,
+  }
 }

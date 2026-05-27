@@ -196,6 +196,10 @@
   font-weight: 800;
 }
 
+.mobileMapPanel {
+  display: none;
+}
+
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -339,23 +343,222 @@
 }
 
 @media (max-width: 720px) {
+  .page {
+    min-height: calc(100vh - 78px);
+    background:
+      linear-gradient(180deg, rgba(247, 251, 255, 0.82), #ffffff 50%),
+      #f7fbff;
+  }
+
   .content {
-    width: min(100% - 28px, 1420px);
-    padding-top: 24px;
+    width: min(100% - 32px, 1420px);
+    padding-top: 18px;
+  }
+
+  .hero {
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .dataBadge {
+    display: none;
   }
 
   .hero h1 {
-    font-size: 32px;
+    margin-top: 0;
+    font-size: 39px;
+    line-height: 1.12;
   }
 
-  .filterPanel,
-  .summaryGrid,
-  .cardGrid,
+  .hero p {
+    display: none;
+  }
+
+  .summaryGrid {
+    display: none;
+  }
+
+  .filterPanel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 0;
+    max-width: 100%;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .field {
+    min-width: 0;
+  }
+
+  .field span {
+    display: none;
+  }
+
+  .field input,
+  .field select,
+  .toggle span {
+    min-width: 0;
+    width: 100%;
+    height: 54px;
+    padding: 0 18px;
+    color: #263952;
+    background: #ffffff;
+    border: 1px solid #cbd8e8;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(7, 27, 63, 0.06);
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .searchField input {
+    color: #ffffff;
+    background: #075bd1;
+    border-color: #075bd1;
+  }
+
+  .searchField input::placeholder {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .toggleGroup {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .toggle span {
+    min-width: 0;
+    padding: 0 8px;
+    font-size: 14px;
+  }
+
+  .mobileMapPanel {
+    position: relative;
+    display: block;
+    height: 234px;
+    margin: 14px 0 18px;
+    overflow: hidden;
+    background: #edf5f8;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(7, 27, 63, 0.1);
+  }
+
+  .mobileShelterMap {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(112deg, transparent 0 43%, rgba(255, 255, 255, 0.9) 44% 47%, transparent 48%),
+      linear-gradient(18deg, transparent 0 54%, rgba(255, 255, 255, 0.84) 55% 58%, transparent 59%),
+      radial-gradient(circle at 52% 8%, rgba(105, 190, 233, 0.32) 0 21%, transparent 22%),
+      radial-gradient(circle at 63% 54%, rgba(90, 190, 110, 0.22) 0 27%, transparent 28%),
+      repeating-linear-gradient(32deg, #f3f1eb 0 36px, #ffffff 37px 42px, #f3f1eb 43px 82px);
+  }
+
+  .mobileShelterMarker {
+    width: auto !important;
+    height: auto !important;
+    background: transparent;
+    border: 0;
+  }
+
+  .mobileShelterMarker span {
+    display: grid;
+    width: 38px;
+    height: 42px;
+    place-items: center;
+    color: #ffffff;
+    background: #1d6ff2;
+    border: 3px solid #ffffff;
+    border-radius: 50% 50% 50% 0;
+    box-shadow: 0 8px 18px rgba(0, 91, 216, 0.26);
+    font-size: 21px;
+    font-weight: 950;
+    transform: rotate(-45deg);
+  }
+
+  .mobileShelterMarker i {
+    font-style: normal;
+    transform: rotate(45deg);
+  }
+
+  .mobileMapLabel,
+  .mobileMapLabelRight {
+    position: absolute;
+    z-index: 2;
+    color: #334155;
+    font-size: 16px;
+    font-weight: 900;
+    text-shadow: 0 1px 0 #ffffff;
+  }
+
+  .mobileMapLabel {
+    top: 62px;
+    left: 38px;
+  }
+
+  .mobileMapLabelRight {
+    top: 58px;
+    right: 38px;
   }
 
   .resultHeader {
     display: grid;
+    margin: 0 0 12px;
+  }
+
+  .resultHeader h2 {
+    font-size: 24px;
+  }
+
+  .resultHeader p {
+    display: none;
+  }
+
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .shelterCard {
+    min-height: 0;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(7, 27, 63, 0.1);
+  }
+
+  .cardTop {
+    order: 2;
+    justify-content: flex-start;
+  }
+
+  .shelterCard h3 {
+    min-height: 0;
+    font-size: 22px;
+  }
+
+  .address {
+    min-height: 0;
+    font-size: 16px;
+  }
+
+  .detailRow {
+    font-size: 14px;
+  }
+
+  .facilityRow {
+    padding-top: 4px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .shelterCard a {
+    min-height: 46px;
+    border-radius: 12px;
+    font-size: 16px;
   }
 }

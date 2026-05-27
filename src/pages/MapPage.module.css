@@ -190,7 +190,12 @@
   width: 100%;
   height: 100%;
   min-height: 500px;
-  background: #edf5f8;
+  background:
+    linear-gradient(92deg, transparent 0 48%, rgba(255, 255, 255, 0.86) 49% 51%, transparent 52%),
+    linear-gradient(18deg, transparent 0 42%, rgba(255, 255, 255, 0.82) 43% 45%, transparent 46%),
+    radial-gradient(circle at 64% 54%, rgba(134, 207, 246, 0.34) 0 23%, transparent 24%),
+    radial-gradient(circle at 58% 48%, rgba(91, 190, 112, 0.2) 0 31%, transparent 32%),
+    repeating-linear-gradient(30deg, #f7f5ef 0 42px, #ffffff 43px 49px, #f7f5ef 50px 96px);
 }
 
 .leafletMap :global(.leaflet-control-attribution) {
@@ -709,90 +714,221 @@
 }
 
 @media (max-width: 640px) {
+  .mapPage {
+    min-height: 100svh;
+    margin-top: -78px;
+    margin-bottom: -104px;
+    background: #eef7ff;
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    padding: 0;
+  }
+
+  .filterPanel {
+    display: none;
+  }
+
+  .mapLayout {
+    display: block;
+    min-height: 100svh;
+  }
+
+  .mapCard {
+    min-height: 100svh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .mapMountArea {
-    min-height: 390px;
+    min-height: 100svh;
   }
 
   .routeMapFrame {
-    min-height: 390px;
+    height: 100svh;
+    min-height: 640px;
   }
 
   .leafletMap {
-    min-height: 390px;
+    min-height: 640px;
   }
 
   .mapLayerToolbar {
-    top: 12px;
-    left: 12px;
-    gap: 6px;
-  }
-
-  .layerButton {
-    min-height: 30px;
-    padding: 0 10px;
-    font-size: 12px;
+    display: none;
   }
 
   .routeScoreLabel {
-    right: 14px;
-    bottom: 58px;
+    right: 16px;
+    bottom: 236px;
     min-height: 36px;
     padding: 0 12px;
     font-size: 13px;
   }
 
   .leafletMapBadge {
-    right: 14px;
-    bottom: 102px;
-    min-height: 30px;
-    font-size: 12px;
+    display: none;
+  }
+
+  .leafletRouteMarker span {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 14px;
   }
 
   .leafletLayerMarker {
-    max-width: 154px;
-    min-height: 32px;
-    padding: 5px 7px;
+    max-width: 42px;
+    min-height: 42px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
   }
 
   .leafletLayerMarker strong {
-    min-width: 32px;
-    min-height: 21px;
-    font-size: 11px;
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 10px;
   }
 
   .leafletLayerMarker span {
-    font-size: 12px;
+    display: none;
   }
 
   .recommendPanel {
-    padding: 20px 16px;
+    position: absolute;
+    right: 16px;
+    bottom: 96px;
+    left: 16px;
+    top: auto;
+    z-index: 10;
+    height: auto;
+    min-height: 0;
+    padding: 12px;
+    border-radius: 18px;
+    box-shadow: 0 16px 42px rgba(7, 27, 63, 0.18);
+  }
+
+  .recommendHeader {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .sparkleIcon {
+    width: 36px;
+    height: 36px;
+    color: #075bd1;
+    background: #e9f3ff;
+    border-radius: 50%;
+  }
+
+  .sparkleIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .recommendHeader h1 {
+    font-size: 18px;
+  }
+
+  .recommendHeader p {
+    margin-top: 2px;
+    font-size: 11px;
   }
 
   .summaryGrid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid #dce7f4;
+    border-radius: 12px;
   }
 
   .summaryBox {
-    min-height: 132px;
+    min-height: 76px;
+    padding: 8px 3px 7px;
+    border: 0;
+    border-right: 1px solid #dce7f4;
+    border-radius: 0;
   }
 
-  .analysisItem {
-    grid-template-columns: 1fr;
-    gap: 7px;
+  .summaryBox:last-child {
+    border-right: 0;
   }
 
-  .barArea {
-    grid-template-columns: minmax(0, 1fr) 58px;
+  .summaryIcon {
+    width: 21px;
+    height: 21px;
+    margin-bottom: 4px;
   }
 
-  .bottomActions {
-    grid-template-columns: 1fr;
+  .summaryBox p {
+    min-height: 22px;
+    margin-bottom: 3px;
+    font-size: 9px;
+    line-height: 1.35;
   }
 
-  .outlineAction,
-  .primaryAction {
-    min-height: 58px;
-    font-size: 18px;
+  .summaryBox strong {
+    margin-bottom: 2px;
+    font-size: 17px;
+  }
+
+  .summaryBox span {
+    display: none;
+    font-size: 9px;
+  }
+
+  .safetyBadge {
+    display: inline-flex !important;
+    padding: 3px 7px;
+    font-size: 9px !important;
+  }
+
+  .analysisSection,
+  .panelTip,
+  .bottomSection {
+    display: none;
+  }
+
+  .routeScoreLabel {
+    display: none;
+  }
+
+  .leafletMap :global(.leaflet-control-zoom) {
+    margin-bottom: 310px;
+  }
+}
+
+@media (max-width: 420px) {
+  .filterPanel {
+    right: 10px;
+    left: 10px;
+  }
+
+  .mapLayerToolbar {
+    right: 10px;
+  }
+
+  .recommendPanel {
+    right: 10px;
+    left: 10px;
+    padding: 11px;
+  }
+}
+
+@media (max-width: 360px) {
+  .layerButton {
+    min-width: 110px;
+  }
+
+  .recommendHeader h1 {
+    font-size: 16px;
+  }
+
+  .summaryBox strong {
+    font-size: 16px;
   }
 }

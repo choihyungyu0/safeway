@@ -1,5 +1,6 @@
 import { Bell, ChevronDown, LogOut, User } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import logoSrc from '@/assets/logo.PNG'
 import styles from '@/pages/AdminDashboardPage.module.css'
 
 type AdminTopHeaderProps = {
@@ -90,10 +91,7 @@ export function AdminTopHeader({
 function AdminLogo() {
   return (
     <div className={styles.logo} aria-hidden="true">
-      <div className={styles.logoCircle} />
-      <div className={`${styles.logoLeaf} ${styles.leafOne}`} />
-      <div className={`${styles.logoLeaf} ${styles.leafTwo}`} />
-      <div className={`${styles.logoLeaf} ${styles.leafThree}`} />
+      <img src={logoSrc} alt="" />
     </div>
   )
 }
