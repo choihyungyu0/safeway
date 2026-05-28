@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
   Bell,
@@ -16,22 +16,30 @@ const navItems = [
   { to: '/recommendations', label: '추천 결과', mobileLabel: '경로 찾기', icon: Route },
   { to: '/map', label: '지도 보기', mobileLabel: '안전 정보', icon: ShieldCheck },
   { to: '/shelters', label: '쉼터', mobileLabel: '즐겨찾기', icon: Star },
-  { to: '#', label: '마이페이지', mobileLabel: '마이페이지', icon: UserRound, external: true },
+  { to: '/mypage', label: '마이페이지', mobileLabel: '마이페이지', icon: UserRound },
 ]
 
 export function HomeHeader() {
+  const location = useLocation()
   const navigate = useNavigate()
+  const showMobileBackButton = !['/', '/mypage'].includes(location.pathname)
 
   return (
-    <header className={styles.header}>
-      <button
-        type="button"
-        className={styles.mobileBackButton}
-        aria-label="이전 화면"
-        onClick={() => navigate(-1)}
-      >
-        <ArrowLeft size={28} aria-hidden="true" />
-      </button>
+    <header
+      className={
+        showMobileBackButton ? styles.header : `${styles.header} ${styles.headerNoBack}`
+      }
+    >
+      {showMobileBackButton ? (
+        <button
+          type="button"
+          className={styles.mobileBackButton}
+          aria-label="이전 화면"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeft size={28} aria-hidden="true" />
+        </button>
+      ) : null}
 
       <Link to="/" className={styles.logoLink} aria-label="세종 세이프웨이 홈">
         <span className={styles.logoMark} aria-hidden="true">
@@ -46,14 +54,13 @@ export function HomeHeader() {
         {navItems.map((item) => {
           const Icon = item.icon
 
-          return item.external ? (
-            <a key={item.label} href={item.to} className={styles.headerNavLink}>
-              <Icon className={styles.mobileNavIcon} size={22} aria-hidden="true" />
-              <span className={styles.desktopNavLabel}>{item.label}</span>
-              <span className={styles.mobileNavLabel}>{item.mobileLabel}</span>
-            </a>
-          ) : (
-            <NavLink key={item.label} to={item.to} className={styles.headerNavLink}>
+          return (
+            <NavLink
+              key={item.label}
+              to={item.to}
+              end={item.to === '/'}
+              className={styles.headerNavLink}
+            >
               <Icon className={styles.mobileNavIcon} size={22} aria-hidden="true" />
               <span className={styles.desktopNavLabel}>{item.label}</span>
               <span className={styles.mobileNavLabel}>{item.mobileLabel}</span>

@@ -712,6 +712,14 @@
     backdrop-filter: none;
   }
 
+  .headerNoBack {
+    grid-template-columns: minmax(0, 1fr) 46px;
+  }
+
+  .headerNoBack .logoLink {
+    justify-self: start;
+  }
+
   .mobileBackButton,
   .mobileAlarmButton {
     display: inline-grid;

@@ -1,0 +1,688 @@
+.myPage {
+  min-height: calc(100vh - 76px);
+  padding-bottom: 24px;
+  overflow-x: hidden;
+  color: #071b3f;
+  background: #f7fbff;
+}
+
+.hero {
+  position: relative;
+  min-height: 252px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.hero::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(58vw, 980px);
+  content: '';
+  background:
+    linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.76) 26%, rgba(255, 255, 255, 0.24) 58%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(247, 251, 255, 0.5) 78%, #f7fbff 100%),
+    url('/assets/home/hero-sejong.png') center / cover no-repeat;
+}
+
+.hero::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  content: '';
+  background: linear-gradient(180deg, rgba(247, 251, 255, 0), #f7fbff 86%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: min(1360px, calc(100% - 96px));
+  margin: 0 auto;
+  padding: 50px 0 72px;
+}
+
+.kicker {
+  color: #073b78;
+  font-size: 40px;
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.hero h1 {
+  margin-top: 26px;
+  color: #071b3f;
+  font-size: 30px;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.hero p:last-child {
+  margin-top: 12px;
+  color: #26364c;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.contentStack {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-areas:
+    'profile notifications'
+    'saved notifications'
+    'recent support';
+  grid-template-columns: minmax(0, 1.12fr) minmax(440px, 0.88fr);
+  gap: 14px;
+  align-items: start;
+  width: min(1360px, calc(100% - 96px));
+  margin: -44px auto 0;
+}
+
+.card {
+  min-width: 0;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #dce7f5;
+  border-radius: 8px;
+  box-shadow: 0 14px 32px rgba(7, 27, 63, 0.07);
+}
+
+.profileCard {
+  display: grid;
+  grid-area: profile;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+}
+
+.avatar {
+  display: grid;
+  width: 92px;
+  height: 92px;
+  place-items: center;
+  color: #0b62de;
+  background: #e6f0ff;
+  border-radius: 50%;
+}
+
+.avatar svg {
+  width: 48px;
+  height: 48px;
+}
+
+.profileText {
+  display: grid;
+  gap: 6px;
+}
+
+.profileText span {
+  color: #5d697a;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.profileText strong {
+  color: #095bd8;
+  font-size: 30px;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.outlineButton {
+  display: inline-flex;
+  min-width: 150px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  color: #075bea;
+  background: #ffffff;
+  border: 2px solid #075bea;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: 950;
+}
+
+.outlineButton:hover {
+  background: #f0f7ff;
+}
+
+.sectionTitleRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: #071b3f;
+}
+
+.sectionTitleRow h2 {
+  color: #111827;
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.sectionTitleRow svg {
+  flex: 0 0 auto;
+  color: #071b3f;
+}
+
+.notificationCard {
+  grid-area: notifications;
+}
+
+.notificationList {
+  display: grid;
+  margin-top: 14px;
+}
+
+.notificationRow {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  min-height: 68px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.notificationRow:last-child {
+  border-bottom: 0;
+}
+
+.notificationIcon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+}
+
+.notificationIconClimate {
+  color: #ffad16;
+}
+
+.notificationIconRoute {
+  color: #0b62de;
+}
+
+.notificationIconNight {
+  color: #075bd8;
+}
+
+.notificationCopy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.notificationCopy strong {
+  color: #111827;
+  font-size: 19px;
+  font-weight: 950;
+}
+
+.notificationCopy span {
+  color: #606b7b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.switch {
+  position: relative;
+  width: 64px;
+  height: 34px;
+  padding: 0;
+  background: #c9d1dc;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.switch span {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 26px;
+  height: 26px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.22);
+  transition: transform 160ms ease;
+}
+
+.switchOn {
+  background: #0b62de;
+  box-shadow: 0 8px 18px rgba(11, 98, 222, 0.24);
+}
+
+.switchOn span {
+  transform: translateX(30px);
+}
+
+.savedCard {
+  display: grid;
+  grid-area: saved;
+  gap: 14px;
+}
+
+.savedContent {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.placeChipRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.placeChip {
+  display: inline-flex;
+  min-width: max-content;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  color: #26364c;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #ccd8e7;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.placeChip svg {
+  color: #0b62de;
+  fill: #0b62de;
+}
+
+.iconLinkButton {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: #657489;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.recentCard {
+  grid-area: recent;
+}
+
+.recentRouteList {
+  display: grid;
+  margin-top: 12px;
+}
+
+.recentRoute {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 54px;
+  color: #1f2937;
+  text-decoration: none;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.recentRoute:last-child {
+  border-bottom: 0;
+}
+
+.routeTrail,
+.routePoint {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.routeTrail {
+  gap: 14px;
+}
+
+.routeTrail > svg {
+  flex: 0 0 auto;
+  color: #25344c;
+}
+
+.routePoint {
+  gap: 9px;
+}
+
+.routePoint svg {
+  flex: 0 0 auto;
+  color: #1f6feb;
+  fill: #1f6feb;
+}
+
+.routePointEnd svg {
+  color: #1a9a45;
+  fill: #1a9a45;
+}
+
+.routePoint span {
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recentRoute time {
+  color: #657489;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.recentRoute > svg {
+  color: #657489;
+}
+
+.supportGrid {
+  display: grid;
+  grid-area: support;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.menuCard {
+  padding: 18px 20px 12px;
+}
+
+.menuList {
+  display: grid;
+  margin-top: 10px;
+}
+
+.menuButton {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 45px;
+  padding: 0;
+  color: #24364f;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.menuButton:last-child {
+  border-bottom: 0;
+}
+
+.menuButton svg {
+  color: #4a5a70;
+}
+
+.menuButton span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menuButtonDanger span,
+.menuButtonDanger svg:first-child {
+  color: #6b7280;
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    min-height: 270px;
+  }
+
+  .hero::before {
+    width: min(72vw, 780px);
+    background:
+      linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.86) 34%, rgba(255, 255, 255, 0.3) 76%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), #f7fbff 96%),
+      url('/assets/home/hero-sejong.png') center / cover no-repeat;
+  }
+
+  .heroContent,
+  .contentStack {
+    width: min(100% - 48px, 920px);
+  }
+
+  .contentStack {
+    grid-template-areas:
+      'profile'
+      'notifications'
+      'saved'
+      'recent'
+      'support';
+    grid-template-columns: 1fr;
+    margin-top: -28px;
+  }
+
+  .card {
+    padding: 22px 24px;
+  }
+
+  .profileCard {
+    gap: 22px;
+  }
+
+  .avatar {
+    width: 104px;
+    height: 104px;
+  }
+}
+
+@media (max-width: 720px) {
+  .myPage {
+    min-height: calc(100vh - 78px);
+    padding-bottom: 116px;
+  }
+
+  .hero {
+    min-height: 266px;
+    margin-top: -78px;
+    padding-top: 78px;
+  }
+
+  .hero::before {
+    top: 78px;
+    width: 100%;
+    background:
+      linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.94) 42%, rgba(255, 255, 255, 0.42) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1), #f7fbff 96%),
+      url('/assets/home/hero-sejong.png') right center / auto 100% no-repeat;
+  }
+
+  .heroContent,
+  .contentStack {
+    width: min(100% - 32px, 560px);
+  }
+
+  .heroContent {
+    padding: 54px 0 48px;
+  }
+
+  .kicker {
+    font-size: 36px;
+  }
+
+  .hero h1 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  .hero p:last-child {
+    margin-top: 12px;
+    font-size: 16px;
+  }
+
+  .contentStack {
+    gap: 16px;
+    margin-top: -12px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .profileCard {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 14px;
+  }
+
+  .avatar {
+    width: 74px;
+    height: 74px;
+  }
+
+  .avatar svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .profileText {
+    gap: 6px;
+  }
+
+  .profileText span {
+    font-size: 16px;
+  }
+
+  .profileText strong {
+    font-size: 26px;
+  }
+
+  .outlineButton {
+    min-width: 112px;
+    min-height: 50px;
+    font-size: 18px;
+  }
+
+  .sectionTitleRow {
+    gap: 12px;
+  }
+
+  .sectionTitleRow h2 {
+    font-size: 22px;
+  }
+
+  .notificationList {
+    margin-top: 16px;
+  }
+
+  .notificationRow {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 12px;
+    min-height: 74px;
+  }
+
+  .notificationIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .notificationCopy strong {
+    font-size: 18px;
+  }
+
+  .notificationCopy span {
+    font-size: 14px;
+  }
+
+  .switch {
+    width: 58px;
+    height: 32px;
+  }
+
+  .switch span {
+    width: 24px;
+    height: 24px;
+  }
+
+  .switchOn span {
+    transform: translateX(26px);
+  }
+
+  .savedCard {
+    gap: 16px;
+  }
+
+  .placeChip {
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 15px;
+  }
+
+  .placeChipRow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .recentRoute {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 10px;
+    min-height: 58px;
+  }
+
+  .routeTrail {
+    gap: 11px;
+  }
+
+  .routePoint {
+    gap: 7px;
+  }
+
+  .routePoint span {
+    max-width: 124px;
+    font-size: 16px;
+  }
+
+  .recentRoute time {
+    font-size: 14px;
+  }
+
+  .menuCard {
+    padding: 18px 20px 12px;
+  }
+
+  .menuButton {
+    gap: 10px;
+    min-height: 52px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 420px) {
+  .profileCard {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .outlineButton {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .routePoint span {
+    max-width: 92px;
+  }
+}
+
+@media (max-width: 360px) {
+  .supportGrid {
+    grid-template-columns: 1fr;
+  }
+}

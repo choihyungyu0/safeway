@@ -13,6 +13,7 @@ import { FeedbackPage } from '@/pages/FeedbackPage'
 import { HomePage } from '@/pages/HomePage'
 import { LoginPage } from '@/pages/LoginPage'
 import { MapPage } from '@/pages/MapPage'
+import { MyPage } from '@/pages/MyPage'
 import { RecommendationPage } from '@/pages/RecommendationPage'
 import { ShelterDetailPage } from '@/pages/ShelterDetailPage'
 import { ShelterListPage } from '@/pages/ShelterListPage'
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
       { path: 'user-type', element: <UserTypePage /> },
       { path: 'recommendations', element: <RecommendationPage /> },
       { path: 'map', element: <MapPage /> },
+      { path: 'mypage', element: <MyPage /> },
       { path: 'shelters', element: <ShelterListPage /> },
       { path: 'shelters/:shelterId', element: <ShelterDetailPage /> },
       { path: 'feedback/:routeLogId', element: <FeedbackPage /> },
