@@ -24,16 +24,29 @@ const withMockLatency = <T,>(value: T) =>
   })
 
 export const searchPlaces = (keyword: string): Promise<Place[]> => {
-  const normalizedKeyword = keyword.trim().toLowerCase()
+  const normalizedKeyword = normalizePlaceSearchText(keyword)
   const results = normalizedKeyword
-    ? mockPlaces.filter(
-        (place) =>
-          place.name.toLowerCase().includes(normalizedKeyword) ||
-          place.district.includes(keyword),
+    ? mockPlaces.filter((place) =>
+        [
+          place.name,
+          place.district,
+          place.roadAddress,
+          place.lotAddress,
+          place.description,
+          ...place.aliases,
+        ]
+          .filter(Boolean)
+          .some((value) =>
+            normalizePlaceSearchText(String(value)).includes(normalizedKeyword),
+          ),
       )
     : mockPlaces
 
   return withMockLatency(results)
+}
+
+function normalizePlaceSearchText(value: string) {
+  return value.trim().toLocaleLowerCase('ko-KR').replace(/\s+/g, '')
 }
 
 export const getShelterGaps = (): Promise<{

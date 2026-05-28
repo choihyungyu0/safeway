@@ -61,9 +61,12 @@ describe('MapPage', () => {
     renderMapPage()
 
     await user.click(screen.getByRole('button', { name: /출발지 정부세종청사 1동/ }))
+    expect(screen.getByRole('dialog', { name: '출발지 주소 검색' })).toBeInTheDocument()
     expect(screen.getByRole('listbox', { name: '출발지 후보' })).toBeInTheDocument()
 
-    await user.click(screen.getByRole('option', { name: /세종호수공원/ }))
+    await user.clear(screen.getByLabelText('출발지 주소 검색어'))
+    await user.type(screen.getByLabelText('출발지 주소 검색어'), '호수')
+    await user.click(await screen.findByRole('option', { name: /세종호수공원/ }))
     expect(
       screen.getByRole('button', { name: /출발지 세종호수공원/ }),
     ).toBeInTheDocument()
@@ -80,6 +83,22 @@ describe('MapPage', () => {
     await user.click(screen.getByRole('button', { name: '18:00' }))
     expect(
       screen.getByRole('button', { name: /출발일시 2025\.06\.22.*18:00/ }),
+    ).toBeInTheDocument()
+  })
+
+  it('sets a destination from address search candidates', async () => {
+    const user = userEvent.setup()
+    renderMapPage()
+
+    await user.click(screen.getByRole('button', { name: /목적지 세종특별자치시청/ }))
+    expect(screen.getByRole('dialog', { name: '목적지 주소 검색' })).toBeInTheDocument()
+
+    await user.clear(screen.getByLabelText('목적지 주소 검색어'))
+    await user.type(screen.getByLabelText('목적지 주소 검색어'), '보람로 77')
+    await user.click(await screen.findByRole('option', { name: /도담동 주민센터/ }))
+
+    expect(
+      screen.getByRole('button', { name: /목적지 도담동 주민센터/ }),
     ).toBeInTheDocument()
   })
 

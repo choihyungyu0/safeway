@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   CalendarDays,
   ChevronDown,
@@ -7,11 +7,14 @@ import {
   Footprints,
   MapPin,
   RefreshCw,
+  Search,
   UserRound,
 } from 'lucide-react'
+import type { Place } from '@/entities/place/types'
 import type { RouteSearchParams, TransportMode } from '@/entities/route/types'
 import { userTypes, type UserType } from '@/entities/user/types'
 import { defaultSearchParams, isUserType } from '@/features/route-search/routeSearchStore'
+import { searchPlaces } from '@/shared/api/safewayApi'
 import { transportModeLabels, userTypeLabels } from '@/shared/constants/labels'
 import styles from '@/pages/MapPage.module.css'
 
@@ -24,49 +27,16 @@ type MapSearchBarProps = {
 
 type ActivePicker = 'start' | 'destination' | 'departure' | null
 
-type PlaceOption = {
+type PlaceSelection = {
   value: string
-  title: string
   meta: string
 }
 
 const transportModes: TransportMode[] = ['WALK', 'BUS_BRT', 'BIKE', 'MIXED']
 
-const placeOptions: PlaceOption[] = [
-  {
-    value: '정부세종청사 1동',
-    title: '정부세종청사 1동',
-    meta: '어진동 · 행정 중심 출발지',
-  },
-  {
-    value: '세종특별자치시청',
-    title: '세종특별자치시청',
-    meta: '보람동 · 시민 행정 거점',
-  },
-  {
-    value: '세종호수공원',
-    title: '세종호수공원',
-    meta: '세종동 · 그늘길과 수변 산책로',
-  },
-  {
-    value: '나성동 BRT 정류장',
-    title: '나성동 BRT 정류장',
-    meta: '나성동 · BRT 환승 접근',
-  },
-  {
-    value: '도담동 주민센터',
-    title: '도담동 주민센터',
-    meta: '도담동 · 생활권 공공시설',
-  },
-  {
-    value: '금강보행교',
-    title: '금강보행교',
-    meta: '세종동 · 강변 저시정 주의',
-  },
-]
-
 const timeOptions = ['09:00', '12:00', '14:00', '18:00', '21:00']
 const weekdayLabels = ['일', '월', '화', '수', '목', '금', '토']
+const defaultPlaceMeta = '클릭해서 도로명·지번 주소 검색'
 
 export function MapSearchBar({
   searchParams,
@@ -88,6 +58,7 @@ export function MapSearchBar({
   )
   const [selectedUserType, setSelectedUserType] = useState<UserType>(userType)
   const [activePicker, setActivePicker] = useState<ActivePicker>(null)
+  const [selectedPlaceMeta, setSelectedPlaceMeta] = useState<Record<string, string>>({})
   const [calendarMonth, setCalendarMonth] = useState(() => {
     const initialDeparture = parseDepartureAt(
       searchParams.departureAt || defaultSearchParams.departureAt,
@@ -132,13 +103,17 @@ export function MapSearchBar({
     setActivePicker((current) => (current === picker ? null : picker))
   }
 
-  const updatePlace = (target: 'start' | 'destination', value: string) => {
+  const updatePlace = (target: 'start' | 'destination', selection: PlaceSelection) => {
     if (target === 'start') {
-      setStartPlace(value)
+      setStartPlace(selection.value)
     } else {
-      setDestination(value)
+      setDestination(selection.value)
     }
 
+    setSelectedPlaceMeta((current) => ({
+      ...current,
+      [selection.value]: selection.meta,
+    }))
     setActivePicker(null)
   }
 
@@ -185,22 +160,22 @@ export function MapSearchBar({
             activePicker === 'start' ? styles.pickerButtonOpen : ''
           }`}
           aria-labelledby="map-start-place-label map-start-place-value"
-          aria-haspopup="listbox"
+          aria-haspopup="dialog"
           aria-expanded={activePicker === 'start'}
-          aria-controls="map-start-place-options"
+          aria-controls="map-start-place-picker"
           onClick={() => openPicker('start')}
         >
-          <span id="map-start-place-value">{getPlaceOption(startPlace).title}</span>
-          <small>{getPlaceOption(startPlace).meta}</small>
+          <span id="map-start-place-value">{startPlace}</span>
+          <small>{selectedPlaceMeta[startPlace] ?? defaultPlaceMeta}</small>
           <ChevronDown size={17} aria-hidden="true" />
         </button>
 
         {activePicker === 'start' && (
           <PlacePicker
-            id="map-start-place-options"
-            label="출발지 후보"
+            id="map-start-place-picker"
+            label="출발지"
             selectedValue={startPlace}
-            onSelect={(value) => updatePlace('start', value)}
+            onSelect={(selection) => updatePlace('start', selection)}
           />
         )}
       </div>
@@ -219,22 +194,22 @@ export function MapSearchBar({
             activePicker === 'destination' ? styles.pickerButtonOpen : ''
           }`}
           aria-labelledby="map-destination-label map-destination-value"
-          aria-haspopup="listbox"
+          aria-haspopup="dialog"
           aria-expanded={activePicker === 'destination'}
-          aria-controls="map-destination-options"
+          aria-controls="map-destination-picker"
           onClick={() => openPicker('destination')}
         >
-          <span id="map-destination-value">{getPlaceOption(destination).title}</span>
-          <small>{getPlaceOption(destination).meta}</small>
+          <span id="map-destination-value">{destination}</span>
+          <small>{selectedPlaceMeta[destination] ?? defaultPlaceMeta}</small>
           <ChevronDown size={17} aria-hidden="true" />
         </button>
 
         {activePicker === 'destination' && (
           <PlacePicker
-            id="map-destination-options"
-            label="목적지 후보"
+            id="map-destination-picker"
+            label="목적지"
             selectedValue={destination}
-            onSelect={(value) => updatePlace('destination', value)}
+            onSelect={(selection) => updatePlace('destination', selection)}
           />
         )}
       </div>
@@ -398,35 +373,123 @@ function PlacePicker({
   id: string
   label: string
   selectedValue: string
-  onSelect: (value: string) => void
+  onSelect: (selection: PlaceSelection) => void
 }) {
+  const [query, setQuery] = useState(selectedValue)
+  const [searchState, setSearchState] = useState<{ query: string; results: Place[] }>({
+    query: '',
+    results: [],
+  })
+  const trimmedQuery = query.trim()
+  const isLoading = searchState.query !== query
+  const results = isLoading ? [] : searchState.results
+
+  useEffect(() => {
+    let isCurrent = true
+
+    searchPlaces(query)
+      .then((places) => {
+        if (isCurrent) {
+          setSearchState({ query, results: places })
+        }
+      })
+
+    return () => {
+      isCurrent = false
+    }
+  }, [query])
+
+  const canUseManualAddress =
+    !isLoading &&
+    trimmedQuery.length > 0 &&
+    !results.some(
+      (place) =>
+        normalizePlaceText(place.name) === normalizePlaceText(trimmedQuery) ||
+        normalizePlaceText(place.roadAddress) === normalizePlaceText(trimmedQuery),
+    )
+
   return (
-    <div className={styles.pickerPopover} id={id} role="listbox" aria-label={label}>
-      {placeOptions.map((place) => (
-        <button
-          type="button"
-          className={styles.placeOption}
-          role="option"
-          aria-selected={place.value === selectedValue}
-          onClick={() => onSelect(place.value)}
-          key={place.value}
-        >
-          <span>{place.title}</span>
-          <small>{place.meta}</small>
-        </button>
-      ))}
+    <div
+      className={`${styles.pickerPopover} ${styles.placeSearchPopover}`}
+      id={id}
+      role="dialog"
+      aria-label={`${label} 주소 검색`}
+    >
+      <label className={styles.placeSearchInput}>
+        <Search size={17} aria-hidden="true" />
+        <input
+          autoFocus
+          value={query}
+          placeholder={`${label} 또는 주소 검색`}
+          aria-label={`${label} 주소 검색어`}
+          onChange={(event) => setQuery(event.target.value)}
+          onFocus={(event) => event.currentTarget.select()}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && trimmedQuery) {
+              event.preventDefault()
+              onSelect({ value: trimmedQuery, meta: '직접 입력한 주소' })
+            }
+          }}
+        />
+      </label>
+
+      <div
+        className={styles.placeResults}
+        id={`${id}-results`}
+        role="listbox"
+        aria-label={`${label} 후보`}
+      >
+        {results.map((place) => (
+          <button
+            type="button"
+            className={styles.placeOption}
+            role="option"
+            aria-selected={place.name === selectedValue}
+            onClick={() => onSelect({ value: place.name, meta: getPlaceMeta(place) })}
+            key={place.id}
+          >
+            <span>{place.name}</span>
+            <em>{place.roadAddress}</em>
+            <small>{getPlaceMeta(place)}</small>
+          </button>
+        ))}
+
+        {canUseManualAddress && (
+          <button
+            type="button"
+            className={`${styles.placeOption} ${styles.manualPlaceOption}`}
+            role="option"
+            aria-selected={false}
+            onClick={() => onSelect({ value: trimmedQuery, meta: '직접 입력한 주소' })}
+          >
+            <span>입력한 주소 사용</span>
+            <em>{trimmedQuery}</em>
+            <small>후보에 없으면 입력값 그대로 설정합니다.</small>
+          </button>
+        )}
+      </div>
+
+      {isLoading && (
+        <p className={styles.placeSearchStatus} role="status">
+          주소 후보를 찾는 중입니다.
+        </p>
+      )}
+
+      {!isLoading && results.length === 0 && !canUseManualAddress && (
+        <p className={styles.placeSearchStatus}>
+          장소명, 도로명, 동 이름을 입력해 주세요.
+        </p>
+      )}
     </div>
   )
 }
 
-function getPlaceOption(value: string): PlaceOption {
-  return (
-    placeOptions.find((place) => place.value === value) ?? {
-      value,
-      title: value,
-      meta: '직접 입력한 장소',
-    }
-  )
+function getPlaceMeta(place: Place) {
+  return `${place.district} · ${place.description}`
+}
+
+function normalizePlaceText(value: string) {
+  return value.trim().toLocaleLowerCase('ko-KR').replace(/\s+/g, '')
 }
 
 function parseDepartureAt(value: string) {
